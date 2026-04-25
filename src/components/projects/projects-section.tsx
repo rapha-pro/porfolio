@@ -1,19 +1,22 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { PROJECTS } from "@/lib/data/projects"
+import { getSortedProjects } from "@/lib/data/projects"
 import { ProjectCard } from "./project-card"
 
 /**
  * Purpose:
  *   The full Projects section. Renders a section header then a responsive
- *   masonry-columns gallery of ProjectCards. Three columns on desktop,
- *   two on tablet, one on mobile.
+ *   masonry-columns gallery of ProjectCards. Projects are pre-sorted by
+ *   priority (high > medium > low) then by date (newest first) via
+ *   getSortedProjects() -- hidden entries (visible: false) are excluded.
  *
  * Returns:
  *   A <section id="projects"> ready to drop into the page layout.
  */
 export function ProjectsSection() {
+  const projects = getSortedProjects()
+
   return (
     <section id="projects" className="relative mx-auto w-full max-w-7xl px-6 py-24">
       {/* Section header */}
@@ -39,7 +42,7 @@ export function ProjectsSection() {
 
       {/* Masonry gallery */}
       <div className="columns-1 gap-6 sm:columns-2 lg:columns-3">
-        {PROJECTS.map((project, i) => (
+        {projects.map((project, i) => (
           <ProjectCard key={project.slug} project={project} index={i} />
         ))}
       </div>
