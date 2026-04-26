@@ -1,0 +1,5 @@
+FoodQuest was built at a 24-hour hackathon in September 2024. The core idea: make donating to food banks feel rewarding by gamifying the experience with points, streaks, and leaderboards. Users photograph items they want to donate and the app estimates their nutritional value, awarding points accordingly.
+
+The AI component uses a PyTorch image classification model fine-tuned on a food dataset to identify item categories from photos. Each category maps to a nutritional point value, so users who donate more nutritious food earn more points — incentivising quality donations.
+
+The backend is a Flask REST API connected to a PostgreSQL database. The React frontend provides a smooth single-page experience with a real-time leaderboard and personal donation history. We placed in the top 3 at the hackathon.

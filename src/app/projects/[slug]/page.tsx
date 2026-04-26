@@ -1,3 +1,5 @@
+import fs from "fs"
+import path from "path"
 import { notFound } from "next/navigation"
 import Link from "next/link"
 import { ArrowLeft, Globe } from "lucide-react"
@@ -11,9 +13,13 @@ type PageProps = {
 
 /**
  * Purpose:
- *   Detail page for a project. Statically generated for all slugs with
- *   hasDetailPage: true. Shows a full hero image, long description,
- *   tech stack, and link buttons.
+ *   Standard detail page for a project. Reads long-form copy from
+ *   content/projects/{slug}.txt (paragraphs separated by blank lines).
+ *   Falls back to project.description if the file doesn't exist.
+ *
+ *   Projects with customPage: true should have their own route at
+ *   src/app/projects/{slug}/page.tsx -- Next.js will prefer the specific
+ *   route over this dynamic one automatically. No code change needed here.
  *
  * Returns:
  *   Full-page layout or 404 if the slug is unknown / has no detail page.
@@ -22,6 +28,8 @@ export default async function ProjectDetailPage({ params }: PageProps) {
   const { slug } = await params
   const project = PROJECTS.find((p) => p.slug === slug && p.hasDetailPage)
   if (!project) notFound()
+
+  const paragraphs = readDescriptionFile(slug) ?? [project.description]
 
   return (
     <main className="min-h-screen">
@@ -62,11 +70,11 @@ export default async function ProjectDetailPage({ params }: PageProps) {
         {/* Link buttons */}
         {(project.githubUrl ?? project.liveUrl ?? project.videoUrl) && (
           <div className="mb-10 flex flex-wrap gap-3">
-            {project.githubUrl && (
-              <ExtLink href={project.githubUrl} icon={<AnimatedGithub size={16} />} label="GitHub" />
-            )}
             {project.liveUrl && (
               <ExtLink href={project.liveUrl} icon={<Globe size={16} />} label="Live site" />
+            )}
+            {project.githubUrl && (
+              <ExtLink href={project.githubUrl} icon={<AnimatedGithub size={16} />} label="GitHub" />
             )}
             {project.videoUrl && (
               <ExtLink href={project.videoUrl} icon={<AnimatedYoutube size={16} />} label="Watch demo" />
@@ -74,16 +82,14 @@ export default async function ProjectDetailPage({ params }: PageProps) {
           </div>
         )}
 
-        {/* Long description */}
-        {project.longDescription && (
-          <div className="mb-12 flex flex-col gap-5">
-            {project.longDescription.map((para, i) => (
-              <p key={i} className="text-[15px] leading-relaxed text-muted">
-                {para}
-              </p>
-            ))}
-          </div>
-        )}
+        {/* Long description -- sourced from content/projects/{slug}.txt */}
+        <div className="mb-12 flex flex-col gap-5">
+          {paragraphs.map((para, i) => (
+            <p key={i} className="text-[15px] leading-relaxed text-muted">
+              {para}
+            </p>
+          ))}
+        </div>
 
         {/* Tech stack */}
         <div>
@@ -109,6 +115,30 @@ export default async function ProjectDetailPage({ params }: PageProps) {
   )
 }
 
+/**
+ * Purpose:
+ *   Reads content/projects/{slug}.txt and splits on blank lines into
+ *   an array of paragraph strings. Returns null if the file doesn't exist.
+ *
+ * Args:
+ *   slug -- project slug matching the .txt filename.
+ *
+ * Returns:
+ *   Array of paragraph strings, or null.
+ */
+function readDescriptionFile(slug: string): string[] | null {
+  try {
+    const filePath = path.join(process.cwd(), "content", "projects", `${slug}.txt`)
+    const raw = fs.readFileSync(filePath, "utf-8")
+    return raw
+      .split(/\n\n+/)
+      .map((p) => p.trim())
+      .filter(Boolean)
+  } catch {
+    return null
+  }
+}
+
 function ExtLink({ href, icon, label }: { href: string; icon: React.ReactNode; label: string }) {
   return (
     <a
@@ -124,5 +154,5 @@ function ExtLink({ href, icon, label }: { href: string; icon: React.ReactNode; l
 }
 
 export function generateStaticParams() {
-  return PROJECTS.filter((p) => p.hasDetailPage).map((p) => ({ slug: p.slug }))
+  return PROJECTS.filter((p) => p.hasDetailPage && !p.customPage).map((p) => ({ slug: p.slug }))
 }

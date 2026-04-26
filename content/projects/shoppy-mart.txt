@@ -1,0 +1,5 @@
+Shoppy Mart is a full e-commerce simulation built to practice the end-to-end lifecycle of an online store — from browsing and cart management to checkout and order history.
+
+The frontend is built in React with a custom hook managing cart state. Firebase Firestore stores product listings and orders in real time, and Firebase Authentication handles user accounts. The admin panel lets me add products, update stock, and review orders without touching the database directly.
+
+This project solidified my understanding of state management patterns, optimistic UI updates, and how to structure a client-heavy app without a dedicated backend service.

@@ -15,7 +15,7 @@ import { ParticleField } from "@/components/ui/particle-field"
 export function HeroBackground() {
   return (
     <>
-      {/* ── Atmosphere blobs ── */}
+      {/* -- Atmosphere blobs -- */}
       <div
         aria-hidden
         className="pointer-events-none absolute -left-40 -top-40 h-[600px] w-[600px] rounded-full opacity-30 blur-[120px]"
@@ -32,10 +32,10 @@ export function HeroBackground() {
         style={{ background: "radial-gradient(circle, #8b5cf6, transparent 70%)" }}
       />
 
-      {/* ── Particle field ── */}
+      {/* -- Particle field -- */}
       <ParticleField />
 
-      {/* ── Subtle grid ── */}
+      {/* -- Subtle grid -- */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 opacity-[0.04] dark:opacity-[0.06]"
@@ -46,7 +46,7 @@ export function HeroBackground() {
         }}
       />
 
-      {/* ── Floating orb pills (parallax targets) ── */}
+      {/* -- Floating orb pills (parallax targets) -- */}
       <div className="parallax-slow pointer-events-none absolute left-[15%] top-[20%]">
         <div
           className="h-2 w-2 rounded-full"

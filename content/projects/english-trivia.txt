@@ -1,0 +1,5 @@
+English Trivia is an interactive quiz application designed for classroom use, covering English grammar rules, literary analysis, and vocabulary. Teachers can select a category and difficulty level, then display questions on a projector for students to answer together.
+
+The app tracks scores per round, animates correct and incorrect answers, and shows an explanation for each answer after the question resolves. Everything runs client-side with no backend — the question bank is a JSON file bundled with the app.
+
+Built with vanilla JavaScript, HTML, and CSS to keep dependencies at zero and make it easy to run on any school computer without installation.

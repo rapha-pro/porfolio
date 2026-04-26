@@ -67,10 +67,10 @@ export default function Hero() {
     >
       <HeroBackground />
 
-      {/* ══ Content grid ══ */}
+      {/* -- Content grid -- */}
       <div className="relative z-10 mx-auto grid max-w-7xl grid-cols-1 items-center gap-16 lg:grid-cols-2">
 
-        {/* ── LEFT column ── */}
+        {/* -- LEFT column -- */}
         <div ref={leftRef} className="flex flex-col gap-8">
           <div className="gs-item">
             <StatusBadge />
@@ -93,7 +93,7 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* ── RIGHT column ── */}
+        {/* -- RIGHT column -- */}
         <div ref={rightRef} className="flex flex-col items-center gap-8">
           <PhotoCard />
           <SkillCubePanel />

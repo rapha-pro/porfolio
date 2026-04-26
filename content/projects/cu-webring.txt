@@ -1,0 +1,5 @@
+CU-Webring is an open-source web ring built for the Carleton University community. A web ring is a circular collection of websites linked together so visitors can easily navigate between member sites, discovering personal portfolios and projects made by students and alumni.
+
+I contributed to the project by building out core navigation features and automating the member-addition workflow using GitHub Actions. New members can submit a pull request to add their site, and the CI pipeline validates and deploys the update automatically — no manual intervention needed.
+
+The project is intentionally lightweight and fully static. It's about discoverability and community, not complexity. All styling is vanilla CSS, keeping load times minimal and the codebase accessible to contributors of any skill level.

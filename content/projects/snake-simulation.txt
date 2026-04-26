@@ -1,0 +1,5 @@
+A Python snake game where an AI agent learns to play entirely on its own using a genetic algorithm. Each generation spawns a population of snakes with randomised neural network weights. The snakes that survive longest and eat the most food reproduce and mutate, slowly evolving effective play strategies.
+
+The simulation is visualised in real time with Pygame: you can watch each generation get progressively better, from random thrashing to deliberate food-seeking behaviour, usually within 30-50 generations.
+
+The project was built for my Artificial Intelligence course and deepened my understanding of evolutionary computation, fitness function design, and the surprising effectiveness of simple selection pressure.

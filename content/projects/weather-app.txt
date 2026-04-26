@@ -1,0 +1,5 @@
+A weather dashboard that fetches real-time conditions and a five-day forecast from the OpenWeatherMap API. Users can search any city worldwide, and the UI updates instantly with temperature, humidity, wind speed, and a condition icon.
+
+The design adapts its colour palette to the time of day and weather condition — a warm amber for sunny afternoons, deep blue for night, grey tones for overcast skies. CSS custom properties make the theme swap smooth and cheap.
+
+Built during my first semester of programming. It was my first time working with a public REST API, handling asynchronous JavaScript with fetch, and thinking about error states when the network or the API returns unexpected results.

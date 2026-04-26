@@ -25,6 +25,15 @@
  *   priority       -- "high" | "medium" | "low" (default "low").
  *                     High-priority projects appear before medium, then low.
  *   visible        -- Set false to hide from the projects grid entirely.
+ *   customPage     -- True when a hand-crafted page exists at
+ *                     src/app/projects/{slug}/page.tsx. The standard
+ *                     detail template is skipped for these slugs.
+ *
+ * Long descriptions (detail page body):
+ *   Edit content/projects/{slug}.txt. Paragraphs are separated by blank lines.
+ *   The detail page reads this file at build time. If the file is missing, it
+ *   falls back to project.description. To add a new project's long copy, just
+ *   drop a new {slug}.txt in that folder.
  */
 
 export type ProjectPriority = "high" | "medium" | "low"
@@ -33,25 +42,29 @@ export type Project = {
   slug: string
   title: string
   description: string
+  /** @deprecated -- long descriptions now live in content/projects/{slug}.txt */
   longDescription?: string[]
   image: string
   images?: string[]
   tech: string[]
-  /** Numeric YYYYMM for sort ordering, e.g. 202409 for September 2024. */
   sortDate: number
-  /** Human-readable date shown on the card badge, e.g. "Sep 2024". */
   period: string
-  /** Project type label, e.g. "Hackathon Project". */
   context: string
   githubUrl?: string
   liveUrl?: string
   videoUrl?: string
   hasDetailPage: boolean
   featured?: boolean
-  /** Render order weight. High appears before medium, medium before low. */
   priority?: ProjectPriority
-  /** Set false to hide from the projects grid without deleting the entry. */
   visible?: boolean
+  /**
+   * Set true when the project has a hand-crafted page at
+   * src/app/projects/{slug}/page.tsx. Next.js static routes take precedence
+   * over the [slug] dynamic route automatically -- no code change needed.
+   * Setting this flag just excludes the slug from generateStaticParams() so
+   * the dynamic template doesn't shadow the custom one.
+   */
+  customPage?: boolean
 }
 
 /** When true, projects with equal priority are sorted newest-first. */

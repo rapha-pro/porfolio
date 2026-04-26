@@ -78,7 +78,7 @@ function ExperienceRow({ job, index }: ExperienceRowProps) {
 
   return (
     <li ref={ref} className="relative">
-      {/* ── Mobile: single column, left rail ─────────────────────────────── */}
+      {/* -- Mobile: single column, left rail -- */}
       <div className="pl-10 md:hidden">
         {/* Mobile rail node -- hollow ring so the accent bar passes through */}
         <span
@@ -99,7 +99,7 @@ function ExperienceRow({ job, index }: ExperienceRowProps) {
         {card}
       </div>
 
-      {/* ── Desktop: zig-zag, center rail ────────────────────────────────── */}
+      {/* -- Desktop: zig-zag, center rail -- */}
       {/*   grid-cols: [card-area | node-column | card-area]                 */}
       <div className="hidden md:grid md:grid-cols-[1fr_64px_1fr] md:items-start">
         {/* Left card slot */}

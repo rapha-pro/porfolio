@@ -1,0 +1,5 @@
+A browser-based Hangman game with a categorised word bank (animals, countries, programming terms, movies) and three difficulty levels that vary word length and letter frequency. The game tracks wins and losses across sessions using localStorage.
+
+Each wrong guess animates the hangman figure drawing step by step using SVG. Correct letters reveal with a bounce animation. A hint system lets players trade points for a revealed vowel, adding a small strategic layer.
+
+Built with vanilla JavaScript, HTML, and CSS, no frameworks. A compact project that pushed me to learn the python pygame library

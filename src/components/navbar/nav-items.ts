@@ -6,7 +6,7 @@ import {
   type LucideIcon,
 } from "lucide-react"
 
-/** A single nav destination. */
+
 export type NavItem = {
   href: string
   label: string
@@ -15,7 +15,7 @@ export type NavItem = {
 
 /**
  * Single source of truth for navbar routes. Order = render order.
- * Edit here once; both desktop + mobile navbars pick it up.
+ * both desktop + mobile navbars pick it up.
  */
 export const NAV_ITEMS: ReadonlyArray<NavItem> = [
   { href: "#home",     label: "Home",     icon: HomeIcon },

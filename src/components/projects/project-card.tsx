@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 import { Globe, ExternalLink } from "lucide-react"
-import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { AnimatedGithub } from "@/components/ui/icons/animated-github"
 import { AnimatedYoutube } from "@/components/ui/icons/animated-youtube"
 import { type Project } from "@/lib/data/projects"
@@ -14,9 +14,10 @@ type ProjectCardProps = {
 
 /**
  * Purpose:
- *   Individual project card for the masonry gallery. Image zooms on hover,
- *   a glass ExternalLink badge appears bottom-right, title gains accent colour,
- *   and the card border glows. Link icons shown in order: live -> github -> video.
+ *   Individual project card for the masonry gallery. The card itself is a
+ *   <div role="link"> (not an <a>) so that the icon links inside it can be
+ *   real <a> tags without triggering the "nested <a>" invalid-HTML error.
+ *   Clicking anywhere on the card except an icon link triggers navigation.
  *
  * Args:
  *   project -- the project data entry.
@@ -26,11 +27,31 @@ type ProjectCardProps = {
  *   An animated glass card.
  */
 export function ProjectCard({ project, index }: ProjectCardProps) {
+  const router = useRouter()
+
   const href = project.hasDetailPage
     ? `/projects/${project.slug}`
     : (project.liveUrl ?? project.githubUrl ?? project.videoUrl ?? "#")
 
   const isInternal = project.hasDetailPage
+
+  function handleCardClick(e: React.MouseEvent<HTMLDivElement>) {
+    // If the click landed on or inside a real anchor, let that anchor handle it
+    if ((e.target as HTMLElement).closest("a")) return
+    if (isInternal) {
+      router.push(href)
+    } else {
+      window.open(href, "_blank", "noopener,noreferrer")
+    }
+  }
+
+  function handleCardKey(e: React.KeyboardEvent<HTMLDivElement>) {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault()
+      if (isInternal) router.push(href)
+      else window.open(href, "_blank", "noopener,noreferrer")
+    }
+  }
 
   return (
     <motion.div
@@ -38,12 +59,19 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-8% 0px" }}
       transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1], delay: (index % 3) * 0.08 }}
-      className="break-inside-avoid mb-6"
+      className="mb-6"
     >
-      <CardLink href={href} isInternal={isInternal}>
-        <div className="relative overflow-hidden rounded-2xl border border-app bg-[var(--glass)] backdrop-blur-sm transition-all duration-500 hover:border-[var(--accent)] hover:shadow-[0_0_0_1px_var(--accent),0_8px_40px_var(--accent-glow)]">
+      <div
+        role="link"
+        tabIndex={0}
+        onClick={handleCardClick}
+        onKeyDown={handleCardKey}
+        className="group block cursor-pointer rounded-2xl outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
+        aria-label={project.title}
+      >
+        <div className="relative overflow-hidden rounded-2xl border border-app bg-[var(--glass)] backdrop-blur-sm transition-all duration-500 group-hover:border-[var(--accent)] group-hover:shadow-[0_0_0_1px_var(--accent),0_8px_40px_var(--accent-glow)]">
 
-          {/* ── Image ─────────────────────────────────── */}
+          {/* Image area */}
           <div
             className="relative overflow-hidden"
             style={{ aspectRatio: project.featured ? "16/9" : "4/3" }}
@@ -88,18 +116,14 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
             </div>
           </div>
 
-          {/* ── Content ────────────────────────────────── */}
+          {/* Content area */}
           <div className="flex flex-col gap-3 p-4 md:p-5">
-            {/* Title + link icons row */}
+            {/* Title + link icons -- icons are real <a> tags, safe here since card is a <div> */}
             <div className="flex items-start justify-between gap-2">
               <h3 className="text-base font-semibold leading-snug text-brand transition-colors duration-300 group-hover:text-[color:var(--accent)] md:text-lg">
                 {project.title}
               </h3>
-              {/* Icons: live first, then github, then video */}
-              <div
-                className="flex shrink-0 items-center gap-1.5 pt-0.5"
-                onClick={(e: React.MouseEvent) => e.preventDefault()}
-              >
+              <div className="flex shrink-0 items-center gap-1.5 pt-0.5">
                 {project.liveUrl && (
                   <IconLink href={project.liveUrl} label="Live site">
                     <Globe size={14} />
@@ -141,33 +165,12 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
             </div>
           </div>
         </div>
-      </CardLink>
+      </div>
     </motion.div>
   )
 }
 
-/** Renders as Next.js Link for internal routes, plain <a> for external ones. */
-function CardLink({
-  href,
-  isInternal,
-  children,
-}: {
-  href: string
-  isInternal: boolean
-  children: React.ReactNode
-}) {
-  const cls = "group block"
-  if (isInternal) {
-    return <Link href={href} className={cls}>{children}</Link>
-  }
-  return (
-    <a href={href} target="_blank" rel="noopener noreferrer" className={cls}>
-      {children}
-    </a>
-  )
-}
-
-/** Small icon link -- opens in a new tab without triggering the card link. */
+/** Small icon link -- a real <a> tag; safe because the card wrapper is a <div>. */
 function IconLink({
   href,
   label,
@@ -184,7 +187,6 @@ function IconLink({
       rel="noopener noreferrer"
       aria-label={label}
       className="flex h-6 w-6 items-center justify-center rounded-md border border-app bg-[var(--glass)] text-muted transition-colors duration-200 hover:border-[color:var(--accent)] hover:text-[color:var(--accent)]"
-      onClick={(e: React.MouseEvent) => e.stopPropagation()}
     >
       {children}
     </a>

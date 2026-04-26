@@ -1,0 +1,5 @@
+Galleria was the final project for my Web Development course in Fall 2023. The goal was to design and build a full-stack application from scratch — no starter kits, no UI libraries — using Node.js and Express on the backend.
+
+Artists can create accounts, upload artwork with titles and descriptions, follow other artists, and leave comments on pieces they admire. The app uses MongoDB for flexible document storage and Pug as a server-side templating engine, keeping the architecture close to classical MVC.
+
+Building Galleria taught me the full HTTP request-response cycle, session-based authentication with bcrypt password hashing, and how to think about data modelling when relationships between users and posts need to be efficient at query time.

@@ -1,0 +1,5 @@
+A festive personal newsletter designed and coded as a seasonal creative exercise. The layout mimics a printed holiday card — a bold red header, an editorial-style body with a Christmas scene image, and a warm closing note.
+
+The challenge was making a richly formatted email that renders consistently across Gmail, Outlook, and Apple Mail, which all interpret CSS differently. Inline styles, table-based layouts, and thorough testing in multiple clients were required to get a pixel-perfect result everywhere.
+
+Sent to a small list of friends and family in December 2023. A fun reminder that email HTML is its own discipline.

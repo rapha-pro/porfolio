@@ -24,9 +24,9 @@ const mono = JetBrains_Mono({
 })
 
 export const metadata: Metadata = {
-  title: "Raphaël Onana — Portfolio",
+  title: "Raphaël Onana - Portfolio",
   description:
-    "Portfolio of Raphaël Onana — building immersive web experiences with Next.js, animation, and 3D.",
+    "Portfolio of Raphaël Onana — building immersive web experience",
 }
 
 /**
