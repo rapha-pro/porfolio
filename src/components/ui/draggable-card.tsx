@@ -8,8 +8,11 @@ import { useRef, type CSSProperties, type ReactNode } from "react"
  *   Establishes a 3D perspective context for draggable card children.
  *
  * Args:
- *   className: extra classes applied to the wrapper div.
- *   children:  DraggableCardBody elements.
+ *   - className: extra classes applied to the wrapper div.
+ *   - children:  DraggableCardBody elements.
+ *
+ * Returns:
+ *   A plain div with CSS perspective set.
  */
 export function DraggableCardContainer({
   className,
@@ -32,10 +35,13 @@ export function DraggableCardContainer({
  *   user did not actually drag (pointer stayed within a small threshold).
  *
  * Args:
- *   className: extra classes (cursor, select-none, etc.).
- *   style:     absolute position, initial rotate, zIndex, etc.
- *   children:  card visual content.
- *   onClick:   called on tap/click (not on drag-release).
+ *   - className: extra classes (cursor, select-none, etc.).
+ *   - style:     initial CSS styles — position, rotate, zIndex, etc.
+ *   - children:  card visual content.
+ *   - onClick:   called on tap/click but not on drag-release.
+ *
+ * Returns:
+ *   An animated motion.div that responds to drag and mouse-tilt.
  */
 export function DraggableCardBody({
   className,

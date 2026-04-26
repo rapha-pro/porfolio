@@ -66,10 +66,10 @@ function buildCache(): Map<string, string> {
  *   Case-insensitive. Returns undefined when no logo is known.
  *
  * Args:
- *   name -- technology display name (e.g. "React", "PyTorch").
+ *   - name: technology display name (e.g. "React", "PyTorch").
  *
  * Returns:
- *   Logo image URL string, or undefined.
+ *   Logo image URL string, or undefined if no logo is known for that name.
  */
 export function getTechLogo(name: string): string | undefined {
   if (!_cache) _cache = buildCache()

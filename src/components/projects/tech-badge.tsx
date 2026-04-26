@@ -19,11 +19,11 @@ type TechBadgeProps = {
  *   text-only so it always looks intentional rather than broken.
  *
  * Args:
- *   name:     technology display name (e.g. "React", "PyTorch").
- *   showLogo: whether to prepend a logo image (default true).
+ *   - name:     technology display name (e.g. "React", "PyTorch").
+ *   - showLogo: whether to prepend a logo image (default true).
  *
  * Returns:
- *   A pill-shaped badge with optional logo and name.
+ *   A pill-shaped <span> badge with an optional 16x16 logo and the tech name.
  */
 export function TechBadge({ name, showLogo = true }: TechBadgeProps) {
   const logoSrc = showLogo ? getTechLogo(name) : undefined

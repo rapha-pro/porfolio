@@ -22,8 +22,12 @@ type PageProps = {
  *   src/app/projects/{slug}/page.tsx -- Next.js will prefer the specific
  *   route over this dynamic one automatically. No code change needed here.
  *
+ * Args:
+ *   - params: Next.js dynamic route params (resolves to { slug }).
+ *
  * Returns:
- *   Full-page layout or 404 if the slug is unknown / has no detail page.
+ *   Full-page layout with hero image, description, and tech stack,
+ *   or a 404 if the slug is unknown or has no detail page.
  */
 export default async function ProjectDetailPage({ params }: PageProps) {
   const { slug } = await params
@@ -112,10 +116,10 @@ export default async function ProjectDetailPage({ params }: PageProps) {
  *   an array of paragraph strings. Returns null if the file doesn't exist.
  *
  * Args:
- *   slug -- project slug matching the .txt filename.
+ *   - slug: project slug matching the .txt filename.
  *
  * Returns:
- *   Array of paragraph strings, or null.
+ *   Array of paragraph strings, or null if the file is missing.
  */
 function readDescriptionFile(slug: string): string[] | null {
   try {

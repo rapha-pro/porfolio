@@ -21,11 +21,12 @@ type ProjectCardProps = {
  *   Clicking anywhere on the card except an icon link triggers navigation.
  *
  * Args:
- *   project -- the project data entry.
- *   index   -- stagger offset for the scroll-in animation.
+ *   - project: the project data entry.
+ *   - index:   stagger offset for the scroll-in animation.
  *
  * Returns:
- *   An animated glass card.
+ *   An animated glass card with image, title, description, tech chips,
+ *   and icon links for live site, GitHub, and video demo.
  */
 export function ProjectCard({ project, index }: ProjectCardProps) {
   const router = useRouter()
