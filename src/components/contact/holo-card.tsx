@@ -4,18 +4,13 @@ import { useEffect, useRef } from "react"
 import * as THREE from "three"
 
 type HoloCardProps = {
-  /** Name engraved on the card front. */
-  name: string
-  /** Title / role line. */
-  title: string
-  /** Email line. */
-  email: string
-  /** Optional handle line. */
-  handle?: string
-  /** Square canvas size in px. Default 460. */
-  size?: number
-  /** Edge-glow color override. Defaults to current --accent. */
-  edgeColor?: string
+
+  name: string        // Name engraved on the card front.
+  title: string       // Title / role line.
+  email: string       // Email line. 
+  handle?: string     //Optional handle line.
+  size?: number       // Square canvas size in px. Default 460.
+  edgeColor?: string  // Edge-glow color override. Defaults to current --accent.
   className?: string
 }
 

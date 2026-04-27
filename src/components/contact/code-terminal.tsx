@@ -38,9 +38,9 @@ const TOKENS: Token[] = [
   sp(2), prm("location"),    df(":     "), str('"Montréal, QC"'), df(","), nl(),
   sp(2), prm("status"),      df(":       "), str('"available — graduate roles"'), df(","), nl(),
   sp(2), prm("interests"),   df(":   ["), nl(),
-  sp(4), str('"software engineering"'), df(","), nl(),
-  sp(4), str('"machine learning"'), df(","), nl(),
-  sp(4), str('"full-stack development"'), df(","), nl(),
+  sp(4), str('"Data Scientist"'), df(","), nl(),
+  sp(4), str('"Machine Learning"'), df(","), nl(),
+  sp(4), str('"AI Engineer"'), df(","), nl(),
   sp(2), df("],"), nl(),
   df("}"), nl(),
   nl(),
@@ -55,17 +55,37 @@ const charDelay = (ch: string): number => {
   return 22
 }
 
+type CodeTerminalProps = {
+  /**
+   * Horizontal perspective rotation in degrees (positive = face left, showing
+   * the card's right edge). Applied only on lg+ breakpoints — collapses to 0
+   * on single-column layouts so it doesn't look broken on narrow screens.
+   * Default: 8.
+   */
+  rotateY?: number
+  /**
+   * Vertical tilt in degrees (negative = top tilts toward viewer / slight
+   * "looking up" angle). Applied on all breakpoints.
+   * Default: -2.
+   */
+  rotateX?: number
+}
+
 /**
  * Purpose:
  *   VS Code-style code editor card with a character-by-character typewriter
  *   animation of a professional TypeScript profile. The card is rendered
- *   inside a parent wrapper that applies a slight rotation for visual interest.
+ *   inside a parent wrapper that applies a configurable perspective slant.
  *   Typing begins when the card enters the viewport.
+ *
+ * Args:
+ *   rotateY — horizontal slant degrees, lg+ only. Default 8.
+ *   rotateX — vertical tilt degrees, all breakpoints. Default -2.
  *
  * Returns:
  *   A self-contained dark glass card shaped like a code editor window.
  */
-export function CodeTerminal() {
+export function CodeTerminal({ rotateY = 3, rotateX = 3 }: CodeTerminalProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const inView       = useInView(containerRef, { once: true, margin: "-15% 0px" })
   const [charIndex, setCharIndex] = useState(0)
@@ -86,91 +106,106 @@ export function CodeTerminal() {
   const done = charIndex >= TOTAL_CHARS
   const lines = countLines(TOKENS, charIndex)
 
+  /* Responsive slant:
+   *   mobile  — slight vertical tilt only (no horizontal skew on narrow screens)
+   *   desktop — full perspective rotateY + rotateX
+   * Implemented via an injected <style> block so we get a real @media breakpoint
+   * without duplicating the card DOM or fighting inline-style specificity. */
+
   return (
-    /* Slant wrapper — rotate the whole card at a gentle angle */
-    <div
-      ref={containerRef}
-      className="w-full"
-      style={{ transform: "rotate(-4deg) translateY(-8px)", transformOrigin: "center top" }}
-    >
-      <div
-        className="overflow-hidden rounded-2xl border shadow-2xl"
-        style={{
-          borderColor: "rgba(255,255,255,0.08)",
-          background: "#1e1e1e",
-          boxShadow: "0 24px 60px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.04)",
-        }}
-      >
-        {/* Title bar */}
-        <div
-          className="flex items-center justify-between border-b px-4 py-2.5"
-          style={{ borderColor: "rgba(255,255,255,0.07)", background: "#252526" }}
-        >
-          <div className="flex items-center gap-1.5">
-            <span className="h-3 w-3 rounded-full bg-[#ff5f57]" />
-            <span className="h-3 w-3 rounded-full bg-[#febc2e]" />
-            <span className="h-3 w-3 rounded-full bg-[#28c840]" />
-          </div>
-          <div className="flex items-center gap-2">
-            {/* Explorer breadcrumb */}
-            <span className="text-[11px] font-mono" style={{ color: "#858585" }}>
-              src / lib /
-            </span>
-            <span
-              className="flex items-center gap-1.5 rounded px-2 py-0.5 text-[11px] font-mono"
-              style={{ background: "#1e1e1e", color: "#cccccc", border: "1px solid rgba(255,255,255,0.06)" }}
-            >
-              <TsFileIcon />
-              profile.ts
-            </span>
-          </div>
-          <div className="flex gap-1.5 opacity-40">
-            {[1,2,3].map((i) => (
-              <span key={i} className="h-0.5 w-3 rounded-full bg-white" />
-            ))}
-          </div>
-        </div>
+    <div ref={containerRef} className="w-full">
+      <style>{`
+        .ct-slant {
+          transform: perspective(1100px) rotateX(${rotateX}deg);
+          transform-origin: center center;
+        }
+        @media (min-width: 1024px) {
+          .ct-slant {
+            transform: perspective(1100px) rotateY(${rotateY}deg) rotateX(${rotateX}deg);
+            transform-origin: left center;
+          }
+        }
+        @keyframes tblink { 0%,100%{opacity:1} 50%{opacity:0} }
+      `}</style>
 
-        {/* Code area */}
-        <div className="flex" style={{ minHeight: 320 }}>
-          {/* Line numbers */}
+      <div className="ct-slant w-full">
+        <div
+          className="overflow-hidden rounded-2xl border shadow-2xl"
+          style={{
+            borderColor: "rgba(255,255,255,0.08)",
+            background: "#1e1e1e",
+            boxShadow: "0 24px 60px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.04)",
+          }}
+        >
+          {/* Title bar */}
           <div
-            className="select-none border-r py-4 pr-4 pl-3 text-right text-[12px] leading-[1.7]"
-            style={{ borderColor: "rgba(255,255,255,0.04)", color: "#3c3c3c", fontFamily: "'JetBrains Mono', monospace", minWidth: "2.8rem" }}
+            className="flex items-center justify-between border-b px-4 py-2.5"
+            style={{ borderColor: "rgba(255,255,255,0.07)", background: "#252526" }}
           >
-            {Array.from({ length: lines }, (_, i) => <div key={i}>{i + 1}</div>)}
+            <div className="flex items-center gap-1.5">
+              <span className="h-3 w-3 rounded-full bg-[#ff5f57]" />
+              <span className="h-3 w-3 rounded-full bg-[#febc2e]" />
+              <span className="h-3 w-3 rounded-full bg-[#28c840]" />
+            </div>
+            <div className="flex items-center gap-2">
+              {/* Explorer breadcrumb */}
+              <span className="text-[11px] font-mono" style={{ color: "#858585" }}>
+                src / lib /
+              </span>
+              <span
+                className="flex items-center gap-1.5 rounded px-2 py-0.5 text-[11px] font-mono"
+                style={{ background: "#1e1e1e", color: "#cccccc", border: "1px solid rgba(255,255,255,0.06)" }}
+              >
+                <TsFileIcon />
+                profile.ts
+              </span>
+            </div>
+            <div className="flex gap-1.5 opacity-40">
+              {[1,2,3].map((i) => (
+                <span key={i} className="h-0.5 w-3 rounded-full bg-white" />
+              ))}
+            </div>
           </div>
 
-          {/* Code */}
-          <pre
-            className="flex-1 overflow-x-auto px-5 py-4 text-[12.5px] leading-[1.7]"
-            style={{ fontFamily: "'JetBrains Mono', 'Fira Code', monospace", tabSize: 2 }}
-          >
-            <code>
-              <VisibleTokens tokens={TOKENS} visibleChars={charIndex} />
-              {!done && (
-                <span
-                  className="inline-block w-[2px] align-middle"
-                  style={{ height: "1.1em", background: "var(--accent)", animation: "tblink 0.9s step-start infinite" }}
-                />
-              )}
-            </code>
-          </pre>
-        </div>
+          {/* Code area */}
+          <div className="flex" style={{ minHeight: 320 }}>
+            {/* Line numbers */}
+            <div
+              className="select-none border-r py-4 pr-4 pl-3 text-right text-[12px] leading-[1.7]"
+              style={{ borderColor: "rgba(255,255,255,0.04)", color: "#3c3c3c", fontFamily: "'JetBrains Mono', monospace", minWidth: "2.8rem" }}
+            >
+              {Array.from({ length: lines }, (_, i) => <div key={i}>{i + 1}</div>)}
+            </div>
 
-        {/* Status bar */}
-        <div
-          className="flex items-center justify-between border-t px-4 py-1 text-[10px] font-mono"
-          style={{ borderColor: "rgba(255,255,255,0.06)", background: "#007acc", color: "#ffffff" }}
-        >
-          <span className="flex items-center gap-2 opacity-90">
-            <span>{done ? "TypeScript" : "typing…"}</span>
-          </span>
-          <span className="opacity-80">Ln {lines}, Col {countCol(TOKENS, charIndex)}</span>
+            {/* Code */}
+            <pre
+              className="flex-1 overflow-x-auto px-5 py-4 text-[12.5px] leading-[1.7]"
+              style={{ fontFamily: "'JetBrains Mono', 'Fira Code', monospace", tabSize: 2 }}
+            >
+              <code>
+                <VisibleTokens tokens={TOKENS} visibleChars={charIndex} />
+                {!done && (
+                  <span
+                    className="inline-block w-[2px] align-middle"
+                    style={{ height: "1.1em", background: "var(--accent)", animation: "tblink 0.9s step-start infinite" }}
+                  />
+                )}
+              </code>
+            </pre>
+          </div>
+
+          {/* Status bar */}
+          <div
+            className="flex items-center justify-between border-t px-4 py-1 text-[10px] font-mono"
+            style={{ borderColor: "rgba(255,255,255,0.06)", background: "#007acc", color: "#ffffff" }}
+          >
+            <span className="flex items-center gap-2 opacity-90">
+              <span>{done ? "TypeScript" : "typing…"}</span>
+            </span>
+            <span className="opacity-80">Ln {lines}, Col {countCol(TOKENS, charIndex)}</span>
+          </div>
         </div>
       </div>
-
-      <style>{`@keyframes tblink { 0%,100%{opacity:1} 50%{opacity:0} }`}</style>
     </div>
   )
 }

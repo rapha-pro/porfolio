@@ -10,7 +10,7 @@ export const CONTACT_COPY = {
   kicker: "Let's connect",
 
   /** Big section heading rendered with TextHoverEffect. Keep it short. */
-  heading: "LETS TALK",
+  heading: "LET'S TALK!",
 
   name: "Raphaël Onana",
   title: "Software Engineer · CS Graduate",

@@ -13,11 +13,13 @@ import { SectionHeader } from "./section-header"
 import { CodeTerminal } from "./code-terminal"
 import { ContactForm } from "./contact-form"
 
-/* ── Globe markers: three cities relevant to Raphaël ────────────────────── */
+/* ── Globe markers: five cities across North America ────────────────────── */
 const MARKERS: GlobeMarker[] = [
-  { lat: 45.5017, lng: -73.5673, label: "MTL", subtitle: "Home · Montréal, QC",   color: "#8b5cf6" },
-  { lat: 40.7128, lng: -74.0060, label: "NYC", subtitle: "New York, NY",           color: "#06b6d4" },
-  { lat: 37.7749, lng: -122.419, label: "SFO", subtitle: "San Francisco, CA",      color: "#f59e0b" },
+  { lat: 45.5017, lng: -73.5673, label: "MTL", subtitle: "Home · Montréal, QC",   color: "#8b5cf6", src: "https://assets.aceternity.com/avatars/1.webp" },
+  { lat: 45.4215, lng: -75.6972, label: "OTT", subtitle: "Ottawa, ON",             color: "#06b6d4", src: "https://assets.aceternity.com/avatars/2.webp" },
+  { lat: 43.6532, lng: -79.3832, label: "TOR", subtitle: "Toronto, ON",            color: "#f59e0b", src: "https://assets.aceternity.com/avatars/3.webp" },
+  { lat: 40.7128, lng: -74.0060, label: "NYC", subtitle: "New York, NY",           color: "#10b981", src: "https://assets.aceternity.com/avatars/4.webp" },
+  { lat: 37.7749, lng: -122.419, label: "SFO", subtitle: "San Francisco, CA",      color: "#ec4899", src: "https://assets.aceternity.com/avatars/5.webp" },
 ]
 
 /**
@@ -51,7 +53,7 @@ export default function Contact() {
   /* FloatingDock items derived from SOCIALS */
   const dockItems: DockItem[] = SOCIALS.map((s) => ({
     title:  s.label,
-    icon:   <s.icon size={18} />,
+    icon:   <s.icon size={18} className="text-[color:var(--accent)]" />,
     href:   s.href,
     target: s.href.startsWith("http") ? "_blank" : undefined,
     rel:    s.href.startsWith("http") ? "noopener noreferrer" : undefined,
@@ -66,12 +68,12 @@ export default function Contact() {
     >
       <ContactBackground />
 
-      <div className="relative z-10 mx-auto w-full max-w-6xl">
+      <div className="relative z-10 mx-auto w-full max-w-7xl">
         {/* ── Section header — "LET'S TALK" ────────────────────────── */}
         <SectionHeader />
 
         {/* ── Row 1: Code terminal (left) + Contact form (right) ───── */}
-        <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-2 lg:gap-12">
+        <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-[44%_56%] lg:gap-12">
           {/* Code terminal — animated in from the left, slant applied inside */}
           <motion.div
             initial={{ opacity: 0, x: -36 }}
@@ -109,7 +111,7 @@ export default function Contact() {
           </p>
 
           {/* Globe container — fixed height so the canvas has room */}
-          <div className="relative h-[380px] w-full md:h-[440px]">
+          <div className="relative h-[480px] w-full md:h-[560px]">
             <Globe3D
               markers={MARKERS}
               config={{
@@ -134,33 +136,6 @@ export default function Contact() {
           className="mt-12 flex justify-center"
         >
           <FloatingDock items={dockItems} />
-        </motion.div>
-
-        {/* Status + location pills */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="mt-6 flex flex-wrap items-center justify-center gap-3"
-        >
-          {/* Pulsing available pill */}
-          <span className="inline-flex items-center gap-2 rounded-full border border-app bg-[var(--glass)] px-3 py-1.5 text-xs text-muted backdrop-blur-md">
-            <span className="relative flex h-2 w-2">
-              <span aria-hidden className="absolute inset-0 animate-ping rounded-full" style={{ background: "var(--accent)" }} />
-              <span className="relative h-2 w-2 rounded-full" style={{ background: "var(--accent)", boxShadow: "0 0 8px var(--accent-glow)" }} />
-            </span>
-            {CONTACT_COPY.statusLabel}
-          </span>
-
-          {/* Location */}
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-app bg-[var(--glass)] px-3 py-1.5 text-xs text-subtle backdrop-blur-md">
-            <svg width={11} height={11} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-              <path d="M12 21s-7-7.5-7-12a7 7 0 0 1 14 0c0 4.5-7 12-7 12Z" />
-              <circle cx="12" cy="9" r="2.5" />
-            </svg>
-            {CONTACT_COPY.location}
-          </span>
         </motion.div>
 
         {/* Signature */}

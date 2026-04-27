@@ -2,6 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion"
 import { useState, type ChangeEvent, type FormEvent } from "react"
+import { GlassCard } from "@/components/ui/glass-card"
 import { MagneticButton } from "@/components/ui/magnetic-button"
 import { CONTACT_COPY } from "@/lib/data/contact-copy"
 
@@ -25,17 +26,17 @@ const INITIAL: FormState = {
 
 /**
  * Purpose:
- *   Glassmorphism contact form powered by the /api/contact Resend route.
- *   Fields: name (required), email (required, HTML validated), phone
- *   (optional), subject, message (required). Shows inline
- *   sending / success / error states without a page reload.
+ *   GlassCard-wrapped contact form powered by the /api/contact Resend route.
+ *   Required fields (name, email, message) show a red asterisk.
+ *   Phone is optional — a hint line below the input shows the expected format.
+ *   Uses floating-label inputs (peer + placeholder-shown).
  *
  * Returns:
- *   A frosted-glass card containing the labelled form with animated states.
+ *   A GlassCard containing the form with animated success / error states.
  */
 export function ContactForm() {
-  const [form, setForm]     = useState<FormState>(INITIAL)
-  const [status, setStatus] = useState<SendStatus>("idle")
+  const [form, setForm]         = useState<FormState>(INITIAL)
+  const [status, setStatus]     = useState<SendStatus>("idle")
   const [errorMsg, setErrorMsg] = useState("")
 
   const onChange =
@@ -70,24 +71,13 @@ export function ContactForm() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-10% 0px" }}
       transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-      className="w-full"
     >
-      {/* Glass card */}
-      <div
-        className="relative overflow-hidden rounded-2xl border p-6 md:p-8"
-        style={{
-          background:    "rgba(255,255,255,0.03)",
-          backdropFilter: "blur(20px)",
-          WebkitBackdropFilter: "blur(20px)",
-          borderColor:   "rgba(255,255,255,0.08)",
-          boxShadow:     "0 8px 40px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.06)",
-        }}
-      >
-        {/* Top accent line */}
+      <GlassCard hover={false} className="relative p-7 md:p-10">
+        {/* Top accent stripe */}
         <span
           aria-hidden
-          className="pointer-events-none absolute inset-x-0 top-0 h-px"
-          style={{ background: "linear-gradient(90deg, transparent 0%, var(--accent) 50%, transparent 100%)" }}
+          className="pointer-events-none absolute inset-x-6 top-0 h-px"
+          style={{ background: "linear-gradient(90deg, transparent, var(--accent), transparent)" }}
         />
 
         {/* Success overlay */}
@@ -100,17 +90,17 @@ export function ContactForm() {
               exit={{ opacity: 0, scale: 0.96 }}
               transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
               className="absolute inset-0 z-20 flex flex-col items-center justify-center gap-4 rounded-2xl"
-              style={{ background: "rgba(0,0,0,0.7)", backdropFilter: "blur(12px)" }}
+              style={{ background: "var(--glass-strong)", backdropFilter: "blur(14px)" }}
             >
               <span
-                className="flex h-14 w-14 items-center justify-center rounded-full text-2xl"
-                style={{ background: "var(--accent-soft)", boxShadow: "0 0 28px var(--accent-glow)" }}
+                className="flex h-14 w-14 items-center justify-center rounded-full text-xl font-bold text-white"
+                style={{ background: "var(--accent-soft)", boxShadow: "0 0 30px var(--accent-glow)" }}
               >
                 ✓
               </span>
               <p className="text-lg font-semibold text-brand">Message received.</p>
               <p className="max-w-[220px] text-center text-sm text-muted">
-                I&apos;ll get back to you at <span className="text-accent">{form.email || CONTACT_COPY.email}</span>.
+                I&apos;ll reply to <span className="text-accent">{form.email || CONTACT_COPY.email}</span>.
               </p>
               <button
                 onClick={() => setStatus("idle")}
@@ -124,41 +114,39 @@ export function ContactForm() {
 
         {/* Header */}
         <div className="mb-6 flex flex-wrap items-baseline justify-between gap-2">
-          <h3 className="text-base font-semibold text-brand md:text-lg">Get in touch</h3>
-          <span className="text-[10px] font-mono uppercase tracking-[0.18em] text-subtle">
-            direct to inbox
-          </span>
+          <h3 className="text-lg font-semibold text-brand md:text-xl">Get in touch</h3>
+          <p className="text-[11px] font-mono uppercase tracking-[0.18em] text-subtle">
+            direct · no spam, ever
+          </p>
         </div>
 
-        <form onSubmit={onSubmit} className="flex flex-col gap-3.5" noValidate>
+        <form onSubmit={onSubmit} className="flex flex-col gap-5" noValidate>
           {/* Name + Email */}
-          <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2">
-            <GlassInput
-              id="cf-name"   label="Name *"
-              value={form.name}    onChange={onChange("name")}
-              autoComplete="name"  required
-              disabled={status === "sending"}
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+            <FloatingInput
+              id="cf-name"  label="Name" required
+              value={form.name} onChange={onChange("name")}
+              autoComplete="name" disabled={status === "sending"}
             />
-            <GlassInput
-              id="cf-email"  label="Email *"
-              type="email"   value={form.email}   onChange={onChange("email")}
-              autoComplete="email" required
-              /* Permissive pattern: anything@anything.tld */
+            <FloatingInput
+              id="cf-email" label="Email" type="email" required
+              value={form.email} onChange={onChange("email")}
               pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
               title="Please enter a valid email address"
-              disabled={status === "sending"}
+              autoComplete="email" disabled={status === "sending"}
             />
           </div>
 
-          {/* Phone (optional) + Subject */}
-          <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2">
-            <GlassInput
-              id="cf-phone"  label="Phone (optional)"
-              type="tel"     value={form.phone}   onChange={onChange("phone")}
-              autoComplete="tel"
-              disabled={status === "sending"}
+          {/* Phone + Subject */}
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+            <FloatingInput
+              id="cf-phone" label="Phone"
+              type="tel" value={form.phone} onChange={onChange("phone")}
+              placeholder_hint="+1 234 567 8900"
+              hint="Include country code, e.g. +1 234 567 8900"
+              autoComplete="tel" disabled={status === "sending"}
             />
-            <GlassInput
+            <FloatingInput
               id="cf-subject" label="Subject"
               value={form.subject} onChange={onChange("subject")}
               disabled={status === "sending"}
@@ -166,11 +154,10 @@ export function ContactForm() {
           </div>
 
           {/* Message */}
-          <GlassTextarea
-            id="cf-message" label="Message *"
+          <FloatingTextarea
+            id="cf-message" label="Message" required
             value={form.message} onChange={onChange("message")}
-            rows={5} required
-            disabled={status === "sending"}
+            rows={7} disabled={status === "sending"}
           />
 
           {/* Error */}
@@ -183,7 +170,7 @@ export function ContactForm() {
                 exit={{ opacity: 0, height: 0 }}
                 className="overflow-hidden"
               >
-                <div className="flex items-center justify-between rounded-xl border border-red-500/25 bg-red-500/08 px-4 py-2.5 text-sm text-red-400">
+                <div className="flex items-center justify-between rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-2.5 text-sm text-red-400">
                   <span>⚠ {errorMsg}</span>
                   <button type="button" onClick={() => setStatus("idle")} className="ml-3 opacity-60 hover:opacity-100">✕</button>
                 </div>
@@ -192,19 +179,20 @@ export function ContactForm() {
           </AnimatePresence>
 
           {/* Footer */}
-          <div className="mt-1 flex flex-wrap items-center justify-between gap-3">
-            <p className="text-xs text-subtle">No spam — straight to my inbox.</p>
+          <div className="mt-2 flex flex-wrap items-center justify-between gap-3">
+            <p className="text-xs text-subtle">
+              <span className="text-red-400">*</span> Required fields.
+            </p>
             <MagneticButton
               href="#contact"
               onClick={(e) => {
                 e.preventDefault()
                 ;(e.currentTarget.closest("form") as HTMLFormElement | null)?.requestSubmit()
               }}
-              disabled={status === "sending"}
-              className="group inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold text-white transition-all duration-300 disabled:opacity-60"
+              className="group inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold text-white transition-all duration-300"
               style={{
-                background:  "linear-gradient(135deg, var(--accent), #6d28d9)",
-                boxShadow:   "0 0 20px var(--accent-glow)",
+                background: "linear-gradient(135deg, var(--accent), #6d28d9)",
+                boxShadow:  "0 0 22px var(--accent-glow)",
               }}
             >
               {status === "sending" ? (
@@ -215,14 +203,33 @@ export function ContactForm() {
             </MagneticButton>
           </div>
         </form>
-      </div>
+      </GlassCard>
     </motion.div>
   )
 }
 
-/* ── Glass input primitives ──────────────────────────────────────────────── */
+/* ── Floating-label primitives ─────────────────────────────────────────────── */
 
-type GlassInputProps = {
+const INPUT_CLS = `
+  peer w-full rounded-xl border border-app bg-[var(--glass)]
+  px-3 pt-5 pb-2 text-sm text-brand placeholder-transparent
+  backdrop-blur-md outline-none transition-all duration-300
+  focus:border-[color:var(--accent)] focus:bg-[var(--glass-strong)]
+  focus:ring-2 focus:ring-[color:var(--accent)]
+  disabled:opacity-50 disabled:cursor-not-allowed
+`
+
+const LABEL_CLS = `
+  pointer-events-none absolute left-3 top-2 origin-left text-[11px]
+  font-mono uppercase tracking-[0.16em] text-subtle transition-all duration-200
+  peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-[13px]
+  peer-placeholder-shown:tracking-normal peer-placeholder-shown:font-normal
+  peer-placeholder-shown:normal-case
+  peer-focus:top-2 peer-focus:text-[11px] peer-focus:tracking-[0.16em]
+  peer-focus:font-mono peer-focus:uppercase peer-focus:text-accent
+`
+
+type FloatingInputProps = {
   id: string
   label: string
   value: string
@@ -233,47 +240,32 @@ type GlassInputProps = {
   disabled?: boolean
   pattern?: string
   title?: string
+  placeholder_hint?: string
+  /** Small hint shown below the field, e.g. format instructions. */
+  hint?: string
 }
 
-function GlassInput({ id, label, value, onChange, type = "text", autoComplete, required, disabled, pattern, title }: GlassInputProps) {
+function FloatingInput({ id, label, value, onChange, type = "text", autoComplete, required, disabled, pattern, title, placeholder_hint, hint }: FloatingInputProps) {
   return (
     <div className="relative">
       <input
         id={id} type={type} value={value} onChange={onChange}
-        placeholder=" " autoComplete={autoComplete}
-        required={required} disabled={disabled}
+        placeholder={placeholder_hint ?? " "}
+        autoComplete={autoComplete} required={required} disabled={disabled}
         pattern={pattern} title={title}
-        className="peer w-full rounded-xl pb-2 pt-5 px-3 text-sm text-brand placeholder-transparent outline-none transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-        style={{
-          background:    "rgba(255,255,255,0.04)",
-          backdropFilter: "blur(8px)",
-          border:        "1px solid rgba(255,255,255,0.08)",
-          boxShadow:     "inset 0 1px 0 rgba(255,255,255,0.04)",
-        }}
-        onFocus={(e) => {
-          e.currentTarget.style.border = "1px solid var(--accent)"
-          e.currentTarget.style.boxShadow = "0 0 0 3px var(--accent-glow), inset 0 1px 0 rgba(255,255,255,0.06)"
-          e.currentTarget.style.background = "rgba(255,255,255,0.06)"
-        }}
-        onBlur={(e) => {
-          e.currentTarget.style.border = "1px solid rgba(255,255,255,0.08)"
-          e.currentTarget.style.boxShadow = "inset 0 1px 0 rgba(255,255,255,0.04)"
-          e.currentTarget.style.background = "rgba(255,255,255,0.04)"
-        }}
+        className={INPUT_CLS}
       />
-      <label
-        htmlFor={id}
-        className="pointer-events-none absolute left-3 top-2 origin-left text-[10px] font-mono uppercase tracking-[0.14em] text-subtle transition-all duration-200
-          peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-[13px] peer-placeholder-shown:tracking-normal peer-placeholder-shown:font-normal peer-placeholder-shown:normal-case
-          peer-focus:top-2 peer-focus:text-[10px] peer-focus:tracking-[0.14em] peer-focus:font-mono peer-focus:uppercase peer-focus:text-accent"
-      >
-        {label}
+      <label htmlFor={id} className={LABEL_CLS}>
+        {label}{required && <span className="ml-0.5 text-red-400">*</span>}
       </label>
+      {hint && (
+        <p className="mt-1 pl-1 text-[10px] text-subtle">{hint}</p>
+      )}
     </div>
   )
 }
 
-type GlassTextareaProps = {
+type FloatingTextareaProps = {
   id: string
   label: string
   value: string
@@ -283,44 +275,20 @@ type GlassTextareaProps = {
   disabled?: boolean
 }
 
-function GlassTextarea({ id, label, value, onChange, rows = 4, required, disabled }: GlassTextareaProps) {
+function FloatingTextarea({ id, label, value, onChange, rows = 4, required, disabled }: FloatingTextareaProps) {
   return (
     <div className="relative">
       <textarea
         id={id} value={value} onChange={onChange}
-        placeholder=" " rows={rows}
-        required={required} disabled={disabled}
-        className="peer w-full resize-y rounded-xl pb-2 pt-6 px-3 text-sm text-brand placeholder-transparent outline-none transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-        style={{
-          background:    "rgba(255,255,255,0.04)",
-          backdropFilter: "blur(8px)",
-          border:        "1px solid rgba(255,255,255,0.08)",
-          boxShadow:     "inset 0 1px 0 rgba(255,255,255,0.04)",
-        }}
-        onFocus={(e) => {
-          e.currentTarget.style.border = "1px solid var(--accent)"
-          e.currentTarget.style.boxShadow = "0 0 0 3px var(--accent-glow), inset 0 1px 0 rgba(255,255,255,0.06)"
-          e.currentTarget.style.background = "rgba(255,255,255,0.06)"
-        }}
-        onBlur={(e) => {
-          e.currentTarget.style.border = "1px solid rgba(255,255,255,0.08)"
-          e.currentTarget.style.boxShadow = "inset 0 1px 0 rgba(255,255,255,0.04)"
-          e.currentTarget.style.background = "rgba(255,255,255,0.04)"
-        }}
+        placeholder=" " rows={rows} required={required} disabled={disabled}
+        className={INPUT_CLS.replace("pt-5", "pt-6") + " resize-y"}
       />
-      <label
-        htmlFor={id}
-        className="pointer-events-none absolute left-3 top-2 origin-left text-[10px] font-mono uppercase tracking-[0.14em] text-subtle transition-all duration-200
-          peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-[13px] peer-placeholder-shown:tracking-normal peer-placeholder-shown:font-normal peer-placeholder-shown:normal-case
-          peer-focus:top-2 peer-focus:text-[10px] peer-focus:tracking-[0.14em] peer-focus:font-mono peer-focus:uppercase peer-focus:text-accent"
-      >
-        {label}
+      <label htmlFor={id} className={LABEL_CLS}>
+        {label}{required && <span className="ml-0.5 text-red-400">*</span>}
       </label>
     </div>
   )
 }
-
-/* ── Icons ───────────────────────────────────────────────────────────────── */
 
 function PaperPlaneIcon({ className = "" }: { className?: string }) {
   return (

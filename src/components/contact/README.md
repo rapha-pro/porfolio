@@ -1,50 +1,59 @@
 # `components/contact/`
 
 Everything rendered inside `<section id="contact">`. The whole section is
-data-driven — every visible string lives in `src/lib/data/contact-copy.ts`,
-so changing voice, status, or location is a single-file edit.
+data-driven — every visible string lives in `src/lib/data/contact-copy.ts`.
 
-The 3D centerpiece (`HoloCard`) is a Three.js scene that re-builds its
-textures whenever the user switches the global accent — the section feels
-like one cohesive thing under any of the three accent themes.
+## Layout (desktop)
+
+```
+┌─── SectionHeader — "LETS TALK" (TextHoverEffect) ───────┐
+│ CodeTerminal (perspective-slanted) │ ContactForm (glass) │
+│          3D Globe (centered, North America facing)       │
+│               FloatingDock (Email / GitHub / LinkedIn)   │
+│                    signature line                        │
+└──────────────────────────────────────────────────────────┘
+```
+
+Single-column on mobile; grid collapses and CodeTerminal horizontal slant
+is disabled automatically via a `@media (min-width: 1024px)` rule.
 
 ## Files
 
 | File | Role |
 | ---- | ---- |
-| `index.tsx` | Default export `Contact`. Owns the `<section id="contact">`, the mouse-parallax handler that drives the floating accent orbs, and the layout that places the HoloCard, channels, form, and signature. Picks a HoloCard render size per breakpoint via `<ResponsiveHoloCard />`. |
-| `section-header.tsx` | Centered kicker + big animated heading rendered with the shared `<TextHoverEffect />` (cursor-tracked accent gradient over outlined glyphs) + subheading + accent rule. |
-| `holo-card.tsx` | The 3D centerpiece — a Three.js scene rendering a slowly rotating holographic glass business card, with name/title/email engraved on a CanvasTexture, accent edge-glow lines, an additive radial glow plane behind the card, and five accent-colored orbs orbiting on different tilted planes. Tilts toward the cursor. Watches `<html>` for accent-class changes and re-builds textures on accent switch. Disposes every geometry/material/texture on unmount. |
-| `contact-background.tsx` | Atmospheric backdrop matching the hero — accent gradient blobs, particle field, subtle grid, and four parallax-tracked accent orbs (`.contact-parallax-slow` / `.contact-parallax-fast`). Fully `pointer-events: none`. |
-| `contact-channels.tsx` | Status pill + location chip + one glass card per channel from `lib/data/socials.ts` (Email / GitHub / LinkedIn). Cards are magnetic, the email card has a one-click "Copy" button that flashes "Copied!" on success. |
-| `quick-message.tsx` | Glass-surfaced "Send a quick note" form with floating-label inputs (Name, Email, Subject, Message). On submit it builds a `mailto:` link from `CONTACT_COPY.mailtoTemplate` and opens the user's mail client — no backend, no captcha. The send button is a `<MagneticButton />` with a paper-plane icon. |
+| `index.tsx` | Default export `Contact`. Owns the `<section id="contact">`, mouse-parallax GSAP handler for accent orbs, the `lg:grid-cols-[44%_56%]` split between terminal and form, globe row, dock row, and signature. |
+| `section-header.tsx` | Centered kicker + big animated heading rendered with `<TextHoverEffect>` (cursor-tracked accent gradient). SVG gradient IDs are sanitized (`/[^a-zA-Z0-9]/g → "_"`) so apostrophes don't break `url(#…)` references. |
+| `code-terminal.tsx` | VS Code Dark+-themed typewriter card. Accepts `rotateY` (horizontal slant, lg+ only, default 8°) and `rotateX` (vertical tilt, all breakpoints, default −2°) props. Uses an injected `<style>` for responsive transforms. Typing starts when the card scrolls into view via `useInView`. |
+| `contact-form.tsx` | Resend API-powered glass form. Fields: Name*, Email*, Phone (optional — shows country-code hint), Subject, Message*. Floating-label inputs with `peer`/`placeholder-shown` CSS pattern. Success and error states with `AnimatePresence`. Send button is `<MagneticButton>`. |
+| `contact-background.tsx` | Atmospheric backdrop — accent gradient blobs, subtle grid, four parallax orbs (`.contact-parallax-slow` / `.contact-parallax-fast`), and `<ShootingStars>`: 8 CSS-animated diagonal streaks travelling top-left → bottom-right via `rotate(45deg) translateX()`. |
+| `contact-channels.tsx` | *(legacy — not rendered)* Original channel card grid. Kept for reference. |
+| `quick-message.tsx` | *(legacy — not rendered)* Original mailto form. Kept for reference. |
+| `holo-card.tsx` | *(legacy — not rendered)* Three.js holographic business card. Kept for reference. |
 
 ## Data sources
 
 | File | What it drives |
 | ---- | -------------- |
-| `src/lib/data/contact-copy.ts` | Every visible string + the HoloCard's engraved card content + the mailto template. |
-| `src/lib/data/socials.ts` | Channel rows in `<ContactChannels />` — shared with the hero ActionBar. |
+| `src/lib/data/contact-copy.ts` | Every visible string: kicker, heading, subheading, status label, location, signature, default subject. |
+| `src/lib/data/socials.ts` | FloatingDock items — shared with the hero ActionBar. |
+| `src/app/api/contact/route.ts` | POST handler; uses Resend (`RESEND_API_KEY` in `.env.local`). `from: onboarding@resend.dev`, `to: nathonana01@gmail.com`, `replyTo: visitor email`. |
 
 ## Editing
 
-- **Tweak voice / status / location:** edit `CONTACT_COPY` in `contact-copy.ts`.
-- **Add a channel** (Twitter, Bluesky, etc.): push it into `SOCIALS` in
-  `socials.ts`. The contact section renders it automatically with the smart
-  display-string formatter (`channelDisplay`) inside `contact-channels.tsx`.
-- **Change the engraved card text:** `CONTACT_COPY.card.{name,title,email,handle}`.
-- **Change accent presets:** edit the CSS variables under `.accent-violet`,
-  `.accent-cyan`, `.accent-amber` in `app/globals.css`. The HoloCard reads
-  the live `--accent` value, so it picks up the new color automatically.
-- **Disable the form:** delete `<QuickMessage />` from `index.tsx`. The
-  form is independent — the HoloCard and channels stay valid on their own.
+- **Change voice / status / location:** edit `CONTACT_COPY` in `contact-copy.ts`.
+- **Adjust terminal slant:** pass `rotateY` / `rotateX` props to `<CodeTerminal>` in `index.tsx`. `rotateY` only applies on `lg+` screens (≥ 1024 px). `rotateX` applies everywhere.
+- **Add a globe city:** push a `GlobeMarker` into `MARKERS` in `index.tsx` (`lat`, `lng`, `label`, `color`, optional `src` for avatar image, optional `subtitle`).
+- **Change shooting stars count / speed:** edit the `STARS` array in `contact-background.tsx`.
+- **Add a social link:** push to `SOCIALS` in `socials.ts`. The dock and hero ActionBar update automatically.
+- **Change accent colors:** edit CSS variables in `app/globals.css` under `.accent-violet`, `.accent-cyan`, `.accent-amber`.
 
-## Performance notes
+## Contact form API setup
 
-- The HoloCard runs a single `requestAnimationFrame` loop with one card
-  draw and five tiny billboards — well under 200 draw calls. It caps the
-  device pixel ratio at 2, so retina displays don't blow the GPU budget.
-- All textures are cleaned up on unmount **and** when the accent changes
-  (the old textures get `dispose()`d before the new ones replace them).
-- The MutationObserver only fires on `<html>` class-attribute changes,
-  which is how `AccentProvider` swaps accents — minimal overhead.
+```bash
+pnpm add resend
+# .env.local
+RESEND_API_KEY=re_xxxxxxxxxxxx
+```
+
+On the free Resend plan, `from` must be `onboarding@resend.dev` and emails
+can only be delivered to the account's registered address.
