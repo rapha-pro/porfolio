@@ -13,22 +13,14 @@
  */
 
 export type Hobby = {
-  /** Display title ("Piano"). */
   title: string
-  /** One-liner shown under the title. */
   meta: string
-  /** 2–4 short sentences — tell the story, keep it human. */
-  story: string
-  /** Emoji rendered in the header chip. Purely decorative. */
+  story: string  // 2–4 short sentences
   emoji: string
-  /** Optional image under /public/. Omit to hide the media block. */
   imageSrc?: string
-  /** Short <img alt>. Required when imageSrc is provided. */
   imageAlt?: string
-  /** Optional hex tint used on the card's header accent bar. */
   accent: string
-  /** Optional video clip (muted autoplay loop). Takes priority over imageSrc. */
-  videoSrc?: string
+  videoSrc?: string  // Optional video clip (muted autoplay loop). Takes priority over imageSrc.
 }
 
 export const HOBBIES: readonly Hobby[] = [

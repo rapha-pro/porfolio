@@ -35,7 +35,7 @@ export const HERO_COPY = {
   roles: [
     "Data Scientist",
     "Machine Learning Engineer",
-    "Full-Stack AI Engineer",
+    "AI Engineer",
   ] as const,
 
   photoCaption: "High School graduation · June 2022",

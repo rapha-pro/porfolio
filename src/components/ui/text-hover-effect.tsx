@@ -79,9 +79,10 @@ export function TextHoverEffect({
     rawY.set(((e.clientY - rect.top)  / rect.height) * vbH)
   }
 
-  const gradId  = `thetextGradient-${text.replace(/\s+/g, "_")}`
-  const maskId  = `revealMask-${text.replace(/\s+/g, "_")}`
-  const textMaskId = `textMask-${text.replace(/\s+/g, "_")}`
+  const safeId = text.replace(/[^a-zA-Z0-9]/g, "_")
+  const gradId  = `thetextGradient-${safeId}`
+  const maskId  = `revealMask-${safeId}`
+  const textMaskId = `textMask-${safeId}`
 
   return (
     <div className={`w-full ${className}`}>

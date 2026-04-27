@@ -36,7 +36,7 @@ export function DraggableCardContainer({
  *
  * Args:
  *   - className: extra classes (cursor, select-none, etc.).
- *   - style:     initial CSS styles — position, rotate, zIndex, etc.
+ *   - style:     initial CSS styles -- position, rotate, zIndex, etc.
  *   - children:  card visual content.
  *   - onClick:   called on tap/click but not on drag-release.
  *
@@ -97,7 +97,6 @@ export function DraggableCardBody({
       onDragEnd={() => {
         setTimeout(() => { hasDragged.current = false }, 80)
       }}
-      // Capture phase: suppress child click handlers when the user just finished dragging
       onClickCapture={(e) => {
         if (hasDragged.current) {
           e.stopPropagation()

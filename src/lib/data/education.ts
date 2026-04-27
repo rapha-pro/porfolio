@@ -50,19 +50,12 @@ export const SCHOOLS: readonly School[] = [
 ] as const
 
 export type Course = {
-  /** Carleton course code, e.g. "COMP 1405". */
-  code: string
-  /** Full course title. */
-  title: string
-  /** Language(s) or stack used — e.g. "Python", "Java, SQL". */
-  language?: string
-  /** Grade received; leave empty for "In progress". */
-  grade?: string
-  /** Optional one-paragraph description (Carleton calendar). */
-  description?: string
-  /** Optional banner image under /public/images/courses/. */
-  banner?: string
-  /** Hex tint used for the card header accent. */
+  code: string           // Carleton course code, e.g. "COMP 1405".
+  title: string          // Full course title. 
+  language?: string      // Language(s) or stack used — e.g. "Python", "Java, SQL".
+  grade?: string         // Grade received; leave empty for "In progress".
+  description?: string   // Optional one-paragraph description (Carleton calendar).
+  banner?: string        // Optional banner image under /public/images/courses/.
   accent: string
 }
 
@@ -70,12 +63,9 @@ export type YearKey = "freshman" | "sophomore" | "junior" | "senior"
 
 export type YearBlock = {
   key: YearKey
-  /** Display label for the sub-tab. */
   label: string
-  /** Period shown under the label. */
   period: string
-  /** True when courses are currently in progress (suppresses grade reveal). */
-  inProgress?: boolean
+  inProgress?: boolean  // True when courses are currently in progress (suppresses grade reveal).
   courses: readonly Course[]
 }
 
