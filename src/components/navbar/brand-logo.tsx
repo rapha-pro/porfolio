@@ -4,12 +4,9 @@ import Link from "next/link"
 import { motion } from "framer-motion"
 
 type BrandLogoProps = {
-  /** Total square size of the glyph in px. Default 36. */
-  size?: number
-  /** When true (mobile), hide the wordmark and show only the mark. */
-  compact?: boolean
-  /** Optional extra classes on the root link. */
-  className?: string
+  size?: number      // Total square size of the glyph in px. Default 36.
+  compact?: boolean  // When true (mobile), hide the wordmark and show only the mark.
+  className?: string // Optional extra classes on the root link.
 }
 
 /**

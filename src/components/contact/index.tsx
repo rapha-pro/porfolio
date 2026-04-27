@@ -132,16 +132,37 @@ export default function Contact() {
           <FloatingDock items={dockItems} />
         </motion.div>
 
-        {/* Signature */}
-        <motion.p
+        {/* Signature + status/location chips */}
+        <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.25 }}
-          className="mt-10 text-center text-xs italic text-subtle"
+          className="mt-10 flex flex-col items-center gap-4"
         >
-          {CONTACT_COPY.signature}
-        </motion.p>
+          {/* Status + location pills */}
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            <span className="inline-flex items-center gap-2 rounded-full border border-app bg-[var(--glass)] px-3 py-1.5 text-xs text-muted backdrop-blur-md">
+              <span className="relative flex h-2 w-2">
+                <span aria-hidden className="absolute inset-0 animate-ping rounded-full" style={{ background: "var(--accent)" }} />
+                <span className="relative h-2 w-2 rounded-full" style={{ background: "var(--accent)", boxShadow: "0 0 8px var(--accent-glow)" }} />
+              </span>
+              {CONTACT_COPY.statusLabel}
+            </span>
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-app bg-[var(--glass)] px-3 py-1.5 text-xs text-subtle backdrop-blur-md">
+              <svg width={11} height={11} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                <path d="M12 21s-7-7.5-7-12a7 7 0 0 1 14 0c0 4.5-7 12-7 12Z" />
+                <circle cx="12" cy="9" r="2.5" />
+              </svg>
+              {CONTACT_COPY.location}
+            </span>
+          </div>
+
+          {/* Quote signature */}
+          <p className="text-center text-xs italic text-subtle">
+            &ldquo;{CONTACT_COPY.signature}&rdquo;
+          </p>
+        </motion.div>
       </div>
     </section>
   )

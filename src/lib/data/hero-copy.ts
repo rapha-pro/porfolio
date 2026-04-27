@@ -29,5 +29,5 @@ export const HERO_COPY = {
     "AI Engineer",
   ] as const,
 
-  photoCaption: "High School graduation · June 2022",
+  photoCaption: "High School graduation",
 } as const

@@ -52,8 +52,8 @@ export function PhotoCard({
 
         <div className="flex items-center justify-between px-5 py-3">
           <span className="font-mono text-xs text-white/70 italic">{caption}</span>
-          <span className="font-mono text-xs opacity-40" style={{ color: "var(--accent)" }}>
-            #{HERO_COPY.firstName.slice(0, 2).toUpperCase()}
+          <span className="font-mono text-xs font-medium" style={{ color: "var(--accent)", opacity: 0.75 }}>
+            June 2022
           </span>
         </div>
       </div>

@@ -1,6 +1,6 @@
 @AGENTS.md
 
-# Raphaël Onana — Portfolio (Next.js)
+# Portfolio (Next.js)
 
 Stunning, animation-heavy personal portfolio. The goal is world-class visual polish: smooth GSAP/Framer Motion transitions, 3D Three.js elements, glass-morphism, and a cohesive design token system. Every change should feel intentional and premium.
 
@@ -142,25 +142,3 @@ public/
 - Every section directory has a `README.md` describing its file structure.
 
 ---
-
-## Common tasks
-
-**Add a new experience entry:**
-Prepend to `EXPERIENCE` in `src/lib/data/experience.ts`. The zig-zag ordering follows array index automatically.
-
-**Add a narrative chapter:**
-Append a `{ kind: "photo", src, alt, caption }` + `{ kind: "prose", kicker, heading, paragraphs }` pair to `NARRATIVE` in `src/lib/data/narrative.ts`. Keep images in `public/images/about me/` and use URL-encoded paths.
-
-**Add a course:**
-Push to the correct year's `courses` array in `education.ts`. Drop a banner in `public/images/courses/{year}/`.
-
-**Add a hobby:**
-Push to `HOBBIES` in `hobbies.ts`. `imageSrc` is optional — omit it to show no image.
-
-**Change accent colors:**
-Edit the CSS variables in `src/app/globals.css` under `.accent-violet`, `.accent-cyan`, `.accent-amber`.
-
-**Theme a company logo:**
-- Dark wordmark on white tile: `lightLogoBg: true`
-- Light/colored mark on dark tile: `bgOverride: "#1C1C1C"` (or any brand bg)
-- No logo image: omit `logo` (or set to `null`) — the monogram badge auto-generates.

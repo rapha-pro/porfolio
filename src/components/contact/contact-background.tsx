@@ -1,12 +1,13 @@
 "use client"
 
 import { ParticleField } from "@/components/ui/particle-field"
+import { Meteors } from "@/components/ui/meteors"
 
 /**
  * Purpose:
  *   Atmospheric backdrop for the contact section. Accent gradient blobs,
- *   particle field, subtle grid, parallax-tracked floating orbs, and
- *   diagonal shooting-star streaks from top-left to bottom-right.
+ *   particle field, subtle grid, parallax-tracked floating orbs, diagonal
+ *   shooting-star streaks, and an Aceternity-style meteor shower.
  *
  * Returns:
  *   A fragment of absolutely-positioned decorative layers.
@@ -29,8 +30,11 @@ export function ContactBackground() {
       <div aria-hidden className="pointer-events-none absolute inset-0 opacity-[0.04] dark:opacity-[0.06]"
         style={{ backgroundImage: "linear-gradient(var(--fg) 1px, transparent 1px), linear-gradient(90deg, var(--fg) 1px, transparent 1px)", backgroundSize: "60px 60px" }} />
 
-      {/* Shooting stars — diagonal top-left → bottom-right */}
+      {/* Shooting stars — diagonal top-left to bottom-right */}
       <ShootingStars />
+
+      {/* Meteor shower — Aceternity UI style, 215-degree streaks */}
+      <Meteors number={22} minSpeed={4} maxSpeed={10} minDelay={0} maxDelay={12} />
 
       {/* Parallax accent orbs */}
       <span aria-hidden className="contact-parallax-slow pointer-events-none absolute left-[8%] top-[16%] h-2 w-2 rounded-full"
@@ -60,13 +64,13 @@ export function ContactBackground() {
 function ShootingStars() {
   const stars = [
     { top: "4%",  left: "-4%", delay: "0s",    dur: "2.8s", len: 130, opacity: 0.55 },
-    { top: "1%",  left: "18%", delay: "1.4s",   dur: "2.4s", len: 100, opacity: 0.45 },
-    { top: "12%", left: "-8%", delay: "3.1s",   dur: "3.2s", len: 160, opacity: 0.60 },
-    { top: "0%",  left: "38%", delay: "5.0s",   dur: "2.6s", len: 110, opacity: 0.40 },
-    { top: "22%", left: "-2%", delay: "2.2s",   dur: "3.6s", len: 90,  opacity: 0.35 },
-    { top: "6%",  left: "55%", delay: "6.5s",   dur: "2.9s", len: 140, opacity: 0.50 },
-    { top: "35%", left: "-6%", delay: "4.3s",   dur: "3.0s", len: 80,  opacity: 0.30 },
-    { top: "2%",  left: "70%", delay: "7.8s",   dur: "2.5s", len: 120, opacity: 0.42 },
+    { top: "1%",  left: "18%", delay: "1.4s",  dur: "2.4s", len: 100, opacity: 0.45 },
+    { top: "12%", left: "-8%", delay: "3.1s",  dur: "3.2s", len: 160, opacity: 0.60 },
+    { top: "0%",  left: "38%", delay: "5.0s",  dur: "2.6s", len: 110, opacity: 0.40 },
+    { top: "22%", left: "-2%", delay: "2.2s",  dur: "3.6s", len: 90,  opacity: 0.35 },
+    { top: "6%",  left: "55%", delay: "6.5s",  dur: "2.9s", len: 140, opacity: 0.50 },
+    { top: "35%", left: "-6%", delay: "4.3s",  dur: "3.0s", len: 80,  opacity: 0.30 },
+    { top: "2%",  left: "70%", delay: "7.8s",  dur: "2.5s", len: 120, opacity: 0.42 },
   ]
 
   return (
@@ -85,14 +89,14 @@ function ShootingStars() {
           aria-hidden
           className="pointer-events-none absolute"
           style={{
-            top:    s.top,
-            left:   s.left,
-            width:  `${s.len}px`,
-            height: "1.5px",
+            top:          s.top,
+            left:         s.left,
+            width:        `${s.len}px`,
+            height:       "1.5px",
             borderRadius: "999px",
-            background: `linear-gradient(90deg, transparent 0%, rgba(255,255,255,${s.opacity}) 40%, rgba(255,255,255,${s.opacity * 0.6}) 70%, transparent 100%)`,
-            animation: `shoot-star ${s.dur} ${s.delay} linear infinite`,
-            transform: "rotate(45deg)",
+            background:   `linear-gradient(90deg, transparent 0%, rgba(255,255,255,${s.opacity}) 40%, rgba(255,255,255,${s.opacity * 0.6}) 70%, transparent 100%)`,
+            animation:    `shoot-star ${s.dur} ${s.delay} linear infinite`,
+            transform:    "rotate(45deg)",
             transformOrigin: "left center",
           }}
         />

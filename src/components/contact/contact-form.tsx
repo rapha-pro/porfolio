@@ -116,7 +116,7 @@ export function ContactForm() {
         <div className="mb-6 flex flex-wrap items-baseline justify-between gap-2">
           <h3 className="text-lg font-semibold text-brand md:text-xl">Get in touch</h3>
           <p className="text-[11px] font-mono uppercase tracking-[0.18em] text-subtle">
-            direct · no spam, ever
+            direct · no spam
           </p>
         </div>
 

@@ -23,7 +23,11 @@ import { SkillCubePanel } from "./skill-cube-panel"
  * Returns:
  *   The <section id="home">.
  */
-export default function Hero() {
+type HeroProps = {
+  bio?: string[]  // Paragraphs from public/data/bio.txt; empty array shows nothing.
+}
+
+export default function Hero({ bio = [] }: HeroProps) {
   const sectionRef = useRef<HTMLElement>(null)
   const leftRef    = useRef<HTMLDivElement>(null)
   const rightRef   = useRef<HTMLDivElement>(null)
@@ -81,7 +85,7 @@ export default function Hero() {
           </div>
 
           <div className="gs-item">
-            <BioCard />
+            <BioCard bio={bio} />
           </div>
 
           <div className="gs-item">

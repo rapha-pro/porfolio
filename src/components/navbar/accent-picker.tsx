@@ -107,16 +107,18 @@ export function AccentPickerDropdown({
   useEffect(() => {
     if (!open) return
 
-    const onDown = (e: MouseEvent) => {
+    const onDown = (e: MouseEvent | TouchEvent) => {
       if (!rootRef.current?.contains(e.target as Node)) setOpen(false)
     }
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setOpen(false)
     }
-    document.addEventListener("mousedown", onDown)
+    document.addEventListener("mousedown", onDown as EventListener)
+    document.addEventListener("touchstart", onDown as EventListener)
     document.addEventListener("keydown", onKey)
     return () => {
-      document.removeEventListener("mousedown", onDown)
+      document.removeEventListener("mousedown", onDown as EventListener)
+      document.removeEventListener("touchstart", onDown as EventListener)
       document.removeEventListener("keydown", onKey)
     }
   }, [open])

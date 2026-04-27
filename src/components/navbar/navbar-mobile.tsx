@@ -77,7 +77,7 @@ export function NavbarMobile() {
     >
       <div
         className="
-          relative flex items-center gap-1 overflow-hidden rounded-2xl
+          relative flex items-center gap-1 rounded-2xl
           border border-app bg-[var(--glass-strong)]
           px-2 py-2
           backdrop-blur-2xl backdrop-saturate-150
