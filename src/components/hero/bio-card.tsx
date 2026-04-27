@@ -13,7 +13,7 @@ type BioCardProps = {
  *   a GlassCard to lift it above the background.
  *
  * Args:
- *   className — extra classes on the card wrapper.
+ *   className - extra classes on the card wrapper.
  *
  * Returns:
  *   A GlassCard with 4 paragraphs + a small call-out line.

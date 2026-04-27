@@ -28,7 +28,7 @@ export default function Hero() {
   const leftRef    = useRef<HTMLDivElement>(null)
   const rightRef   = useRef<HTMLDivElement>(null)
 
-  /* GSAP entrance timeline — scoped so it cleans up on unmount. */
+  /* GSAP entrance timeline - scoped so it cleans up on unmount. */
   useGSAP(
     () => {
       const leftItems = leftRef.current?.querySelectorAll(".gs-item")
@@ -48,7 +48,7 @@ export default function Hero() {
    *   depth. Targets are any elements with `.parallax-slow` / `.parallax-fast`.
    *
    * Args:
-   *   e — the pointer move event.
+   *   e - the pointer move event.
    */
   const onMouseMove = useCallback((e: MouseEvent<HTMLElement>) => {
     const { innerWidth: W, innerHeight: H } = window

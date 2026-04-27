@@ -13,28 +13,22 @@ import { SectionHeader } from "./section-header"
 import { CodeTerminal } from "./code-terminal"
 import { ContactForm } from "./contact-form"
 
-/* ── Globe markers: five cities across North America ────────────────────── */
+/* Globe markers: five cities across North America */
 const MARKERS: GlobeMarker[] = [
-  { lat: 45.5017, lng: -73.5673, label: "MTL", subtitle: "Home · Montréal, QC",   color: "#8b5cf6", src: "https://assets.aceternity.com/avatars/1.webp" },
-  { lat: 45.4215, lng: -75.6972, label: "OTT", subtitle: "Ottawa, ON",             color: "#06b6d4", src: "https://assets.aceternity.com/avatars/2.webp" },
-  { lat: 43.6532, lng: -79.3832, label: "TOR", subtitle: "Toronto, ON",            color: "#f59e0b", src: "https://assets.aceternity.com/avatars/3.webp" },
-  { lat: 40.7128, lng: -74.0060, label: "NYC", subtitle: "New York, NY",           color: "#10b981", src: "https://assets.aceternity.com/avatars/4.webp" },
-  { lat: 37.7749, lng: -122.419, label: "SFO", subtitle: "San Francisco, CA",      color: "#ec4899", src: "https://assets.aceternity.com/avatars/5.webp" },
+  { lat: 45.5017, lng: -73.5673, label: "MTL", subtitle: "Home · Montréal, QC", color: "#8b5cf6" },
+  { lat: 45.4215, lng: -75.6972, label: "OTT", subtitle: "Ottawa, ON",           color: "#06b6d4" },
+  { lat: 43.6532, lng: -79.3832, label: "TOR", subtitle: "Toronto, ON",          color: "#f59e0b" },
+  { lat: 40.7128, lng: -74.0060, label: "NYC", subtitle: "New York, NY",         color: "#10b981" },
+  { lat: 37.7749, lng: -122.419, label: "SFO", subtitle: "San Francisco, CA",    color: "#ec4899" },
 ]
 
 /**
  * Purpose:
- *   Top-level Contact section. Owns the <section id="contact"> landmark,
- *   the atmospheric backdrop, and the mouse-parallax handler for accent orbs.
+ *   Top-level Contact section. Owns the section landmark, the atmospheric
+ *   backdrop, and the mouse-parallax handler for accent orbs. Renders the
+ *   CodeTerminal + ContactForm row, the 3D globe, and the FloatingDock.
  *
- *   Layout (desktop):
- *     ┌─── SectionHeader — "LET'S TALK" ───┐
- *     │ CodeTerminal (slanted) │ ContactForm │
- *     │         3D Globe (centered)         │
- *     │         FloatingDock                │
- *     └─────────────────────────────────────┘
- *
- *   Stacks single-column on mobile.
+ * Args: none
  *
  * Returns:
  *   The full <section id="contact">.
@@ -69,11 +63,11 @@ export default function Contact() {
       <ContactBackground />
 
       <div className="relative z-10 mx-auto w-full max-w-7xl">
-        {/* ── Section header — "LET'S TALK" ────────────────────────── */}
+ {/* Section header — "LET'S TALK" */}
         <SectionHeader />
 
-        {/* ── Row 1: Code terminal (left) + Contact form (right) ───── */}
-        <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-[44%_56%] lg:gap-12">
+ {/* Row 1: Code terminal (left) + Contact form (right) */}
+        <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-[50%_50%] lg:gap-28">
           {/* Code terminal — animated in from the left, slant applied inside */}
           <motion.div
             initial={{ opacity: 0, x: -36 }}
@@ -97,7 +91,7 @@ export default function Contact() {
           </motion.div>
         </div>
 
-        {/* ── Row 2: 3D Globe ──────────────────────────────────────── */}
+ {/* Row 2: 3D Globe */}
         <motion.div
           initial={{ opacity: 0, scale: 0.92 }}
           whileInView={{ opacity: 1, scale: 1 }}
@@ -127,7 +121,7 @@ export default function Contact() {
           </div>
         </motion.div>
 
-        {/* ── Row 3: FloatingDock (replaces channel cards) ─────────── */}
+ {/* Row 3: FloatingDock (replaces channel cards) */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

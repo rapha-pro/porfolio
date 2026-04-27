@@ -8,7 +8,7 @@ import { HOBBIES, type Hobby } from "@/lib/data/hobbies"
 
 /**
  * Purpose:
- *   The Hobbies tab. A responsive card grid — each hobby is an optional image
+ *   The Hobbies tab. A responsive card grid - each hobby is an optional image
  *   plus a short personal story with a subtle tilt and accent header. When a
  *   `videoSrc` is added to a hobby, the card renders a muted autoplay loop in
  *   place of the image. Omitting both `imageSrc` and `videoSrc` hides the
@@ -38,8 +38,8 @@ export function HobbiesTab() {
  *   `imageSrc` nor `videoSrc` is supplied.
  *
  * Args:
- *   hobby — hobby payload from HOBBIES.
- *   delay — stagger delay in seconds for the entry animation.
+ *   hobby - hobby payload from HOBBIES.
+ *   delay - stagger delay in seconds for the entry animation.
  *
  * Returns:
  *   A motion-wrapped tilt + glass card.

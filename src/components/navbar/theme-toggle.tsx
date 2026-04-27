@@ -17,8 +17,8 @@ type ThemeToggleProps = {
  *   rotate+scale so the switch feels physical rather than binary.
  *
  * Args:
- *   size      — button diameter in px.
- *   className — extra classes merged into the button.
+ *   size      - button diameter in px.
+ *   className - extra classes merged into the button.
  *
  * Returns:
  *   A button element that flips `next-themes` theme between light/dark.

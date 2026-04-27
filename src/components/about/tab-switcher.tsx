@@ -28,9 +28,9 @@ type TabSwitcherProps = {
  *   (and slides up) between tabs via AnimatePresence.
  *
  * Args:
- *   tabs       — the tab definitions + panels.
- *   defaultTab — optional initial tab key.
- *   className  — extra classes on the root wrapper.
+ *   tabs       - the tab definitions + panels.
+ *   defaultTab - optional initial tab key.
+ *   className  - extra classes on the root wrapper.
  *
  * Returns:
  *   A tab bar + animated content area.
@@ -113,7 +113,7 @@ export function TabSwitcher({
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
- * Inline icon set — keeps this component dependency-free for lucide-react
+ * Inline icon set - keeps this component dependency-free for lucide-react
  * version quirks. Each icon inherits currentColor so it retints with text.
  * ═══════════════════════════════════════════════════════════════════════════ */
 

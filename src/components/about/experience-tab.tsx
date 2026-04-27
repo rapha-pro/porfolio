@@ -10,7 +10,7 @@ import { CompanyLogo } from "./company-logo"
 /**
  * Purpose:
  *   Vertical timeline of employment history with a zig-zag layout on desktop.
- *   Even-indexed entries sit LEFT of the center rail; odd-indexed sit RIGHT —
+ *   Even-indexed entries sit LEFT of the center rail; odd-indexed sit RIGHT -
  *   creating the alternating visual from the design reference. On smaller
  *   screens the layout collapses to a single-column stack with the rail on
  *   the left, matching the mobile convention used across the site.
@@ -63,8 +63,8 @@ type ExperienceRowProps = {
  *   card slot is filled per row. On mobile: a simple left-padded single column.
  *
  * Args:
- *   job   — the experience entry to render.
- *   index — position in the list; determines left (even) vs right (odd).
+ *   job   - the experience entry to render.
+ *   index - position in the list; determines left (even) vs right (odd).
  *
  * Returns:
  *   A positioned <li> row.
@@ -131,9 +131,9 @@ type CardProps = {
  *   desktop layouts. Slides in from `slideFrom` px on first viewport entry.
  *
  * Args:
- *   job       — the experience entry.
- *   inView    — whether the row has entered the viewport.
- *   slideFrom — horizontal offset to animate from (negative = left).
+ *   job       - the experience entry.
+ *   inView    - whether the row has entered the viewport.
+ *   slideFrom - horizontal offset to animate from (negative = left).
  *
  * Returns:
  *   An animated GlassCard with company logo, role info, and bullet points.
@@ -207,8 +207,8 @@ type CenterNodeProps = {
  *   shown below. Glows when the row enters the viewport.
  *
  * Args:
- *   job    — the experience entry (provides accent color, company name, period).
- *   inView — whether the row has entered the viewport (drives the glow).
+ *   job    - the experience entry (provides accent color, company name, period).
+ *   inView - whether the row has entered the viewport (drives the glow).
  *
  * Returns:
  *   A flex column centering the glowing circle + period label on the rail.
@@ -244,7 +244,7 @@ function CenterNode({ job, inView }: CenterNodeProps) {
  *   the monogram fallback.
  *
  * Args:
- *   company — company display name.
+ *   company - company display name.
  *
  * Returns:
  *   Simple Icons slug string, or undefined.

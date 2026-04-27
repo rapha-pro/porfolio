@@ -19,7 +19,7 @@ type HoloCardProps = {
  *   Read a CSS color (hex or rgb()) into a THREE-friendly numeric value.
  *
  * Args:
- *   value — "#8b5cf6" or "rgb(139,92,246)" or "rgba(...)" string.
+ *   value - "#8b5cf6" or "rgb(139,92,246)" or "rgba(...)" string.
  *
  * Returns:
  *   24-bit integer (0xRRGGBB) or undefined when parsing fails.
@@ -69,8 +69,8 @@ type CardTextureContent = {
  *   palette so the glass card reads in any theme.
  *
  * Args:
- *   content — name + title + email + handle.
- *   accent  — accent color used for the gradient strip + glow text.
+ *   content - name + title + email + handle.
+ *   accent  - accent color used for the gradient strip + glow text.
  *
  * Returns:
  *   A THREE.CanvasTexture ready for use as a material map.
@@ -85,7 +85,7 @@ function makeCardTexture(content: CardTextureContent, accent: number): THREE.Can
 
   const accentHex = `#${accent.toString(16).padStart(6, "0")}`
 
-  // Card backdrop — deep navy with subtle violet wash
+  // Card backdrop - deep navy with subtle violet wash
   const bg = ctx.createLinearGradient(0, 0, W, H)
   bg.addColorStop(0, "#0c0f1d")
   bg.addColorStop(1, "#161a2e")
@@ -107,7 +107,7 @@ function makeCardTexture(content: CardTextureContent, accent: number): THREE.Can
   ctx.fillStyle = stripe
   ctx.fillRect(48, H - 28, W - 96, 5)
 
-  // Accent corner mark — top-left
+  // Accent corner mark - top-left
   ctx.fillStyle = accentHex
   ctx.fillRect(60, 60, 28, 4)
   ctx.fillRect(60, 60, 4, 28)
@@ -121,12 +121,12 @@ function makeCardTexture(content: CardTextureContent, accent: number): THREE.Can
   ctx.font = "600 22px ui-monospace, 'JetBrains Mono', 'Cascadia Mono', Menlo, monospace"
   ctx.fillText("CONTACT · v1.0", 100, 88)
 
-  // Name — large
+  // Name - large
   ctx.fillStyle = "#FFFFFF"
   ctx.font = "800 84px 'Plus Jakarta Sans', 'Segoe UI', Helvetica, Arial, sans-serif"
   ctx.fillText(content.name, 100, 240)
 
-  // Title — accent
+  // Title - accent
   ctx.fillStyle = accentHex
   ctx.font = "600 30px 'Plus Jakarta Sans', 'Segoe UI', Helvetica, Arial, sans-serif"
   ctx.fillText(content.title, 100, 290)
@@ -167,7 +167,7 @@ function makeCardTexture(content: CardTextureContent, accent: number): THREE.Can
  *   Render a small glow texture used for the orbiting satellite particles.
  *
  * Args:
- *   accent — accent color as a hex int.
+ *   accent - accent color as a hex int.
  *
  * Returns:
  *   A radial-gradient CanvasTexture.
@@ -202,13 +202,13 @@ function makeOrbTexture(accent: number): THREE.CanvasTexture {
  *   switches the global accent (mutation observer on <html> class list).
  *
  * Args:
- *   name      — name engraved on the card.
- *   title     — role / position line.
- *   email     — email line.
- *   handle    — optional handle line under the email.
- *   size      — square canvas side in px.
- *   edgeColor — override edge glow color.
- *   className — extra classes on the wrapper.
+ *   name      - name engraved on the card.
+ *   title     - role / position line.
+ *   email     - email line.
+ *   handle    - optional handle line under the email.
+ *   size      - square canvas side in px.
+ *   edgeColor - override edge glow color.
+ *   className - extra classes on the wrapper.
  *
  * Returns:
  *   A <div> hosting the WebGL canvas; cleans up on unmount.
@@ -228,7 +228,7 @@ export function HoloCard({
     const mount = mountRef.current
     if (!mount) return
 
-    /* ── Scene + renderer ─────────────────────────────────────────── */
+ /* Scene + renderer */
     const scene = new THREE.Scene()
 
     const camera = new THREE.PerspectiveCamera(40, 1, 0.1, 100)
@@ -244,7 +244,7 @@ export function HoloCard({
     renderer.setClearColor(0x000000, 0)
     mount.appendChild(renderer.domElement)
 
-    /* ── Lights ───────────────────────────────────────────────────── */
+ /* Lights */
     scene.add(new THREE.AmbientLight(0xffffff, 0.55))
     const key = new THREE.DirectionalLight(0xffffff, 0.9)
     key.position.set(2, 3, 4)
@@ -255,7 +255,7 @@ export function HoloCard({
     accentLight.position.set(0, 0, 2.4)
     scene.add(accentLight)
 
-    /* ── The card ─────────────────────────────────────────────────── */
+ /* The card */
     // Aspect 8:5 (standard business card-ish)
     const cardW = 3.2
     const cardH = 2.0
@@ -277,7 +277,7 @@ export function HoloCard({
       accent,
     )
 
-    /* Six materials — front (+Z) and back (−Z) get the textures, the
+    /* Six materials - front (+Z) and back (−Z) get the textures, the
        four edge faces get a subtle dark glass colour. Order matches
        BoxGeometry: [+X, −X, +Y, −Y, +Z, −Z]. */
     const edgeMat = new THREE.MeshPhysicalMaterial({
@@ -326,7 +326,7 @@ export function HoloCard({
     glow.position.z = -0.2
     scene.add(glow)
 
-    /* ── Orbiting accent orbs ─────────────────────────────────────── */
+ /* Orbiting accent orbs */
     const orbGroup = new THREE.Group()
     scene.add(orbGroup)
 
@@ -345,13 +345,13 @@ export function HoloCard({
         blending: THREE.AdditiveBlending,
       })
       const orb = new THREE.Mesh(new THREE.PlaneGeometry(0.45, 0.45), mat)
-      // Always face camera (billboard) — we'll reset rotation each frame.
+      // Always face camera (billboard) - we'll reset rotation each frame.
       orb.userData = { radius, inclination, phase, speed: 0.4 + Math.random() * 0.5 }
       orbGroup.add(orb)
       orbs.push(orb)
     }
 
-    /* ── Cursor tilt ──────────────────────────────────────────────── */
+ /* Cursor tilt */
     const target = new THREE.Vector2(0, 0)
     const handlePointer = (e: PointerEvent) => {
       const rect = mount.getBoundingClientRect()
@@ -364,7 +364,7 @@ export function HoloCard({
     mount.addEventListener("pointermove", handlePointer)
     mount.addEventListener("pointerleave", handleLeave)
 
-    /* ── Accent change observer ───────────────────────────────────── */
+ /* Accent change observer */
     /* Re-build the textures + edge color when the user switches accent. */
     const observer = new MutationObserver(() => {
       const next = getAccentInt()
@@ -405,13 +405,13 @@ export function HoloCard({
       attributeFilter: ["class"],
     })
 
-    /* ── Animation loop ───────────────────────────────────────────── */
+ /* Animation loop */
     let raf = 0
     const start = performance.now()
     const tick = () => {
       const t = (performance.now() - start) / 1000
 
-      // Cursor tilt — soft lerp toward the target.
+      // Cursor tilt - soft lerp toward the target.
       const tiltX = target.y * 0.35
       const tiltY = target.x * 0.45
       card.rotation.x += (tiltX - card.rotation.x) * 0.08
@@ -446,7 +446,7 @@ export function HoloCard({
     }
     raf = requestAnimationFrame(tick)
 
-    /* ── Cleanup ──────────────────────────────────────────────────── */
+ /* Cleanup */
     return () => {
       cancelAnimationFrame(raf)
       observer.disconnect()

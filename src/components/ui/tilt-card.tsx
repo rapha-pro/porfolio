@@ -15,15 +15,15 @@ type TiltCardProps = {
 
 /**
  * Purpose:
- *   Wraps children with a 3D tilt that tracks cursor position — drops to
+ *   Wraps children with a 3D tilt that tracks cursor position - drops to
  *   zero with an elastic spring on leave. Good for photo cards, feature
  *   tiles, project thumbnails.
  *
  * Args:
- *   max        — maximum rotate in degrees for rotateX/rotateY.
- *   perspective — CSS perspective to preserve depth.
- *   className  — extra classes on the root.
- *   children   — content to tilt.
+ *   max        - maximum rotate in degrees for rotateX/rotateY.
+ *   perspective - CSS perspective to preserve depth.
+ *   className  - extra classes on the root.
+ *   children   - content to tilt.
  *
  * Returns:
  *   A <div> with GSAP-driven 3D tilt.

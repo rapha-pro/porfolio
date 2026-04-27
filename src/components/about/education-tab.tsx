@@ -121,7 +121,7 @@ export function EducationTab() {
  *   logo fallback behaviour.
  *
  * Args:
- *   school — the school record.
+ *   school - the school record.
  *
  * Returns:
  *   A GlassCard row with logo + school details.

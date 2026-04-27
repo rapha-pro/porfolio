@@ -16,11 +16,11 @@ type GlassCardProps = HTMLAttributes<HTMLDivElement> & {
  *   blurred translucent background. Opt-in hover lift with accent glow.
  *
  * Args:
- *   hover    — toggle hover lift + accent glow (default true).
- *   flat     — hide the top bevel highlight line (default false).
- *   className — extra classes merged onto the root.
- *   children — card content.
- *   ...rest  — forwarded to the root <div>.
+ *   hover    - toggle hover lift + accent glow (default true).
+ *   flat     - hide the top bevel highlight line (default false).
+ *   className - extra classes merged onto the root.
+ *   children - card content.
+ *   ...rest  - forwarded to the root <div>.
  *
  * Returns:
  *   A <div> with glass styling and optional hover interaction.

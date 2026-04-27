@@ -15,8 +15,8 @@ type StatusBadgeProps = {
  *   small GlassCard shell with a pulsing accent-colored sparkle.
  *
  * Args:
- *   label     — status text (auto-uppercased via CSS).
- *   className — extra classes on the card.
+ *   label     - status text (auto-uppercased via CSS).
+ *   className - extra classes on the card.
  *
  * Returns:
  *   A GlassCard chip.

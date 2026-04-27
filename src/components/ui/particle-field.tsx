@@ -30,7 +30,7 @@ type Dot = {
  *   [r, g, b] components.
  *
  * Args:
- *   hex — any 3- or 6-digit hex with or without leading "#".
+ *   hex - any 3- or 6-digit hex with or without leading "#".
  *
  * Returns:
  *   An RGB triple; falls back to [139, 92, 246] on any parse failure.
@@ -54,10 +54,10 @@ function hexToRgb(hex: string): [number, number, number] {
  *   accent-aware (reads --accent on mount).
  *
  * Args:
- *   count        — number of particles.
- *   linkDistance — px threshold for link drawing.
- *   rgb          — override color; defaults to --accent from CSS.
- *   className    — extra classes on the root <canvas>.
+ *   count        - number of particles.
+ *   linkDistance - px threshold for link drawing.
+ *   rgb          - override color; defaults to --accent from CSS.
+ *   className    - extra classes on the root <canvas>.
  *
  * Returns:
  *   A pointer-events-none absolute <canvas> covering its parent.

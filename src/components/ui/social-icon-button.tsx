@@ -18,7 +18,7 @@ export type AnimatedIconComponent = ComponentType<{
 type SocialIconButtonProps = AnchorHTMLAttributes<HTMLAnchorElement> & {
   /** Animated SVG component (e.g. AnimatedGithub). */
   icon: AnimatedIconComponent
-  /** Accessible label — also used as `title`. */
+  /** Accessible label - also used as `title`. */
   label: string
   /** Icon rendered size in px. Default 18. */
   iconSize?: number
@@ -32,12 +32,12 @@ type SocialIconButtonProps = AnchorHTMLAttributes<HTMLAnchorElement> & {
  *   handles its own micro-animation.
  *
  * Args:
- *   icon       — the animated icon component to render.
- *   label      — aria-label / title text.
- *   iconSize   — size passed to the icon component.
- *   href       — destination.
- *   className  — merged onto the root <a>.
- *   ...rest    — other anchor attributes.
+ *   icon       - the animated icon component to render.
+ *   label      - aria-label / title text.
+ *   iconSize   - size passed to the icon component.
+ *   href       - destination.
+ *   className  - merged onto the root <a>.
+ *   ...rest    - other anchor attributes.
  *
  * Returns:
  *   An animated <a> pill.

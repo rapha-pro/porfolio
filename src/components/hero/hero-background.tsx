@@ -4,7 +4,7 @@ import { ParticleField } from "@/components/ui/particle-field"
 
 /**
  * Purpose:
- *   All decorative / atmospheric layers behind the hero content —
+ *   All decorative / atmospheric layers behind the hero content -
  *   blur blobs, grid overlay, particle field, floating orb pills.
  *   Pointer-events are disabled throughout so it never intercepts input.
  *

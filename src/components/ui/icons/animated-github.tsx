@@ -10,11 +10,11 @@ type AnimatedGithubProps = {
 /**
  * Purpose:
  *   GitHub octocat mark as an SVG. On hover the whole mark tilts + scales
- *   slightly, and on tap it bounces — giving the static logo some life.
+ *   slightly, and on tap it bounces - giving the static logo some life.
  *
  * Args:
- *   size      — width/height in px. Default 20.
- *   className — extra classes on the root <motion.svg>.
+ *   size      - width/height in px. Default 20.
+ *   className - extra classes on the root <motion.svg>.
  *
  * Returns:
  *   A motion SVG that inherits `currentColor`.

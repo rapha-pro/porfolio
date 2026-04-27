@@ -19,9 +19,9 @@ type BrandLogoProps = {
  *   picks up the current accent color via `currentColor` → `var(--accent)`.
  *
  * Args:
- *   size     — pixel size of the mark (square).
- *   compact  — when true, render only the glyph (used on mobile dock).
- *   className — extra classes applied to the outer <Link>.
+ *   size     - pixel size of the mark (square).
+ *   compact  - when true, render only the glyph (used on mobile dock).
+ *   className - extra classes applied to the outer <Link>.
  *
  * Returns:
  *   A <Link> to "#home" containing the mark + wordmark (unless compact).

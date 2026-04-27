@@ -85,8 +85,8 @@ type ChannelCardProps = {
  *   on the right that doesn't navigate.
  *
  * Args:
- *   social — channel descriptor (icon, href, label).
- *   delay  — entry stagger.
+ *   social - channel descriptor (icon, href, label).
+ *   delay  - entry stagger.
  *
  * Returns:
  *   A motion.div wrapping a clickable card.
@@ -176,11 +176,11 @@ function ChannelCard({ social, delay }: ChannelCardProps) {
 
 /**
  * Purpose:
- *   Friendly display string for a channel — strips mailto:, drops the
+ *   Friendly display string for a channel - strips mailto:, drops the
  *   linkedin URL prefix, etc.
  *
  * Args:
- *   social — the channel.
+ *   social - the channel.
  *
  * Returns:
  *   A short, human-readable string.
@@ -208,7 +208,7 @@ function channelDisplay(social: Social): string {
  *   API is unavailable (very rare in modern browsers).
  *
  * Args:
- *   email — the address to copy.
+ *   email - the address to copy.
  *
  * Returns:
  *   A button that swaps between "Copy" and "Copied!" states.
@@ -224,7 +224,7 @@ function CopyEmailButton({ email }: { email: string }) {
       setCopied(true)
       setTimeout(() => setCopied(false), 1400)
     } catch {
-      /* clipboard not available — silent no-op */
+      /* clipboard not available - silent no-op */
     }
   }
 
@@ -241,9 +241,7 @@ function CopyEmailButton({ email }: { email: string }) {
   )
 }
 
-/* ──────────────────────────────────────────────────────────────────
- * Inline SVG glyphs — keep this file self-contained.
- * ────────────────────────────────────────────────────────────────── */
+/* Inline SVG glyphs - keep this file self-contained. */
 
 function PinIcon() {
   return (

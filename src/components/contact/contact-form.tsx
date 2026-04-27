@@ -26,13 +26,13 @@ const INITIAL: FormState = {
 
 /**
  * Purpose:
- *   GlassCard-wrapped contact form powered by the /api/contact Resend route.
- *   Required fields (name, email, message) show a red asterisk.
- *   Phone is optional — a hint line below the input shows the expected format.
- *   Uses floating-label inputs (peer + placeholder-shown).
+ *   GlassCard-wrapped contact form. Required fields show a red asterisk.
+ *   Phone is optional with a country-code hint. Uses floating-label inputs.
+ *
+ * Args: none
  *
  * Returns:
- *   A GlassCard containing the form with animated success / error states.
+ *   A GlassCard form with Resend API submission, success and error states.
  */
 export function ContactForm() {
   const [form, setForm]         = useState<FormState>(INITIAL)
@@ -72,7 +72,7 @@ export function ContactForm() {
       viewport={{ once: true, margin: "-10% 0px" }}
       transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
     >
-      <GlassCard hover={false} className="relative p-7 md:p-10">
+      <GlassCard hover={false} className="relative flex min-h-[560px] flex-col p-7 md:p-10">
         {/* Top accent stripe */}
         <span
           aria-hidden
@@ -100,7 +100,7 @@ export function ContactForm() {
               </span>
               <p className="text-lg font-semibold text-brand">Message received.</p>
               <p className="max-w-[220px] text-center text-sm text-muted">
-                I&apos;ll reply to <span className="text-accent">{form.email || CONTACT_COPY.email}</span>.
+                Expect a reply within 24 hours.
               </p>
               <button
                 onClick={() => setStatus("idle")}
@@ -120,8 +120,8 @@ export function ContactForm() {
           </p>
         </div>
 
-        <form onSubmit={onSubmit} className="flex flex-col gap-5" noValidate>
-          {/* Name + Email */}
+        <form onSubmit={onSubmit} className="flex flex-1 flex-col gap-5" noValidate>
+          {/* Name &Email */}
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
             <FloatingInput
               id="cf-name"  label="Name" required
@@ -137,7 +137,7 @@ export function ContactForm() {
             />
           </div>
 
-          {/* Phone + Subject */}
+          {/* Phone & Subject */}
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
             <FloatingInput
               id="cf-phone" label="Phone"
@@ -157,7 +157,7 @@ export function ContactForm() {
           <FloatingTextarea
             id="cf-message" label="Message" required
             value={form.message} onChange={onChange("message")}
-            rows={7} disabled={status === "sending"}
+            rows={9} disabled={status === "sending"}
           />
 
           {/* Error */}
@@ -179,7 +179,7 @@ export function ContactForm() {
           </AnimatePresence>
 
           {/* Footer */}
-          <div className="mt-2 flex flex-wrap items-center justify-between gap-3">
+          <div className="mt-auto flex flex-wrap items-center justify-between gap-3 pt-4">
             <p className="text-xs text-subtle">
               <span className="text-red-400">*</span> Required fields.
             </p>
@@ -208,7 +208,7 @@ export function ContactForm() {
   )
 }
 
-/* ── Floating-label primitives ─────────────────────────────────────────────── */
+/* Floating-label primitives */
 
 const INPUT_CLS = `
   peer w-full rounded-xl border border-app bg-[var(--glass)]
@@ -241,8 +241,7 @@ type FloatingInputProps = {
   pattern?: string
   title?: string
   placeholder_hint?: string
-  /** Small hint shown below the field, e.g. format instructions. */
-  hint?: string
+  hint?: string  // Small hint shown below the field, e.g. format instructions.
 }
 
 function FloatingInput({ id, label, value, onChange, type = "text", autoComplete, required, disabled, pattern, title, placeholder_hint, hint }: FloatingInputProps) {

@@ -5,7 +5,7 @@ import { useInView } from "framer-motion"
 
 type Token = { text: string; cls: string }
 
-/* ── Colour helpers (VS Code Dark+ palette) ─────────────────────────────── */
+/* Colour helpers (VS Code Dark+ palette) */
 const kw  = (t: string): Token => ({ text: t, cls: "text-[#569cd6]" })   // keyword  blue
 const tp  = (t: string): Token => ({ text: t, cls: "text-[#4ec9b0]" })   // type     teal
 const str = (t: string): Token => ({ text: t, cls: "text-[#ce9178]" })   // string   orange
@@ -16,7 +16,7 @@ const nl  = (): Token           => ({ text: "\n", cls: "" })
 const df  = (t: string): Token => ({ text: t, cls: "text-[#d4d4d4]" })   // default  light-grey
 const sp  = (n = 2): Token     => ({ text: " ".repeat(n), cls: "" })
 
-/* ── Code content: professional graduate candidate profile ─────────────── */
+/* Code content: professional graduate candidate profile */
 const TOKENS: Token[] = [
   cmt("// profile.ts"), nl(),
   nl(),
@@ -56,36 +56,24 @@ const charDelay = (ch: string): number => {
 }
 
 type CodeTerminalProps = {
-  /**
-   * Horizontal perspective rotation in degrees (positive = face left, showing
-   * the card's right edge). Applied only on lg+ breakpoints — collapses to 0
-   * on single-column layouts so it doesn't look broken on narrow screens.
-   * Default: 8.
-   */
-  rotateY?: number
-  /**
-   * Vertical tilt in degrees (negative = top tilts toward viewer / slight
-   * "looking up" angle). Applied on all breakpoints.
-   * Default: -2.
-   */
-  rotateX?: number
+  rotateX?: number  // Horizontal perspective slant, lg+ only. Positive = face left. Default 3.
+  rotateY?: number  // Vertical tilt, all breakpoints. Positive = top tilts toward viewer. Default 3.
 }
 
 /**
  * Purpose:
- *   VS Code-style code editor card with a character-by-character typewriter
- *   animation of a professional TypeScript profile. The card is rendered
- *   inside a parent wrapper that applies a configurable perspective slant.
- *   Typing begins when the card enters the viewport.
+ *   VS Code-style typewriter card animating a TypeScript profile char-by-char.
+ *   Typing starts when the card enters the viewport. Perspective slant is
+ *   responsive: horizontal only on lg+, vertical tilt on all breakpoints.
  *
  * Args:
- *   rotateY — horizontal slant degrees, lg+ only. Default 8.
- *   rotateX — vertical tilt degrees, all breakpoints. Default -2.
+ *   rotateY - horizontal slant, lg+ only.
+ *   rotateX - vertical tilt, all breakpoints.
  *
  * Returns:
- *   A self-contained dark glass card shaped like a code editor window.
+ *   A dark glass card styled as a VS Code editor window.
  */
-export function CodeTerminal({ rotateY = 3, rotateX = 3 }: CodeTerminalProps) {
+export function CodeTerminal({ rotateX = 3, rotateY = 3 }: CodeTerminalProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const inView       = useInView(containerRef, { once: true, margin: "-15% 0px" })
   const [charIndex, setCharIndex] = useState(0)
@@ -107,8 +95,8 @@ export function CodeTerminal({ rotateY = 3, rotateX = 3 }: CodeTerminalProps) {
   const lines = countLines(TOKENS, charIndex)
 
   /* Responsive slant:
-   *   mobile  — slight vertical tilt only (no horizontal skew on narrow screens)
-   *   desktop — full perspective rotateY + rotateX
+   *   mobile:  slight vertical tilt only (rotateY prop)
+   *   desktop: full horizontal slant (rotateX) + vertical tilt (rotateY)
    * Implemented via an injected <style> block so we get a real @media breakpoint
    * without duplicating the card DOM or fighting inline-style specificity. */
 
@@ -116,12 +104,12 @@ export function CodeTerminal({ rotateY = 3, rotateX = 3 }: CodeTerminalProps) {
     <div ref={containerRef} className="w-full">
       <style>{`
         .ct-slant {
-          transform: perspective(1100px) rotateX(${rotateX}deg);
+          transform: perspective(1100px) rotateX(${rotateY}deg);
           transform-origin: center center;
         }
         @media (min-width: 1024px) {
           .ct-slant {
-            transform: perspective(1100px) rotateY(${rotateY}deg) rotateX(${rotateX}deg);
+            transform: perspective(1100px) rotateY(${rotateX}deg) rotateX(${rotateY}deg);
             transform-origin: left center;
           }
         }

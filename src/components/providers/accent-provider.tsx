@@ -42,7 +42,7 @@ const AccentContext = createContext<AccentContextType | undefined>(undefined)
  *   Toggle the `.accent-*` class on <html> so CSS variables re-cascade.
  *
  * Args:
- *   accent — the accent id to apply.
+ *   accent - the accent id to apply.
  */
 function applyAccent(accent: Accent): void {
   const root = document.documentElement
@@ -56,7 +56,7 @@ function applyAccent(accent: Accent): void {
  *   mutates the root class so CSS variables update globally.
  *
  * Args:
- *   children — subtree that consumes the context.
+ *   children - subtree that consumes the context.
  *
  * Returns:
  *   A context provider wrapping `children`.
@@ -81,7 +81,7 @@ export function AccentProvider({ children }: { children: ReactNode }) {
         try {
           localStorage.setItem(STORAGE_KEY, next)
         } catch {
-          /* storage may be unavailable (SSR/privacy) — ignore */
+          /* storage may be unavailable (SSR/privacy) - ignore */
         }
         applyAccent(next)
       },

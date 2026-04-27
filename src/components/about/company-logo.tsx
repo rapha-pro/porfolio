@@ -3,13 +3,13 @@
 import { useState } from "react"
 
 type CompanyLogoProps = {
-  /** Company display name — used for alt text and the fallback monogram. */
+  /** Company display name - used for alt text and the fallback monogram. */
   name: string
   /** Optional local logo under /public; preferred source when provided. */
   localSrc?: string | null
   /** Optional Simple Icons slug (e.g. "ford"). Tried before the monogram. */
   simpleIconSlug?: string
-  /** Tailwind size tokens — defaults to h-14 w-14. */
+  /** Tailwind size tokens - defaults to h-14 w-14. */
   sizeClass?: string
   /** When true, logo renders on a white backdrop (for dark wordmarks). */
   lightBg?: boolean
@@ -28,7 +28,7 @@ type CompanyLogoProps = {
  * Purpose:
  *   Smart logo tile. Prefers a local image, falls back to a Simple Icons
  *   CDN glyph, and finally shows a monogram (first letter of the company)
- *   on a glass chip. The chain is resilient to broken URLs — each failure
+ *   on a glass chip. The chain is resilient to broken URLs - each failure
  *   advances the fallback via `onError`.
  *
  *   Precedence:
@@ -38,14 +38,14 @@ type CompanyLogoProps = {
  *     bgOverride → lightBg (#FFFFFF) → glass gradient (default)
  *
  * Args:
- *   name           — company name (alt + monogram source).
- *   localSrc       — preferred local image path.
- *   simpleIconSlug — Simple Icons slug for the CDN fallback.
- *   sizeClass      — tailwind height + width classes.
- *   lightBg        — use a white card for dark brand marks.
- *   bgOverride     — force an exact hex background (overrides lightBg).
- *   accent         — monogram tint.
- *   className      — extra classes on the tile.
+ *   name           - company name (alt + monogram source).
+ *   localSrc       - preferred local image path.
+ *   simpleIconSlug - Simple Icons slug for the CDN fallback.
+ *   sizeClass      - tailwind height + width classes.
+ *   lightBg        - use a white card for dark brand marks.
+ *   bgOverride     - force an exact hex background (overrides lightBg).
+ *   accent         - monogram tint.
+ *   className      - extra classes on the tile.
  *
  * Returns:
  *   A square tile that renders whichever layer of the chain succeeded.
@@ -62,9 +62,9 @@ export function CompanyLogo({
 }: CompanyLogoProps) {
   /**
    * Stages:
-   *   0 — try localSrc
-   *   1 — try Simple Icons CDN
-   *   2 — monogram fallback
+   *   0 - try localSrc
+   *   1 - try Simple Icons CDN
+   *   2 - monogram fallback
    */
   const initial = localSrc ? 0 : simpleIconSlug ? 1 : 2
   const [stage, setStage] = useState<0 | 1 | 2>(initial as 0 | 1 | 2)

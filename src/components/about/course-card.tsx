@@ -15,12 +15,12 @@ type CourseCardProps = {
  * Purpose:
  *   Compact course card. Header row has the optional banner/logo + course
  *   code + title. Body holds the short description. A subtle "Show grade"
- *   pill toggles a flip to reveal the grade chip — works on click for
+ *   pill toggles a flip to reveal the grade chip - works on click for
  *   touch devices and on hover on pointers.
  *
  * Args:
- *   course     — course payload (code, title, description, banner, accent).
- *   inProgress — true when the course is currently being taken.
+ *   course     - course payload (code, title, description, banner, accent).
+ *   inProgress - true when the course is currently being taken.
  *
  * Returns:
  *   A motion.div card with accent-colored header.
@@ -50,7 +50,7 @@ export function CourseCard({ course, inProgress = false }: CourseCardProps) {
       {/* Title row */}
       <div className="flex items-center gap-3 px-4 pt-4">
         {course.banner ? (
-          /* Course banner/logo — tiny thumbnail */
+          /* Course banner/logo - tiny thumbnail */
           /* eslint-disable-next-line @next/next/no-img-element */
           <img
             src={course.banner}

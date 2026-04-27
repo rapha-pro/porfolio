@@ -13,8 +13,8 @@ type AnimatedMailProps = {
  *   revealing a little letter inside that slides up. Releases back closed.
  *
  * Args:
- *   size      — width/height in px. Default 20.
- *   className — extra classes on the root.
+ *   size      - width/height in px. Default 20.
+ *   className - extra classes on the root.
  *
  * Returns:
  *   A motion SVG that inherits `currentColor`.

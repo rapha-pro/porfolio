@@ -15,7 +15,7 @@ type SkillCubePanelProps = {
  *   component itself pure/reusable; this file owns the hero styling.
  *
  * Args:
- *   className — extra classes on the wrapping GlassCard.
+ *   className - extra classes on the wrapping GlassCard.
  *
  * Returns:
  *   A GlassCard hosting the 3D cube + a small skill chip summary.

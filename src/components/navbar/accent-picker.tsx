@@ -19,7 +19,7 @@ type AccentPickerSwatchesProps = { className?: string }
  *   Framer Motion layoutId so it smoothly slides between swatches.
  *
  * Args:
- *   className — extra classes on the wrapping <div>.
+ *   className - extra classes on the wrapping <div>.
  *
  * Returns:
  *   A horizontal group of colored swatch buttons.
@@ -88,9 +88,9 @@ type AccentPickerDropdownProps = {
  *   list of accent options. Click outside / Escape closes it.
  *
  * Args:
- *   align    — "top" opens upward (use inside a bottom dock), "bottom" opens
+ *   align    - "top" opens upward (use inside a bottom dock), "bottom" opens
  *              downward. Default "top".
- *   className — extra classes on the trigger button.
+ *   className - extra classes on the trigger button.
  *
  * Returns:
  *   A trigger button plus an animated popover (AnimatePresence).

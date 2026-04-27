@@ -7,11 +7,9 @@ export type GlobeMarker = {
   lat: number
   lng: number
   label: string
-  /** Avatar image URL. Displayed as a circle sprite. */
-  src?: string
-  /** Fallback ring colour when no src (hex). Defaults to accent. */
-  color?: string
-  subtitle?: string
+  src?: string       // Avatar image URL, displayed as a circle sprite.
+  color?: string     // Fallback ring color when no src (hex). Defaults to accent.
+  subtitle?: string  // Tooltip or label subtitle.
 }
 
 type Globe3DConfig = {
@@ -25,8 +23,8 @@ type Globe3DConfig = {
 type Globe3DProps = {
   markers?: GlobeMarker[]
   config?: Globe3DConfig
-  onMarkerClick?: (marker: GlobeMarker) => void
-  onMarkerHover?: (marker: GlobeMarker | null) => void
+  onMarkerClick?: (marker: GlobeMarker) => void   // Fired when a marker sprite is clicked.
+  onMarkerHover?: (marker: GlobeMarker | null) => void  // Fired with hovered marker, or null on leave.
   className?: string
 }
 
@@ -41,9 +39,17 @@ function latLngToVec3(lat: number, lng: number, r = 1): THREE.Vector3 {
 }
 
 /**
- * Draws a circular avatar marker onto a 128x128 canvas.
- * If img is provided the photo is clipped into the circle; otherwise the
- * fallback colour is used with the label initials.
+ * Purpose:
+ *   Draws a 128x128 circular avatar canvas. Clips the photo if img is given,
+ *   otherwise fills with the fallback color and label initials.
+ *
+ * Args:
+ *   img   - loaded image or null for initials fallback.
+ *   color - ring and fill color (hex).
+ *   label - text used for initials when no image.
+ *
+ * Returns:
+ *   A 128x128 HTMLCanvasElement ready for use as a Three.js texture.
  */
 function drawAvatarCanvas(img: HTMLImageElement | null, color: string, label: string): HTMLCanvasElement {
   const S = 128, c = document.createElement("canvas")
@@ -77,17 +83,15 @@ function drawAvatarCanvas(img: HTMLImageElement | null, color: string, label: st
 
 /**
  * Purpose:
- *   Interactive 3-D Earth globe built on Three.js. Renders an Earth sphere
- *   with atmosphere glow, star field, and avatar-style circle pin markers.
- *   Markers can show a real image (src) or fall back to coloured initials.
- *   Supports auto-rotation, drag-to-spin, and momentum.
+ *   Interactive 3D Earth globe built on Three.js. Renders atmosphere glow,
+ *   star field, and avatar-style circle markers. Supports auto-rotation,
+ *   drag-to-spin with momentum, and marker click callbacks.
  *
  * Args:
- *   - markers:       lat/lng pins with optional avatar src URLs.
- *   - config:        visual tuning (atmosphere, speed, etc.).
- *   - onMarkerClick: fired when a marker sprite is clicked.
- *   - onMarkerHover: fired with the hovered marker, or null on leave.
- *   - className:     extra classes on the wrapper div.
+ *   markers       - lat/lng pins with optional avatar src URLs.
+ *   config        - visual tuning (atmosphere, speed, tilt, etc.).
+ *   onMarkerClick - fired when a marker sprite is clicked.
+ *   className     - extra classes on the wrapper div.
  *
  * Returns:
  *   A responsive div containing the Three.js canvas.
@@ -97,7 +101,14 @@ export function Globe3D({ markers = [], config = {}, onMarkerClick, className = 
 
   useEffect(() => {
     const mount = mountRef.current; if (!mount) return
-    const { atmosphereColor = "#4da6ff", atmosphereIntensity = 20, bumpScale = 5, autoRotateSpeed = 0.15, tilt = 23.4 } = config
+    const { atmosphereColor: rawAtmoColor = "#4da6ff", atmosphereIntensity = 20, bumpScale = 5, autoRotateSpeed = 0.15, tilt = 23.4 } = config
+
+    /* Resolve CSS custom property to a real hex so Three.js Color can parse it */
+    const atmosphereColor = rawAtmoColor.startsWith("var(")
+      ? (getComputedStyle(document.documentElement)
+          .getPropertyValue(rawAtmoColor.replace(/^var\(/, "").replace(/\)$/, "").trim())
+          .trim() || "#8b5cf6")
+      : rawAtmoColor
 
     const W = mount.clientWidth || 460, H = mount.clientHeight || 460
 
@@ -123,11 +134,11 @@ export function Globe3D({ markers = [], config = {}, onMarkerClick, className = 
     scene.add(new THREE.AmbientLight(0xffffff, 0.55))
     const sun = new THREE.DirectionalLight(0xfff8e7, 1.1); sun.position.set(4, 2, 4); scene.add(sun)
 
-    /* Earth group — tilted like the real planet */
+    /* Earth group - tilted like the real planet */
     const earthGroup = new THREE.Group()
     earthGroup.rotation.z = tilt * (Math.PI / 180)
     /* Initial rotation: face North America (lon ≈ -90 → theta ≈ π/2 → rotate Y to align) */
-    earthGroup.rotation.y = 0.3
+    earthGroup.rotation.y = 1.1
     scene.add(earthGroup)
 
     const loader = new THREE.TextureLoader()
@@ -147,7 +158,7 @@ export function Globe3D({ markers = [], config = {}, onMarkerClick, className = 
     const glowMat = new THREE.MeshPhongMaterial({ color: new THREE.Color(atmosphereColor), transparent: true, opacity: 0.05, side: THREE.BackSide, depthWrite: false })
     earthGroup.add(new THREE.Mesh(new THREE.SphereGeometry(1.13, 64, 64), glowMat))
 
-    /* Markers — start with fallback texture, replace async when avatar loads */
+    /* Markers - start with fallback texture, replace async when avatar loads */
     const markerSprites: Array<{ sprite: THREE.Sprite; marker: GlobeMarker }> = []
 
     markers.forEach((m) => {
@@ -156,7 +167,7 @@ export function Globe3D({ markers = [], config = {}, onMarkerClick, className = 
       const canvas = drawAvatarCanvas(null, color, m.label)
       const mat    = new THREE.SpriteMaterial({ map: new THREE.CanvasTexture(canvas), transparent: true, depthTest: false, sizeAttenuation: true })
       const sprite = new THREE.Sprite(mat)
-      sprite.position.copy(pos); sprite.scale.set(0.2, 0.2, 1)
+      sprite.position.copy(pos); sprite.scale.set(0.12, 0.12, 1)
       earthGroup.add(sprite)
       markerSprites.push({ sprite, marker: m })
 

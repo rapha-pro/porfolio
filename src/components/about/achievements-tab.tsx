@@ -13,8 +13,8 @@ import { IconSparkles, IconTrophy } from "./tab-switcher"
 
 /**
  * Purpose:
- *   The Achievements tab. Two vertical rails — awards on the left, activities
- *   on the right — each item fading up as it enters the viewport.
+ *   The Achievements tab. Two vertical rails - awards on the left, activities
+ *   on the right - each item fading up as it enters the viewport.
  *
  * Returns:
  *   A two-column <section>.

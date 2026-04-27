@@ -25,7 +25,7 @@ type SkillCubeProps = {
  *   24-bit integer. Returns undefined on bad input so callers can fall back.
  *
  * Args:
- *   hex — "#8b5cf6" or "8b5cf6".
+ *   hex - "#8b5cf6" or "8b5cf6".
  *
  * Returns:
  *   Numeric color (e.g. 0x8b5cf6) or undefined.
@@ -43,12 +43,12 @@ function hexToInt(hex: string): number | undefined {
  *   scene with ambient + directional + point lights and an accent edge glow.
  *
  * Args:
- *   skills           — up to 6 skills; extras are ignored, fewer is fine.
- *   size             — canvas edge length in px.
- *   autoRotateSpeed  — OrbitControls autoRotateSpeed.
- *   edgeColor        — CSS hex; defaults to the active accent color.
- *   interactive      — allow click-drag orbit. Disable for purely decorative use.
- *   className        — extra classes on the mount <div>.
+ *   skills           - up to 6 skills; extras are ignored, fewer is fine.
+ *   size             - canvas edge length in px.
+ *   autoRotateSpeed  - OrbitControls autoRotateSpeed.
+ *   edgeColor        - CSS hex; defaults to the active accent color.
+ *   interactive      - allow click-drag orbit. Disable for purely decorative use.
+ *   className        - extra classes on the mount <div>.
  *
  * Returns:
  *   A <div> hosting a WebGL canvas.
@@ -69,7 +69,7 @@ export function SkillCube({
     // Wipe any previous canvas (Fast Refresh / StrictMode remounts).
     el.innerHTML = ""
 
-    /* ── Scene ─────────────────────────────────────────── */
+ /* Scene */
     const scene = new THREE.Scene()
     const camera = new THREE.PerspectiveCamera(60, 1, 0.1, 100)
     camera.position.set(0, 0.3, 2.2)
@@ -80,7 +80,7 @@ export function SkillCube({
     renderer.setClearColor(0x000000, 0)
     el.appendChild(renderer.domElement)
 
-    /* ── Controls ──────────────────────────────────────── */
+ /* Controls */
     const controls = new OrbitControls(camera, renderer.domElement)
     controls.enableDamping = true
     controls.dampingFactor = 0.06
@@ -90,7 +90,7 @@ export function SkillCube({
     controls.autoRotate = true
     controls.autoRotateSpeed = autoRotateSpeed
 
-    /* ── Materials (one per face, max 6) ──────────────── */
+ /* Materials (one per face, max 6) */
     const geo = new THREE.BoxGeometry(1.15, 1.15, 1.15)
     const loader = new THREE.TextureLoader()
 
@@ -139,7 +139,7 @@ export function SkillCube({
     const cube = new THREE.Mesh(geo, materials)
     scene.add(cube)
 
-    /* ── Lights ────────────────────────────────────────── */
+ /* Lights */
     scene.add(new THREE.AmbientLight(0xffffff, 0.7))
     const directional = new THREE.DirectionalLight(0xffffff, 1.4)
     directional.position.set(4, 6, 5)
@@ -156,7 +156,7 @@ export function SkillCube({
     rim.position.set(-3, 2, 2)
     scene.add(rim)
 
-    /* ── Edge glow ─────────────────────────────────────── */
+ /* Edge glow */
     const edges = new THREE.EdgesGeometry(geo)
     const edgeMat = new THREE.LineBasicMaterial({
       color: accentInt,
@@ -166,7 +166,7 @@ export function SkillCube({
     const edgeLines = new THREE.LineSegments(edges, edgeMat)
     scene.add(edgeLines)
 
-    /* ── Render loop ───────────────────────────────────── */
+ /* Render loop */
     let rafId = 0
     const animate = () => {
       rafId = requestAnimationFrame(animate)
@@ -175,7 +175,7 @@ export function SkillCube({
     }
     animate()
 
-    /* ── Cleanup ───────────────────────────────────────── */
+ /* Cleanup */
     return () => {
       cancelAnimationFrame(rafId)
       controls.dispose()

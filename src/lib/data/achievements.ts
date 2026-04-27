@@ -22,7 +22,7 @@ export type Activity = {
   description: string
 }
 
-/** Awards / recognitions — most recent first. */
+/** Awards / recognitions - most recent first. */
 export const AWARDS: readonly Award[] = [
   {
     title: "Dean's Honour List",

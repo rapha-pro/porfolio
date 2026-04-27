@@ -2,14 +2,14 @@
  * Employment history, most-recent first.
  *
  * Each entry is self-contained: the experience timeline iterates over this
- * list, so adding a new job is one object — no JSX changes.
+ * list, so adding a new job is one object - no JSX changes.
  *
  * Logos live in /public/images/experience/. If a new company isn't there
  * yet, `logo` can be `null` and the timeline renders a letter-badge fallback.
  */
 
 export type ExperienceEntry = {
-  /** Company name — shown as the card title. */
+  /** Company name - shown as the card title. */
   company: string
   /** Role held at the company. */
   role: string
@@ -19,7 +19,7 @@ export type ExperienceEntry = {
   location: string
   /** Free-text date range ("Jan 2025 – Aug 2025"). */
   period: string
-  /** Array of bullet points — each becomes a <li>. */
+  /** Array of bullet points - each becomes a <li>. */
   bullets: readonly string[]
   /** Logo URL under /public, or null for the letter-badge fallback. */
   logo: string | null

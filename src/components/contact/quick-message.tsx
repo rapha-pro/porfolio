@@ -86,7 +86,7 @@ export function QuickMessage() {
             Send a quick note
           </h3>
           <p className="text-[11px] font-mono uppercase tracking-[0.18em] text-subtle">
-            mailto · no spam, ever
+            mailto · no spam
           </p>
         </div>
 
@@ -166,7 +166,7 @@ export function QuickMessage() {
 }
 
 /* --------------------
- * Floating-label inputs — built with Tailwind `peer` + `placeholder-shown`.
+ * Floating-label inputs - built with Tailwind `peer` + `placeholder-shown`.
  * The trick: each input has placeholder=" " (a single space) so it counts as
  * "shown" only when the field is empty. The label uses peer-state classes
  * to slide up on focus or when content is present.

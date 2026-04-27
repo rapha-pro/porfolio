@@ -1,7 +1,7 @@
 /**
  * Shared skills catalog.
  *
- * One source of truth for any surface that renders tech logos — the hero
+ * One source of truth for any surface that renders tech logos - the hero
  * cube, floating skill cloud, projects section, etc.
  *
  * Design notes:
@@ -10,7 +10,7 @@
  *     map to the six faces of <SkillCube /> in declaration order.
  *   - `bg` is a tint color used on solid surfaces (chips, fallback plates).
  *     The 3D cube renders logos at full brightness, so `bg` doesn't affect
- *     the cube faces — only the chips.
+ *     the cube faces - only the chips.
  */
 
 export type SkillCategory = "language" | "framework" | "tool"
@@ -20,7 +20,7 @@ export type Skill = {
   category: SkillCategory
   /** Hex accent color used for chips and glows. */
   bg: string
-  /** URL of the logo SVG — mostly devicons CDN. */
+  /** URL of the logo SVG - mostly devicons CDN. */
   src: string
   /** When true, the skill is placed on a face of the 3D hero cube. */
   onCube?: boolean
@@ -30,10 +30,10 @@ export type Skill = {
  * Canonical skill list. Edit here once.
  *
  * Cube faces (in order): Python, C++, Docker, SQL, GitHub,
- * scikit-learn — reflecting a data-science trajectory.
+ * scikit-learn - reflecting a data-science trajectory.
  */
 export const SKILLS: readonly Skill[] = [
-  /* ── On the cube (data-science set) ───────────────────── */
+ /* On the cube (data-science set) */
   { label: "Python",       category: "language",  bg: "#3B82F6", onCube: true,
     src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
   { label: "C++",          category: "language",  bg: "#7C3AED", onCube: true,
@@ -48,7 +48,7 @@ export const SKILLS: readonly Skill[] = [
   { label: "scikit-learn", category: "framework", bg: "#F7931E", onCube: true,
     src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/scikitlearn/scikitlearn-original.svg" },
 
-  /* ── Other languages ──────────────────────────────────── */
+ /* Other languages */
   { label: "TypeScript",   category: "language",  bg: "#3178C6",
     src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" },
   { label: "JavaScript",   category: "language",  bg: "#F7DF1E",
@@ -66,7 +66,7 @@ export const SKILLS: readonly Skill[] = [
   { label: "SAS",          category: "language",  bg: "#003B7A",
     src: "/images/programming_logos/sas.svg" },
 
-  /* ── Tools / platforms ────────────────────────────────── */
+ /* Tools / platforms */
   { label: "Git",           category: "tool", bg: "#F05032",
     src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" },
   { label: "Jenkins",       category: "tool", bg: "#D24939",
@@ -86,7 +86,7 @@ export const SKILLS: readonly Skill[] = [
   { label: "PuTTY",         category: "tool", bg: "#0B1020",
     src: "/images/programming_logos/putty.svg" },
 
-  /* ── Frameworks / libraries / platforms ───────────────── */
+ /* Frameworks / libraries / platforms */
   { label: "Pandas",        category: "framework", bg: "#150458",
     src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg" },
   { label: "NumPy",         category: "framework", bg: "#013243",
@@ -106,5 +106,5 @@ export const SKILLS: readonly Skill[] = [
 /** Exactly the six skills flagged `onCube`, in declaration order. */
 export const CUBE_SKILLS: readonly Skill[] = SKILLS.filter((s) => s.onCube)
 
-/** Everything not on the cube — feeds the floating skill cloud. */
+/** Everything not on the cube - feeds the floating skill cloud. */
 export const FLOATING_SKILLS: readonly Skill[] = SKILLS.filter((s) => !s.onCube)

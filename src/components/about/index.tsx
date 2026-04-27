@@ -19,8 +19,8 @@ import { HobbiesTab } from "./hobbies-tab"
 /**
  * Purpose:
  *   The About section. Owns the <section id="about"> landmark, the two
- *   sub-sections — narrative story (zig-zag timeline) and
- *   Experience/Education/Achievements/Hobbies tabs — and the heading block
+ *   sub-sections - narrative story (zig-zag timeline) and
+ *   Experience/Education/Achievements/Hobbies tabs - and the heading block
  *   between them.
  *
  * Returns:

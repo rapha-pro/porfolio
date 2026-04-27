@@ -37,7 +37,7 @@ function useScrollCondensed() {
 type NavLinksProps = {
   /** href of the item currently treated as active (hash). */
   activeHref: string
-  /** Click handler — typically updates active state. */
+  /** Click handler - typically updates active state. */
   onItemClick: (href: string) => void
 }
 
@@ -47,8 +47,8 @@ type NavLinksProps = {
  *   slides to the active item. Each link also does a small icon lift on hover.
  *
  * Args:
- *   activeHref  — href of the item that should show the pill.
- *   onItemClick — invoked with the item's href on click.
+ *   activeHref  - href of the item that should show the pill.
+ *   onItemClick - invoked with the item's href on click.
  *
  * Returns:
  *   A <nav> of links.

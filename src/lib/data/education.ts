@@ -71,7 +71,7 @@ export type YearBlock = {
 
 /**
  * Four-year arc. Junior-year course descriptions are intentionally left
- * blank so Raphaël can paste them in once — code + structure are ready.
+ * blank so Raphaël can paste them in once - code + structure are ready.
  */
 export const YEARS: readonly YearBlock[] = [
   {

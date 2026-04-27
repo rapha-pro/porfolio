@@ -12,14 +12,14 @@ type CometCardProps = {
 
 /**
  * Purpose:
- *   Aceternity-style Comet Card — a 3D-tilt perspective card with a glowing
+ *   Aceternity-style Comet Card - a 3D-tilt perspective card with a glowing
  *   comet radial light that follows the cursor across the card surface. The
  *   tilt resets smoothly when the cursor leaves.
  *
  * Args:
- *   children — card content rendered inside the 3D perspective shell.
- *   maxTilt  — maximum rotation in degrees on each axis.
- *   className — extra classes on the root.
+ *   children - card content rendered inside the 3D perspective shell.
+ *   maxTilt  - maximum rotation in degrees on each axis.
+ *   className - extra classes on the root.
  *
  * Returns:
  *   A 3D-tilt wrapper with a pointer-tracked glow layer.

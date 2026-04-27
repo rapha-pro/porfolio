@@ -6,7 +6,7 @@ import { Providers } from "./providers"
 /**
  * Typography.
  *
- * Plus Jakarta Sans: warm, geometric, premium — UI + body.
+ * Plus Jakarta Sans: warm, geometric, premium - UI + body.
  * JetBrains Mono:    for code, numerals, and tech-flavored accents.
  */
 const sans = Plus_Jakarta_Sans({
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
  *   because `next-themes` applies the theme class on the client.
  *
  * Args:
- *   children — the rendered route tree.
+ *   children - the rendered route tree.
  *
  * Returns:
  *   The full <html> document.

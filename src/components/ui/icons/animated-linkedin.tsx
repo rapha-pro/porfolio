@@ -10,11 +10,11 @@ type AnimatedLinkedinProps = {
 /**
  * Purpose:
  *   LinkedIn "in" mark. On hover the dot above the 'i' pops up and back
- *   while the whole mark scales — a subtle, branded micro-interaction.
+ *   while the whole mark scales - a subtle, branded micro-interaction.
  *
  * Args:
- *   size      — width/height in px. Default 20.
- *   className — extra classes on the root.
+ *   size      - width/height in px. Default 20.
+ *   className - extra classes on the root.
  *
  * Returns:
  *   A motion SVG using `currentColor`.

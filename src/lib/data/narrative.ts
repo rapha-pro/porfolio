@@ -6,7 +6,7 @@
  * NarrativeStory component alternates block placement left/right to create
  * a DeepMind-style zig-zag layout.
  *
- * Edit this file to tweak the story — the UI iterates over the array.
+ * Edit this file to tweak the story - the UI iterates over the array.
  */
 
 export type NarrativeProseBlock = {

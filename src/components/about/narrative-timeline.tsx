@@ -20,13 +20,13 @@ type NarrativeTimelineProps = {
 
 /**
  * Purpose:
- *   Groups an ordered list of narrative blocks into pairs — two blocks share
+ *   Groups an ordered list of narrative blocks into pairs - two blocks share
  *   each row. The first block of a pair occupies the left column, the second
  *   occupies the right. This eliminates whitespace: a photo always sits beside
  *   its matching prose instead of each block claiming a row alone.
  *
  * Args:
- *   blocks — the ordered block list to pair.
+ *   blocks - the ordered block list to pair.
  *
  * Returns:
  *   Array of [left, right | null] tuples. The last pair has null on the right
@@ -44,16 +44,16 @@ function pairBlocks(
 
 /**
  * Purpose:
- *   DeepMind-style paired story timeline. Consecutive blocks share a row —
- *   left column / right column — so photos always sit beside their matching
+ *   DeepMind-style paired story timeline. Consecutive blocks share a row -
+ *   left column / right column - so photos always sit beside their matching
  *   prose and no half-empty rows appear. A center rail connects all rows;
  *   rail nodes glow when their pair enters the viewport.
  *
  *   On mobile, the two-column layout collapses and blocks stack vertically.
  *
  * Args:
- *   blocks    — ordered story blocks. Defaults to NARRATIVE.
- *   className — extra classes on the root wrapper.
+ *   blocks    - ordered story blocks. Defaults to NARRATIVE.
+ *   className - extra classes on the root wrapper.
  *
  * Returns:
  *   A vertical sequence of paired rows with a center rail.
@@ -96,8 +96,8 @@ type RowProps = {
  *   when the row enters the viewport. The rail node glows on entry.
  *
  * Args:
- *   left  — block occupying the left column.
- *   right — block occupying the right column, or null (left-only row).
+ *   left  - block occupying the left column.
+ *   right - block occupying the right column, or null (left-only row).
  *
  * Returns:
  *   A two-column <li> row (stacks on mobile).
@@ -153,9 +153,9 @@ type BlockItemProps = {
  *   actual rendering to the typed sub-components below.
  *
  * Args:
- *   block     — the block to render.
- *   inView    — whether the parent row has entered the viewport.
- *   slideFrom — horizontal offset (px) to animate in from.
+ *   block     - the block to render.
+ *   inView    - whether the parent row has entered the viewport.
+ *   slideFrom - horizontal offset (px) to animate in from.
  *
  * Returns:
  *   An animated wrapper around the block content.
@@ -178,12 +178,12 @@ function BlockItem({ block, inView, slideFrom }: BlockItemProps) {
 
 /**
  * Purpose:
- *   Renders the text-only narrative block. No card background — the text
+ *   Renders the text-only narrative block. No card background - the text
  *   floats directly against the page so it visually pairs with its adjacent
  *   photo without competing surfaces.
  *
  * Args:
- *   block — the prose narrative block.
+ *   block - the prose narrative block.
  *
  * Returns:
  *   Kicker + heading + paragraph stack.
@@ -215,7 +215,7 @@ function ProseBlock({ block }: { block: NarrativeProseBlock }) {
  *   Renders the photo + caption narrative block inside a gentle tilt frame.
  *
  * Args:
- *   block — the photo narrative block.
+ *   block - the photo narrative block.
  *
  * Returns:
  *   A TiltCard-wrapped image with caption.

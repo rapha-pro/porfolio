@@ -23,11 +23,11 @@ type MagneticButtonProps = AnchorHTMLAttributes<HTMLAnchorElement> & {
  *   then elastically snaps back on leave. Use for CTAs and icon buttons.
  *
  * Args:
- *   strength         — pull magnitude (0 disables, 1 = full cursor offset).
- *   releaseDuration  — seconds for the snap-back.
- *   className        — merged onto the <a>.
- *   children         — anchor content.
- *   ...rest          — any other <a> attribute.
+ *   strength         - pull magnitude (0 disables, 1 = full cursor offset).
+ *   releaseDuration  - seconds for the snap-back.
+ *   className        - merged onto the <a>.
+ *   children         - anchor content.
+ *   ...rest          - any other <a> attribute.
  *
  * Returns:
  *   An animated <a>.

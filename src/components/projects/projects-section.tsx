@@ -88,7 +88,7 @@ export function ProjectsSection() {
           {/* 1 column -- mobile */}
           <div className="flex flex-col sm:hidden">
             {projects.map((p, i) => (
-              <DraggableCardBody key={p.slug} style={{ rotate: TILTS[i % TILTS.length] }}>
+              <DraggableCardBody key={p.slug}>
                 <ProjectCard project={p} index={i} />
               </DraggableCardBody>
             ))}

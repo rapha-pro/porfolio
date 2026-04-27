@@ -17,9 +17,9 @@ type SkillMarqueeProps = {
  *   gradients picked from the current surface color.
  *
  * Args:
- *   items       — skill list; falls back to shared SKILLS.
- *   durationSec — duration of one full cycle.
- *   className   — extra classes on the root.
+ *   items       - skill list; falls back to shared SKILLS.
+ *   durationSec - duration of one full cycle.
+ *   className   - extra classes on the root.
  *
  * Returns:
  *   A horizontally scrolling list of pill-shaped skill chips.

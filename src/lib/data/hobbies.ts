@@ -3,7 +3,7 @@
  *
  * Rendered as a responsive card grid inside the Hobbies tab. Each entry
  * pairs an optional photo with a short personal story. Video support is
- * stubbed via the optional `videoSrc` field — when set, the card renders a
+ * stubbed via the optional `videoSrc` field - when set, the card renders a
  * short muted loop instead of the photo.
  *
  * Editing tips:
