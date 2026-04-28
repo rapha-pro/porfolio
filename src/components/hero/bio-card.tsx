@@ -4,36 +4,39 @@ import { GlassCard } from "@/components/ui/glass-card"
 import { HERO_COPY } from "@/lib/data/hero-copy"
 
 type BioCardProps = {
-  bio?: string[]  // Paragraphs read from public/data/bio.txt. Falls back to HERO_COPY.bio.
-  className?: string
+  bio?:       string[]  // Paragraphs from content/bio.txt, passed by page.tsx.
+  className?: string    // Extra classes on the card wrapper.
 }
 
 /**
  * Purpose:
  *   Short paragraph block summarizing who I am and what I do.
- *   Paragraphs come from public/data/bio.txt via the server page component;
- *   falls back to HERO_COPY.bio if none are passed.
+ *   Paragraphs are read server-side from content/bio.txt and passed in as a
+ *   prop by page.tsx. To edit the bio, update content/bio.txt; blank lines
+ *   separate paragraphs. No code change needed.
  *
  * Args:
- *   - bio       : paragraphs from bio.txt (optional, falls back to HERO_COPY).
+ *   - bio       : paragraphs from content/bio.txt.
  *   - className : extra classes on the card wrapper.
  *
  * Returns:
  *   A GlassCard with bio paragraphs and a contact call-to-action.
+ *   Renders nothing for the paragraph list if bio is empty.
  */
 export function BioCard({ bio = [], className = "" }: BioCardProps) {
-  const paragraphs = bio.length > 0 ? bio : [...HERO_COPY.bio]
-  const [p1, ...rest] = paragraphs
+  const [p1, ...rest] = bio
 
   return (
     <GlassCard className={`p-5 ${className}`}>
       <div className="flex flex-col gap-2 text-sm leading-relaxed text-muted">
-        <p>
-          {p1}{" "}
-          <strong className="font-semibold italic text-brand">
-            {HERO_COPY.firstName}.
-          </strong>
-        </p>
+        {p1 && (
+          <p>
+            {p1}{" "}
+            <strong className="font-semibold italic text-brand">
+              {HERO_COPY.firstName}.
+            </strong>
+          </p>
+        )}
         {rest.map((p, i) => (
           <p key={i}>{p}</p>
         ))}
