@@ -99,17 +99,17 @@
   --accent-foreground: #1a0f00;
 }
 
-/* ─────────────────────────────────────────────
+/* 
    KEYFRAMES
-───────────────────────────────────────────── */
+ */
 @keyframes shimmerSweep {
   0%   { background-position: 200% center; }
   100% { background-position: -200% center; }
 }
 
-/* ─────────────────────────────────────────────
+/* 
    BASE
-───────────────────────────────────────────── */
+ */
 * {
   box-sizing: border-box;
 }
@@ -143,9 +143,9 @@ body {
   color: var(--accent-foreground);
 }
 
-/* ─────────────────────────────────────────────
+/* 
    UTILITIES
-───────────────────────────────────────────── */
+ */
 .font-mono {
   font-family: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
 }
@@ -206,44 +206,3 @@ body {
 }
 
 /* Skill marquee loop (used by SkillMarquee) */
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
-}
-
-/* Subtle floating idle for logos / orbs */
-@keyframes float-y {
-  0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-4px); }
-}
-
-/* Shimmer used on CTA borders */
-@keyframes shimmer {
-  0%   { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
-}
-
-/* Aceternity-style meteor shower (used by Meteors component) */
-@keyframes meteor-fall {
-  0%   { transform: rotate(215deg) translateX(0);      opacity: 0; }
-  10%  { opacity: 1; }
-  85%  { opacity: 1; }
-  100% { transform: rotate(215deg) translateX(700px);  opacity: 0; }
-}
-
-/* Meteor color: dark streak in light mode, white in dark mode */
-:root {
-  --meteor-rgb: 0, 0, 0;
-}
-.dark {
-  --meteor-rgb: 255, 255, 255;
-}
-
-/* Global smooth motion fallback (respect user prefs) */
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.001ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.001ms !important;
-  }
-}

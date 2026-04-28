@@ -77,7 +77,7 @@ export function Meteors({
               width:        `${m.width}px`,
               height:       "1.5px",
               borderRadius: "9999px",
-              background:   "linear-gradient(90deg, rgba(var(--meteor-rgb),0.65) 0%, rgba(var(--meteor-rgb),0.2) 40%, transparent 100%)",
+              background:   "linear-gradient(90deg, var(--meteor-streak) 0%, rgba(0,0,0,0) 100%)",
               animation:    `meteor-fall ${m.duration} ${m.delay} linear infinite`,
             }}
           />
@@ -90,8 +90,8 @@ export function Meteors({
               width:      "3px",
               height:     "3px",
               marginTop:  "-0.75px",
-              background: "rgba(var(--meteor-rgb),0.85)",
-              boxShadow:  "0 0 6px 2px rgba(var(--meteor-rgb),0.3)",
+              background: "var(--meteor-head)",
+              boxShadow:  "0 0 6px 2px var(--meteor-glow)",
               animation:  `meteor-fall ${m.duration} ${m.delay} linear infinite`,
             }}
           />
