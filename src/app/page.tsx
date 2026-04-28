@@ -5,6 +5,7 @@ import Hero from "@/components/hero"
 import About from "@/components/about"
 import { ProjectsSection } from "@/components/projects/projects-section"
 import Contact from "@/components/contact"
+import { Footer } from "@/components/footer"
 
 /**
  * Purpose:
@@ -31,6 +32,7 @@ export default async function HomePage() {
       <ProjectsSection />
 
       <Contact />
+      <Footer />
     </main>
   )
 }

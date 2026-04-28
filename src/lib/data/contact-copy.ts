@@ -20,8 +20,8 @@ export const PROFILE = {
   degree:      "B.Sc. Computer Science. AI & ML",
   institution: "Carleton University",
   gradYear:    2026,
-  location:    "QC, Canada",
-  title:       "Software Engineer · CS Incoming Graduate",
+  location:    "Province QC, Canada",
+  title:       "Software Engineer · Incoming Graduate",
 } as const
 
 export const CONTACT_COPY = {

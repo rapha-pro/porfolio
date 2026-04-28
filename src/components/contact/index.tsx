@@ -5,8 +5,6 @@ import { motion } from "framer-motion"
 import gsap from "gsap"
 
 import { CONTACT_COPY } from "@/lib/data/contact-copy"
-import { SOCIALS } from "@/lib/data/socials"
-import { FloatingDock, type DockItem } from "@/components/ui/floating-dock"
 import { Globe3D, type GlobeMarker } from "@/components/ui/3d-globe"
 import { ContactBackground } from "./contact-background"
 import { SectionHeader } from "./section-header"
@@ -26,7 +24,7 @@ const MARKERS: GlobeMarker[] = [
  * Purpose:
  *   Top-level Contact section. Owns the section landmark, the atmospheric
  *   backdrop, and the mouse-parallax handler for accent orbs. Renders the
- *   CodeTerminal + ContactForm row, the 3D globe, and the FloatingDock.
+ *   CodeTerminal + ContactForm row, the 3D globe, and the signature pill.
  *
  * Args: none
  *
@@ -43,15 +41,6 @@ export default function Contact() {
     gsap.to(".contact-parallax-slow", { x: mx * 14, y: my * 10, duration: 1.2, ease: "power2.out" })
     gsap.to(".contact-parallax-fast", { x: mx * 26, y: my * 18, duration: 0.7,  ease: "power2.out" })
   }, [])
-
-  /* FloatingDock items derived from SOCIALS */
-  const dockItems: DockItem[] = SOCIALS.map((s) => ({
-    title:  s.label,
-    icon:   <s.icon size={18} className="text-[color:var(--accent)]" />,
-    href:   s.href,
-    target: s.href.startsWith("http") ? "_blank" : undefined,
-    rel:    s.href.startsWith("http") ? "noopener noreferrer" : undefined,
-  }))
 
   return (
     <section
@@ -121,16 +110,6 @@ export default function Contact() {
           </div>
         </motion.div>
 
- {/* Row 3: FloatingDock (replaces channel cards) */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-10% 0px" }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
-          className="mt-12 flex justify-center"
-        >
-          <FloatingDock items={dockItems} />
-        </motion.div>
 
         {/* Signature pill */}
         <motion.div
