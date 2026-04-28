@@ -37,7 +37,7 @@ export const CONTACT_COPY = {
   subheading:
     "Hi there, I hope you found my website ui-friendly and engaging. I will be glad if you can leave a review as I am always looking to improve and enhance my website. Feel free to reach out whether it's about a role, a project, or just an interesting conversation.",
 
-  signature:      "\"Whatever you can get your mind to conceive and believe, it can achieve.\" — Napoleon Hill",
+  signature:      "Whatever you can get your mind to conceive and believe, it can achieve. — Napoleon Hill",
   statusLabel:    "Available — graduate roles",
   location:       "Montréal, QC",
   email:          PROFILE.email,

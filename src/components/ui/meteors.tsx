@@ -2,109 +2,97 @@
 
 import { useEffect, useState } from "react"
 
-type Meteor = {
-  id: number
-  top: string
-  left: string
-  delay: string
+type MeteorData = {
+  id:       number
+  left:     string
+  top:      string
+  delay:    string
   duration: string
-  size: number
-  opacity: number
+  width:    number
 }
 
 type MeteorsProps = {
-  number?: number   // Total meteors to render. Default 20.
-  minSpeed?: number // Minimum animation duration in seconds. Default 4.
-  maxSpeed?: number // Maximum animation duration in seconds. Default 9.
-  minDelay?: number // Minimum initial delay in seconds. Default 0.
-  maxDelay?: number // Maximum initial delay in seconds. Default 10.
+  number?:   number  // Total meteors. Default 20.
+  minSpeed?: number  // Min animation duration in seconds. Default 4.
+  maxSpeed?: number  // Max animation duration in seconds. Default 10.
+  minDelay?: number  // Min initial delay in seconds. Default 0.
+  maxDelay?: number  // Max initial delay in seconds. Default 14.
 }
 
 /**
  * Purpose:
- *   Aceternity-UI-style meteor shower effect. Renders N absolutely-positioned
- *   meteors as short gradient lines that streak diagonally (215 deg) across
- *   the parent container. Each meteor has randomised position, delay, and speed.
- *   The parent must have `position: relative` (or absolute/fixed) and
- *   `overflow: hidden`.
+ *   Aceternity-UI-style meteor shower. Renders N absolutely-positioned meteors
+ *   as gradient streaks animated at 215 degrees across the parent container.
+ *   Color is theme-aware via --meteor-rgb (black in light mode, white in dark).
+ *   Uses the `meteor-fall` keyframe from globals.css.
+ *   The parent must have `position: relative` and `overflow: hidden`.
+ *   Positions are generated client-side to avoid SSR hydration mismatches.
  *
  * Args:
  *   - number   : total meteors to render. Default 20.
  *   - minSpeed : minimum animation duration in seconds. Default 4.
- *   - maxSpeed : maximum animation duration in seconds. Default 9.
+ *   - maxSpeed : maximum animation duration in seconds. Default 10.
  *   - minDelay : minimum initial delay in seconds. Default 0.
- *   - maxDelay : maximum initial delay in seconds. Default 10.
+ *   - maxDelay : maximum initial delay in seconds. Default 14.
  *
  * Returns:
- *   A fragment of meteor span elements + a <style> block for the keyframe.
+ *   A fragment of absolutely-positioned meteor spans, or null before hydration.
  */
 export function Meteors({
   number   = 20,
   minSpeed = 4,
-  maxSpeed = 9,
+  maxSpeed = 10,
   minDelay = 0,
-  maxDelay = 10,
+  maxDelay = 14,
 }: MeteorsProps) {
-  const [meteors, setMeteors] = useState<Meteor[]>([])
+  const [meteors, setMeteors] = useState<MeteorData[]>([])
 
   useEffect(() => {
-    const rand = (min: number, max: number) =>
-      Math.random() * (max - min) + min
+    const rand = (lo: number, hi: number) => Math.random() * (hi - lo) + lo
 
     setMeteors(
       Array.from({ length: number }, (_, i) => ({
         id:       i,
-        top:      `${rand(-10, 60)}%`,
-        left:     `${rand(-10, 100)}%`,
+        left:     `${Math.round(rand(-400, 1800))}px`,
+        top:      `${Math.round(rand(-80, 20))}px`,
         delay:    `${rand(minDelay, maxDelay).toFixed(2)}s`,
         duration: `${rand(minSpeed, maxSpeed).toFixed(2)}s`,
-        size:     Math.round(rand(60, 160)),
-        opacity:  parseFloat(rand(0.3, 0.65).toFixed(2)),
+        width:    Math.round(rand(80, 200)),
       }))
     )
   }, [number, minSpeed, maxSpeed, minDelay, maxDelay])
 
+  if (meteors.length === 0) return null
+
   return (
     <>
-      <style>{`
-        @keyframes meteor-fall {
-          0%   { transform: rotate(215deg) translateX(0);      opacity: 0; }
-          5%   { opacity: 1; }
-          80%  { opacity: 1; }
-          100% { transform: rotate(215deg) translateX(600px);  opacity: 0; }
-        }
-      `}</style>
-
       {meteors.map((m) => (
         <span key={m.id} aria-hidden>
-          {/* Main streak */}
+          {/* Gradient streak — uses --meteor-rgb: black in light mode, white in dark */}
           <span
             className="pointer-events-none absolute"
             style={{
               top:          m.top,
               left:         m.left,
-              width:        `${m.size}px`,
-              height:       "1px",
-              borderRadius: "999px",
-              background:   `linear-gradient(90deg, rgba(255,255,255,${m.opacity}) 0%, rgba(255,255,255,0) 100%)`,
-              transform:    "rotate(215deg)",
-              transformOrigin: "left center",
+              width:        `${m.width}px`,
+              height:       "1.5px",
+              borderRadius: "9999px",
+              background:   "linear-gradient(90deg, rgba(var(--meteor-rgb),0.65) 0%, rgba(var(--meteor-rgb),0.2) 40%, transparent 100%)",
               animation:    `meteor-fall ${m.duration} ${m.delay} linear infinite`,
             }}
           />
-          {/* Head glow dot */}
+          {/* Head dot */}
           <span
             className="pointer-events-none absolute rounded-full"
             style={{
-              top:       m.top,
-              left:      m.left,
-              width:     "2px",
-              height:    "2px",
-              background: `rgba(255,255,255,${Math.min(m.opacity + 0.2, 0.85)})`,
-              boxShadow: `0 0 4px 1px rgba(255,255,255,${m.opacity * 0.5})`,
-              transform: "rotate(215deg)",
-              transformOrigin: "left center",
-              animation: `meteor-fall ${m.duration} ${m.delay} linear infinite`,
+              top:        m.top,
+              left:       m.left,
+              width:      "3px",
+              height:     "3px",
+              marginTop:  "-0.75px",
+              background: "rgba(var(--meteor-rgb),0.85)",
+              boxShadow:  "0 0 6px 2px rgba(var(--meteor-rgb),0.3)",
+              animation:  `meteor-fall ${m.duration} ${m.delay} linear infinite`,
             }}
           />
         </span>

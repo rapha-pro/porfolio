@@ -8,7 +8,7 @@ import Contact from "@/components/contact"
 
 /**
  * Purpose:
- *   Landing page. Reads bio.txt server-side (public/data/bio.txt), then
+ *   Landing page. Reads bio.txt server-side (content/bio.txt), then
  *   mounts Navbar -> Hero -> About -> Projects -> Contact. The bio array
  *   is passed down so it never needs to be fetched client-side.
  *
@@ -35,10 +35,10 @@ export default async function HomePage() {
   )
 }
 
-/** Reads public/data/bio.txt and splits on blank lines into paragraphs. */
+/** Reads content/bio.txt and splits on blank lines into paragraphs. */
 function readBio(): string[] {
   try {
-    const txt = readFileSync(join(process.cwd(), "public", "data", "bio.txt"), "utf-8")
+    const txt = readFileSync(join(process.cwd(), "content", "bio.txt"), "utf-8")
     return txt.split(/\n\n+/).map((p) => p.trim()).filter(Boolean)
   } catch {
     return []
