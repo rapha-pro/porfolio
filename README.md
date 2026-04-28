@@ -16,7 +16,7 @@
     <circle cx="30" cy="10" r="2" fill="white" opacity="0.85"/>
   </svg>
 
-  # Raphaël Onana — Personal Portfolio
+  # Personal Portfolio
 
   **[raphaelonana.dev](https://raphaelonana.dev)**
 
