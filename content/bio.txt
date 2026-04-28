@@ -1,7 +1,9 @@
-From being a kid who wanted to fly planes to an engineer who wires up the data pipelines, one can say, I've always had my head in the clouds — literally. Nice to meet you, I'm
+I describe myself as a Growing Engineer in Software.
 
-The dream started in a cockpit; it landed in a terminal. A first line of Python rewired everything, and I ended up at Carleton in Computer Science, chasing the same feeling of lift, just with models instead of wings.
+Fun fact? I've always wanted to be a pilot! But somewhere along the way, I discovered programming and took a different flight path (pun intended). 
 
-Along the way I cut Ford's reporting workload by 80% with automation, shipped DevOps and autonomous-drilling features at Caterpillar, crunched data for Elections Canada, and built ML systems at TD. I like problems where the stakes are real and the feedback loop is short.
+A passion for both Maths and Computer Science led me to pursue my degree in AI/ML and Software Engineering.
 
-Based in Montréal, fluent in French and English (plus enough Spanish to order dinner). Off-keyboard you'll find me at a piano, on a soccer pitch, or missing a tennis serve. Currently deep in LLM fine-tuning, RAG, and agentic systems — always open to a good conversation.
+Today, I've been fortunate enough to acquire several industry experience from Fortune 500 companies, where my greatest strengths have been integrating seemlessly to new company's culture, learning quickly, and great communication with my team. I've always had the chance to have a great team wherever I go :) and sometimes find it hard to leave.
+
+Explore my website to learn more about my journey!

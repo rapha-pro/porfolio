@@ -31,10 +31,11 @@ export function BioCard({ bio = [], className = "" }: BioCardProps) {
       <div className="flex flex-col gap-2 text-sm leading-relaxed text-muted">
         {p1 && (
           <p>
-            {p1}{" "}
-            <strong className="font-semibold italic text-brand">
+            Hi again, I'm
+            <strong className="pl-1 pr-1 font-semibold text-brand">
               {HERO_COPY.firstName}.
             </strong>
+            {p1}{" "}
           </p>
         )}
         {rest.map((p, i) => (
@@ -48,7 +49,7 @@ export function BioCard({ bio = [], className = "" }: BioCardProps) {
           >
             Contact section
           </a>{" "}
-          if you&apos;d like to collaborate or hire.
+          if you&apos;d like to collaborate or leave a quick note.
         </p>
       </div>
     </GlassCard>
