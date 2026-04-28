@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { useEffect, useState } from "react"
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion"
-import { BrandLogo } from "./brand-logo"
+import { BrandLogo } from "@/components/brand-logo"
 import { NAV_ITEMS } from "./nav-items"
 import { ThemeToggle } from "./theme-toggle"
 import { AccentPickerSwatches } from "./accent-picker"
