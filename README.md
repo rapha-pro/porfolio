@@ -16,11 +16,12 @@
     <circle cx="30" cy="10" r="2" fill="white" opacity="0.85"/>
   </svg>
 
-  # Personal Portfolio
+# Personal Portfolio
 
-  **[raphaelonana.dev](https://raphaelonana.dev)**
+**[raphaelonana.dev](https://raphaelonana.dev)**
 
-  ![Website banner](public/images/website_banner.png)
+![Website banner](public/images/website_banner.png)
+
 </div>
 
 ---
@@ -164,6 +165,43 @@ content/
 public/
   images/               Static images organised by section
 ```
+
+---
+
+## Running the project
+
+All commands needed to install, develop, build, lint, and deploy the site are documented in **[RUN.md](./RUN.md)**.
+
+---
+
+## Code quality
+
+### Linting — ESLint
+
+Next.js ships with ESLint pre-configured via `eslint-config-next`, which bundles the core-web-vitals ruleset and TypeScript-aware rules. The config lives in `eslint.config.mjs`. `eslint-config-prettier` is added last in the chain to disable any ESLint formatting rules that would conflict with Prettier — the two tools never fight each other.
+
+Run `pnpm lint` to check the whole project (`eslint .`), or `pnpm lint:fix` to auto-fix what ESLint can resolve without human input. Note: `next lint` was replaced with a direct `eslint .` call because Next.js 16 changed the CLI to treat the first positional argument as a directory path.
+
+### Formatting - Prettier
+
+Prettier is the single source of truth for code style. Config lives in `.prettierrc`. The important choices: no semicolons, double quotes, trailing commas where valid, 100-character print width. `.prettierignore` excludes `.next/`, `node_modules/`, and `public/` so generated and binary files are never touched.
+
+Run `pnpm format` to rewrite everything in place, or `pnpm format:check` to report without writing (useful in CI).
+
+### Pre-commit enforcement - Husky & lint-staged
+
+Husky installs a Git pre-commit hook (`.husky/pre-commit`) during `pnpm install` via the `prepare` lifecycle script. The hook runs `lint-staged`, which applies ESLint and Prettier only to the files staged for the current commit — not the whole project — keeping the hook fast even as the codebase grows.
+
+The `lint-staged` config in `package.json`:
+
+```json
+"lint-staged": {
+  "*.{ts,tsx}": ["eslint --fix", "prettier --write"],
+  "*.{js,mjs,json,css,md}": ["prettier --write"]
+}
+```
+
+If ESLint reports an error it cannot auto-fix, the commit is blocked and git prints the offending rule. This makes it structurally impossible to commit broken or unformatted code.
 
 ---
 
