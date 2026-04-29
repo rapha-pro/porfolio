@@ -24,9 +24,9 @@ import { DraggableCardBody } from "@/components/ui/draggable-card"
 const TILTS = [-1.4, 0.8, -0.6, 1.2, -1.0, 0.5, -1.3, 0.9, -0.7]
 
 function toColumns<T>(items: readonly T[], n: number): T[][] {
-  const cols: T[][] = Array.from({ length: n }, () => [])
-  items.forEach((item, i) => cols[i % n].push(item))
-  return cols
+    const cols: T[][] = Array.from({ length: n }, () => [])
+    items.forEach((item, i) => cols[i % n].push(item))
+    return cols
 }
 
 /**
@@ -42,92 +42,96 @@ function toColumns<T>(items: readonly T[], n: number): T[][] {
  *   message behind the cards.
  */
 export function ProjectsSection() {
-  const projects = getSortedProjects()
+    const projects = getSortedProjects()
 
-  return (
-    <section id="projects" className="mx-auto w-full max-w-6xl px-6 py-24">
-      <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-10% 0px" }}
-        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-        className="mb-14 text-center"
-      >
-        <p className="mb-3 text-[11px] font-mono uppercase tracking-[0.2em] text-accent">
-          What I&apos;ve built
-        </p>
-        <h2 className="text-4xl font-bold text-brand md:text-5xl">
-          {PROJECTS_COPY.heading}
-        </h2>
-        <div
-          aria-hidden
-          className="mx-auto mt-4 h-px w-24"
-          style={{
-            background: "linear-gradient(to right, transparent, var(--accent), transparent)",
-          }}
-        />
-        <p className="mt-4 text-sm text-muted">{PROJECTS_COPY.subheading}</p>
-      </motion.div>
+    return (
+        <section id="projects" className="mx-auto w-full max-w-6xl px-6 py-24">
+            <motion.div
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-10% 0px" }}
+                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                className="mb-14 text-center"
+            >
+                <p className="mb-3 text-[11px] font-mono uppercase tracking-[0.2em] text-accent">
+                    What I&apos;ve built
+                </p>
+                <h2 className="text-4xl font-bold text-brand md:text-5xl">
+                    {PROJECTS_COPY.heading}
+                </h2>
+                <div
+                    aria-hidden
+                    className="mx-auto mt-4 h-px w-24"
+                    style={{
+                        background:
+                            "linear-gradient(to right, transparent, var(--accent), transparent)",
+                    }}
+                />
+                <p className="mt-4 text-sm text-muted">{PROJECTS_COPY.subheading}</p>
+            </motion.div>
 
-      {/* Relative wrapper so the secret text can be absolutely centered */}
-      <div className="relative">
+            {/* Relative wrapper so the secret text can be absolutely centered */}
+            <div className="relative">
+                {/* Secret text -- sits at z-0, revealed as cards are dragged away */}
+                <div
+                    aria-hidden
+                    className="pointer-events-none absolute inset-0 z-0 flex items-center justify-center px-8"
+                >
+                    <p className="max-w-sm text-center text-3xl font-black leading-snug text-neutral-300 dark:text-neutral-700 md:text-4xl">
+                        {PROJECTS_COPY.secretText}
+                    </p>
+                </div>
 
-        {/* Secret text -- sits at z-0, revealed as cards are dragged away */}
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0 z-0 flex items-center justify-center px-8"
-        >
-          <p className="max-w-sm text-center text-3xl font-black leading-snug text-neutral-300 dark:text-neutral-700 md:text-4xl">
-            {PROJECTS_COPY.secretText}
-          </p>
-        </div>
+                {/* Card grids -- z-10 so they sit above the secret text */}
+                <div className="relative z-10">
+                    {/* 1 column -- mobile */}
+                    <div className="flex flex-col sm:hidden">
+                        {projects.map((p, i) => (
+                            <DraggableCardBody key={p.slug}>
+                                <ProjectCard project={p} index={i} />
+                            </DraggableCardBody>
+                        ))}
+                    </div>
 
-        {/* Card grids -- z-10 so they sit above the secret text */}
-        <div className="relative z-10">
+                    {/* 2 columns -- tablet */}
+                    <div className="hidden gap-6 sm:flex lg:hidden">
+                        {toColumns(projects, 2).map((col, ci) => (
+                            <div key={ci} className="flex flex-1 flex-col">
+                                {col.map((p, i) => {
+                                    const idx = ci + i * 2
+                                    return (
+                                        <DraggableCardBody
+                                            key={p.slug}
+                                            style={{ rotate: `${TILTS[idx % TILTS.length]}deg` }}
+                                        >
+                                            <ProjectCard project={p} index={idx} />
+                                        </DraggableCardBody>
+                                    )
+                                })}
+                            </div>
+                        ))}
+                    </div>
 
-          {/* 1 column -- mobile */}
-          <div className="flex flex-col sm:hidden">
-            {projects.map((p, i) => (
-              <DraggableCardBody key={p.slug}>
-                <ProjectCard project={p} index={i} />
-              </DraggableCardBody>
-            ))}
-          </div>
-
-          {/* 2 columns -- tablet */}
-          <div className="hidden gap-6 sm:flex lg:hidden">
-            {toColumns(projects, 2).map((col, ci) => (
-              <div key={ci} className="flex flex-1 flex-col">
-                {col.map((p, i) => {
-                  const idx = ci + i * 2
-                  return (
-                    <DraggableCardBody key={p.slug} style={{ rotate: TILTS[idx % TILTS.length] }}>
-                      <ProjectCard project={p} index={idx} />
-                    </DraggableCardBody>
-                  )
-                })}
-              </div>
-            ))}
-          </div>
-
-          {/* 3 columns -- desktop */}
-          <div className="hidden gap-6 lg:flex">
-            {toColumns(projects, 3).map((col, ci) => (
-              <div key={ci} className="flex flex-1 flex-col">
-                {col.map((p, i) => {
-                  const idx = ci + i * 3
-                  return (
-                    <DraggableCardBody key={p.slug} style={{ rotate: TILTS[idx % TILTS.length] }}>
-                      <ProjectCard project={p} index={idx} />
-                    </DraggableCardBody>
-                  )
-                })}
-              </div>
-            ))}
-          </div>
-
-        </div>
-      </div>
-    </section>
-  )
+                    {/* 3 columns -- desktop */}
+                    <div className="hidden gap-6 lg:flex">
+                        {toColumns(projects, 3).map((col, ci) => (
+                            <div key={ci} className="flex flex-1 flex-col">
+                                {col.map((p, i) => {
+                                    const idx = ci + i * 3
+                                    return (
+                                        <DraggableCardBody
+                                            key={p.slug}
+                                            style={{ rotate: `${TILTS[idx % TILTS.length]}deg` }}
+                                        >
+                                            <ProjectCard project={p} index={idx} />
+                                        </DraggableCardBody>
+                                    )
+                                })}
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        </section>
+    )
 }
