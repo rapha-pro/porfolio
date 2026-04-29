@@ -1,22 +1,6 @@
-<div align="center">
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="72" height="72" role="img" aria-label="Raphaël Onana logo">
-    <defs>
-      <linearGradient id="readme-plate" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0%" stop-color="#8b5cf6" stop-opacity="0.95"/>
-        <stop offset="100%" stop-color="#8b5cf6" stop-opacity="0.55"/>
-      </linearGradient>
-    </defs>
-    <rect x="1.5" y="1.5" width="37" height="37" rx="10" fill="url(#readme-plate)"/>
-    <rect x="1.5" y="1.5" width="37" height="37" rx="10" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="0.8"/>
-    <g fill="none" stroke="white" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M13 28 V12"/>
-      <path d="M13 12 H22 a5 5 0 0 1 0 10 H13"/>
-      <path d="M18 22 L27 28"/>
-    </g>
-    <circle cx="30" cy="10" r="2" fill="white" opacity="0.85"/>
-  </svg>
+# Personal Portfolio &nbsp;<img src="public/logo.svg" width="36" height="36" alt="Raphaël Onana logo" align="absmiddle"/>
 
-# Personal Portfolio
+<div align="center">
 
 **[raphaelonana.dev](https://raphaelonana.dev)**
 
