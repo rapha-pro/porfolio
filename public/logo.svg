@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40" role="img" aria-label="Raphaël Onana">
+  <defs>
+    <linearGradient id="plate" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%"   stop-color="#1e1e2e"/>
+      <stop offset="100%" stop-color="#111118"/>
+    </linearGradient>
+    <linearGradient id="stroke" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%"   stop-color="#ffffff" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.65"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Rounded dark plate -->
+  <rect x="1.5" y="1.5" width="37" height="37" rx="10" fill="url(#plate)"/>
+  <rect x="1.5" y="1.5" width="37" height="37" rx="10" fill="none"
+        stroke="rgba(255,255,255,0.12)" stroke-width="0.8"/>
+
+  <!-- Geometric "R": top arch + diagonal leg -->
+  <g fill="none" stroke="url(#stroke)" stroke-width="3.2"
+     stroke-linecap="round" stroke-linejoin="round">
+    <path d="M13 12 H22 a5 5 0 0 1 0 10 H13"/>
+    <path d="M18 22 L27 28"/>
+  </g>
+
+  <!-- Accent dot -->
+  <circle cx="30" cy="10" r="2" fill="#ffffff" opacity="0.85"/>
+</svg>

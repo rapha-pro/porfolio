@@ -1,7 +1,9 @@
 import { AnimatedGithub } from "@/components/ui/icons/animated-github"
 import { AnimatedLinkedin } from "@/components/ui/icons/animated-linkedin"
 import { AnimatedMail } from "@/components/ui/icons/animated-mail"
+import { AnimatedTwitter } from "@/components/ui/icons/animated-twitter"
 import type { AnimatedIconComponent } from "@/components/ui/social-icon-button"
+import { PROFILE } from "./contact-copy"
 
 /**
  * Social / contact link descriptor.
@@ -11,9 +13,9 @@ import type { AnimatedIconComponent } from "@/components/ui/social-icon-button"
  * because hand-rolling them lets us add micro-interactions on hover.
  */
 export type Social = {
-  icon: AnimatedIconComponent
-  href: string
-  label: string
+    icon: AnimatedIconComponent
+    href: string
+    label: string
 }
 
 /**
@@ -21,19 +23,24 @@ export type Social = {
  * Replace the placeholder hrefs with real profile URLs.
  */
 export const SOCIALS: readonly Social[] = [
-  {
-    icon: AnimatedMail,
-    href: "mailto:nathonana01@gmail.com",
-    label: "Email",
-  },
-  {
-    icon: AnimatedGithub,
-    href: "https://github.com/nathonana",
-    label: "GitHub",
-  },
-  {
-    icon: AnimatedLinkedin,
-    href: "https://www.linkedin.com/in/rapha%C3%ABl-onana/",
-    label: "LinkedIn",
-  },
+    {
+        icon: AnimatedMail,
+        href: `mailto:${PROFILE.email}`,
+        label: "Email",
+    },
+    {
+        icon: AnimatedGithub,
+        href: "https://github.com/rapha-pro",
+        label: "GitHub",
+    },
+    {
+        icon: AnimatedLinkedin,
+        href: "https://www.linkedin.com/in/raphaelonana/",
+        label: "LinkedIn",
+    },
+    {
+        icon: AnimatedTwitter,
+        href: "https://x.com/rapha_pro_",
+        label: "X / Twitter",
+    },
 ] as const

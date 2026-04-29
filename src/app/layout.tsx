@@ -6,6 +6,7 @@ import { GoogleAnalytics } from "@/components/analytics"
 import "./globals.css"
 import { Providers } from "./providers"
 import { BASE_URL } from "@/lib/site"
+import { PROFILE } from "@/lib/data/contact-copy"
 
 const sans = Plus_Jakarta_Sans({
     variable: "--font-sans",
@@ -21,60 +22,60 @@ const mono = JetBrains_Mono({
     weight: ["400", "500", "600"],
 })
 
+const metaTitle = `${PROFILE.fullName} — Software Engineer`
+const metaDescription = `Personal portfolio of ${PROFILE.fullName} - Data Scientist, and ML Engineer.`
+
 export const metadata: Metadata = {
     metadataBase: new URL(BASE_URL),
 
     title: {
-        default: "Raphaël Onana — Software Engineer & CS Graduate",
-        template: "%s | Raphaël Onana",
+        default: metaTitle,
+        template: `%s | ${PROFILE.fullName}`,
     },
 
-    description:
-        "Personal portfolio of Raphaël Onana — CS graduate from Carleton University, data scientist, and ML engineer. Open to graduate roles across North America.",
+    description: metaDescription,
 
     keywords: [
-        "Raphaël Onana",
+        PROFILE.fullName,
         "software engineer",
         "data scientist",
         "machine learning engineer",
         "AI engineer",
-        "Carleton University",
-        "Montreal",
+        PROFILE.institution,
+        "ottawa",
         "portfolio",
         "Next.js",
         "React",
     ],
 
-    authors: [{ name: "Raphaël Onana", url: BASE_URL }],
-    creator: "Raphaël Onana",
+    authors: [{ name: PROFILE.fullName, url: BASE_URL }],
+    creator: PROFILE.fullName,
 
     openGraph: {
         type: "website",
         url: BASE_URL,
-        siteName: "Raphaël Onana",
-        title: "Raphaël Onana — Software Engineer & CS Graduate",
-        description:
-            "Personal portfolio of Raphaël Onana — CS graduate, data scientist, and ML engineer based in Montréal. Open to graduate roles across North America.",
+        siteName: PROFILE.fullName,
+        title: metaTitle,
+        description: metaDescription,
         images: [
             {
                 url: "/images/website_banner.png",
                 width: 1200,
                 height: 630,
-                alt: "Raphaël Onana — Portfolio",
+                alt: `${PROFILE.fullName} — Portfolio`,
             },
         ],
     },
 
     twitter: {
         card: "summary_large_image",
-        title: "Raphaël Onana — Software Engineer & CS Graduate",
-        description:
-            "Personal portfolio of Raphaël Onana — CS graduate, data scientist, and ML engineer based in Montréal.",
+        title: metaTitle,
+        description: metaDescription,
         images: ["/images/website_banner.png"],
     },
 
     icons: {
-        icon: [{ url: "/favicon.ico" }],
+        icon: "/favicon.ico",
         apple: "/favicon.ico",
         shortcut: "/favicon.ico",
     },

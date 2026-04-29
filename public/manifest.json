@@ -1,12 +1,18 @@
 {
-  "name": "Rapha\u00ebl Onana \u2014 Portfolio",
-  "short_name": "Rapha\u00ebl.dev",
-  "description": "Personal portfolio of Rapha\u00ebl Onana \u2014 software engineer, data scientist, and ML engineer.",
+  "name": "Raphaël's Portfolio",
+  "short_name": "Raphaël.dev",
+  "description": "Personal portfolio of Raphaël Onana — Data scientist, and ML engineer.",
   "display": "standalone",
   "start_url": "/",
   "theme_color": "#8b5cf6",
   "background_color": "#0a0b11",
   "icons": [
+    {
+      "src": "/logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
     {
       "src": "/favicon.ico",
       "sizes": "any",
