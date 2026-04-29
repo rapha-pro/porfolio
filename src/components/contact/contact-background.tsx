@@ -1,13 +1,12 @@
 "use client"
 
 import { ParticleField } from "@/components/ui/particle-field"
-import { Meteors } from "@/components/ui/meteors"
 
 /**
  * Purpose:
  *   Atmospheric backdrop for the contact section. Accent gradient blobs,
- *   particle field, subtle grid, parallax-tracked floating orbs, diagonal
- *   shooting-star streaks, and an Aceternity-style meteor shower.
+ *   particle field, subtle grid, parallax-tracked floating orbs, and diagonal
+ *   shooting-star streaks.
  *
  * Returns:
  *   A fragment of absolutely-positioned decorative layers.
@@ -32,9 +31,6 @@ export function ContactBackground() {
 
       {/* Shooting stars — diagonal top-left to bottom-right */}
       <ShootingStars />
-
-      {/* Meteor shower — Aceternity UI style, 215-degree streaks */}
-      <Meteors number={22} minSpeed={4} maxSpeed={10} minDelay={0} maxDelay={12} />
 
       {/* Parallax accent orbs */}
       <span aria-hidden className="contact-parallax-slow pointer-events-none absolute left-[8%] top-[16%] h-2 w-2 rounded-full"

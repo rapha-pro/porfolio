@@ -207,6 +207,10 @@ body {
 }
 
 /* Skill marquee loop (used by SkillMarquee) */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
 
 /* Respect user motion preferences */
 @media (prefers-reduced-motion: reduce) {

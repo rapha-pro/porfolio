@@ -1,5 +1,8 @@
 import type { Metadata, Viewport } from "next"
 import { Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google"
+import { Analytics } from "@vercel/analytics/react"
+import { SpeedInsights } from "@vercel/speed-insights/next"
+import { GoogleAnalytics } from "@/components/analytics"
 import "./globals.css"
 import { Providers } from "./providers"
 
@@ -72,9 +75,7 @@ export const metadata: Metadata = {
   },
 
   icons: {
-    icon: [
-      { url: "/images/mylogo.png", type: "image/png" },
-    ],
+    icon: [{ url: "/images/mylogo.png", type: "image/png" }],
     apple: "/images/mylogo.png",
     shortcut: "/images/mylogo.png",
   },
@@ -100,7 +101,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#f7f7fb" },
-    { media: "(prefers-color-scheme: dark)",  color: "#0a0b11" },
+    { media: "(prefers-color-scheme: dark)", color: "#0a0b11" },
   ],
   width: "device-width",
   initialScale: 1,
@@ -130,6 +131,9 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         <Providers>{children}</Providers>
+        <Analytics />
+        <SpeedInsights />
+        <GoogleAnalytics />
       </body>
     </html>
   )

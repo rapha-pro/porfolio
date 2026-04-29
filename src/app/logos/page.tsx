@@ -11,6 +11,10 @@ import { LogoMark4 } from "@/components/logo-marks/logo-mark-4"
 import { LogoMark5 } from "@/components/logo-marks/logo-mark-5"
 import { LogoMark6 } from "@/components/logo-marks/logo-mark-6"
 import { LogoMark7 } from "@/components/logo-marks/logo-mark-7"
+import { LogoMark8 } from "@/components/logo-marks/logo-mark-8"
+import { LogoMark9 } from "@/components/logo-marks/logo-mark-9"
+import { LogoMark10 } from "@/components/logo-marks/logo-mark-10"
+import { LogoMark11 } from "@/components/logo-marks/logo-mark-11"
 
 /**
  * Shape every LogoMark variant follows. Used so the comparison page can
@@ -107,6 +111,46 @@ const VARIANTS: readonly Variant[] = [
     uniqueness:
       "By design this is the least different of the diamond variants — but it's the most likely to age well. The vertex dots are a quiet signature element; they give the mark a hint of jewellery-craft without leaving the geometric base of variant 2.",
   },
+  {
+    id: "v8-pure-diamond",
+    name: "Pure Diamond",
+    tagline: "Image-faithful · crisp inner double-frame · tightened type",
+    description:
+      "A faithful replica of the original Diamond as it renders in the screenshot. Same hexagon, same stacked R / O, same accent rule — with one quiet refinement: a crisp inner double-frame (two parallel hex outlines, very close together) that sharpens the edges without adding any surface treatment. Letterforms are tightened a notch for the same crisp render the screenshot shows.",
+    Mark: LogoMark8,
+    uniqueness:
+      "Closest to v2 of any candidate — picks v8 if you want a polished default that stays out of its own way. The double-frame is the kind of detail you only notice on second glance, which is the point.",
+  },
+  {
+    id: "v9-constellation-r",
+    name: "Constellation R",
+    tagline: "Nine glowing nodes · graph edges · network feel",
+    description:
+      "Nine small glowing nodes connected by thin lines trace the silhouette of an R. The composition reads as a star map, a graph, or a small neural network — a clean fit for the AI / ML stream. The edges stroke-draw on first mount (the letter builds itself out of nothing), and each node pulses softly out of phase with the others.",
+    Mark: LogoMark9,
+    uniqueness:
+      "Networked / graph-style letterforms are vanishingly rare in personal branding. Reads instantly as data-science or AI-engineer in a way the geometric variants don't, without resorting to literal cliches like a brain or a robot.",
+  },
+  {
+    id: "v10-cutout-r",
+    name: "Cutout R",
+    tagline: "Solid plate · negative-space R · minimalist editorial",
+    description:
+      "A solid, fully-saturated accent plate with the R cut out as negative space — the page background shows through the letter rather than the letter being painted on top. Tiny accent corner crops in the four corners of the plate add a small sense of frame. Reads as Bauhaus / editorial / fashion-monogram design — silence-as-composition.",
+    Mark: LogoMark10,
+    uniqueness:
+      "Negative-space letterforms are common in editorial logos but very rare in tech personal-brand marks. The full-saturation plate makes the mark land harder visually than any of the gradient-plate variants — it also retints loudly across the three accent themes.",
+  },
+  {
+    id: "v11-origami-r",
+    name: "Origami R",
+    tagline: "Triangulated facets · light + shadow polygons · low-poly",
+    description:
+      "An R built entirely from triangular polygons — no strokes, no outlines. Light-side and shadow-side facets alternate to give it dimensional depth, like a low-poly sculpture or a sheet of paper folded into the letter. Subtle dark crease lines down the spine and the leg sell the fold.",
+    Mark: LogoMark11,
+    uniqueness:
+      "Low-poly / origami letterforms are a craft / sculpture vocabulary, not a tech one. This is the most \"physical\" of the variants — closest to a 3D object than a 2D mark — and the only one whose silhouette reads as a folded artefact rather than a printed letter.",
+  },
 ] as const
 
 /* Sizes used in the size-ramp preview row. */
@@ -163,13 +207,14 @@ export default function LogoComparisonPage() {
             Pick a logo mark
           </h1>
           <p className="max-w-2xl text-sm leading-relaxed text-muted md:text-base">
-            Seven candidates side-by-side. Each one is shown at multiple sizes,
-            beside the &ldquo;Raphaël .dev&rdquo; wordmark, and dropped into a
-            mock navbar so you can feel how it lands in real context. Variants
-            2 and 4–7 are all hexagon-monogram cousins with different surface
-            treatments (clean · slanted · etched · striped · refined) so you
-            can A/B them quickly. The R⁴ variant is the quiet nickname wink.
-            Hover any mark to trigger its animation. The current pick is
+            Eleven candidates side-by-side. Each one is shown at multiple
+            sizes, beside the &ldquo;Raphaël .dev&rdquo; wordmark, and dropped
+            into a mock navbar so you can feel how it lands in real context.
+            Variants 2, 4–8 are hexagon-monogram cousins (clean · slanted ·
+            etched · striped · refined · pure) for direct A/B. Variants 9–11
+            are completely fresh directions: a constellation graph, a
+            negative-space cutout, and a low-poly origami letterform.
+            Hover any mark to trigger its animation; the current pick is
             flagged below.
           </p>
         </motion.header>
@@ -450,6 +495,10 @@ function markImport(id: string): string {
   if (id.startsWith("v5")) return "LogoMark5"
   if (id.startsWith("v6")) return "LogoMark6"
   if (id.startsWith("v7")) return "LogoMark7"
+  if (id.startsWith("v8")) return "LogoMark8"
+  if (id.startsWith("v9")) return "LogoMark9"
+  if (id.startsWith("v10")) return "LogoMark10"
+  if (id.startsWith("v11")) return "LogoMark11"
   return "LogoMark"
 }
 
@@ -464,11 +513,15 @@ function markImport(id: string): string {
  *   The file basename (e.g. "logo-mark-2").
  */
 function markFile(id: string): string {
-  if (id.startsWith("v2")) return "logo-mark-2"
-  if (id.startsWith("v3")) return "logo-mark-3"
-  if (id.startsWith("v4")) return "logo-mark-4"
-  if (id.startsWith("v5")) return "logo-mark-5"
-  if (id.startsWith("v6")) return "logo-mark-6"
-  if (id.startsWith("v7")) return "logo-mark-7"
+  if (id.startsWith("v2")) return "logo-marks/logo-mark-2"
+  if (id.startsWith("v3")) return "logo-marks/logo-mark-3"
+  if (id.startsWith("v4")) return "logo-marks/logo-mark-4"
+  if (id.startsWith("v5")) return "logo-marks/logo-mark-5"
+  if (id.startsWith("v6")) return "logo-marks/logo-mark-6"
+  if (id.startsWith("v7")) return "logo-marks/logo-mark-7"
+  if (id.startsWith("v8")) return "logo-marks/logo-mark-8"
+  if (id.startsWith("v9")) return "logo-marks/logo-mark-9"
+  if (id.startsWith("v10")) return "logo-marks/logo-mark-10"
+  if (id.startsWith("v11")) return "logo-marks/logo-mark-11"
   return "logo-mark"
 }
