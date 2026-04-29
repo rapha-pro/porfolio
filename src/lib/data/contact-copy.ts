@@ -16,7 +16,7 @@ export const PROFILE = {
     lastName: "Onana",
     fullName: "Raphaël Onana",
     email: "nathonana01@gmail.com",
-    handle: "@nathonana",
+    handle: "@rapha",
     degree: "B.Sc. Computer Science. AI & ML",
     institution: "Carleton University",
     gradYear: 2026,
