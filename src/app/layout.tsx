@@ -22,7 +22,7 @@ const mono = JetBrains_Mono({
     weight: ["400", "500", "600"],
 })
 
-const metaTitle = `${PROFILE.fullName} — Software Engineer`
+const metaTitle = `${PROFILE.firstName} Developer Portfolio`
 const metaDescription = `Personal portfolio of ${PROFILE.fullName} - Data Scientist, and ML Engineer.`
 
 export const metadata: Metadata = {
