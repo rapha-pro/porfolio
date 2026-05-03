@@ -16,7 +16,7 @@ A personal portfolio website built to present my work, background, and contact i
 
 ## Architecture Overview
 
-This is a **client-server web application** built on Next.js App Router. The server layer handles page rendering and the contact form API. The client layer handles all interactivity, animations, and 3D rendering. Static content is decoupled from components entirely — it lives in typed TypeScript constants and plain text files, so no CMS or database is needed.
+This is a **client-server web application** built on Next.js App Router. The server layer handles page rendering and the contact form API. The client layer handles all interactivity, animations, and 3D rendering. Static content is decoupled from components entirely, it lives in typed TypeScript constants and plain text files, so no CMS or database is needed.
 
 ```mermaid
 graph TD
@@ -94,7 +94,7 @@ e.g. Hero, About, Projects, Contact"]
 
 ### Theming system
 
-Every colour in the design is a CSS custom property defined on `:root` (light mode) and `.dark` (dark mode). Three accent themes are toggled by adding a class to `<html>`: `.accent-violet`, `.accent-cyan`, or `.accent-amber`. No component ever hardcodes a colour — they all reference `var(--accent)`, `var(--glass)`, `var(--fg)`, and so on.
+Every colour in the design is a CSS custom property defined on `:root` (light mode) and `.dark` (dark mode). Three accent themes are toggled by adding a class to `<html>`: `.accent-violet`, `.accent-cyan`, or `.accent-amber`. No component ever hardcodes a colour, they all reference `var(--accent)`, `var(--glass)`, `var(--fg)`, and so on.
 
 ### Animation strategy
 
@@ -174,7 +174,7 @@ Run `pnpm format` to rewrite everything in place, or `pnpm format:check` to repo
 
 ### Pre-commit enforcement - Husky & lint-staged
 
-Husky installs a Git pre-commit hook (`.husky/pre-commit`) during `pnpm install` via the `prepare` lifecycle script. The hook runs `lint-staged`, which applies ESLint and Prettier only to the files staged for the current commit — not the whole project — keeping the hook fast even as the codebase grows.
+Husky installs a Git pre-commit hook (`.husky/pre-commit`) during `pnpm install` via the `prepare` lifecycle script. The hook runs `lint-staged`, which applies ESLint and Prettier only to the files staged for the current commit, not the whole project, keeping the hook fast even as the codebase grows.
 
 The `lint-staged` config in `package.json`:
 
