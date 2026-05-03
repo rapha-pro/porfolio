@@ -6,25 +6,21 @@
  * NarrativeStory component alternates block placement left/right to create
  * a DeepMind-style zig-zag layout.
  *
- * Edit this file to tweak the story - the UI iterates over the array.
  */
 
 export type NarrativeProseBlock = {
     kind: "prose"
-    /** Optional accent kicker above the paragraphs (e.g. "2020 · Canada"). */
-    kicker?: string
-    /** Optional heading line. */
-    heading?: string
-    /** One or more paragraphs. */
-    paragraphs: readonly string[]
+    kicker?: string // Optional accent kicker above the paragraphs (e.g. "2020 · Canada").
+    heading?: string // Optional heading line.
+    paragraphs: readonly string[] // One or more paragraphs.
 }
 
 export type NarrativePhotoBlock = {
     kind: "photo"
     src: string
     alt: string
-    /** Short italic caption shown below the image. */
-    caption: string
+    caption: string // Short italic caption shown below the image.
+    aspectRatio?: string // Tailwind aspect-ratio value e.g. "4/3" (default) or "5/4" for taller images.
 }
 
 export type NarrativeBlock = NarrativeProseBlock | NarrativePhotoBlock
@@ -39,39 +35,41 @@ export const NARRATIVE: readonly NarrativeBlock[] = [
         kind: "photo",
         src: "/images/about%20me/about_me_intro.jpg",
         alt: "Raphaël — a snapshot",
-        caption: "A little bit about me — beyond the terminal.",
+        caption: "A little bit about me, above and beyond",
+        aspectRatio: "5/4",
     },
     {
         kind: "prose",
-        kicker: "2020 · New Brunswick",
-        heading: "Crossing an ocean with a notebook full of math",
+        kicker: "Start · New Brunswick",
+        heading: "Crossing the Ocean",
         paragraphs: [
-            "I landed in Canada about six years ago and enrolled in a new high school in New Brunswick. The math felt familiar — back home in Cameroon, Grade 11 had already taken us through topics that North American curricula reach in first-year university. The theory came easy; the language of computers did not.",
-            "I knew exactly zero code. My older brother sat me down one afternoon and walked me through a few pages of C: variables, loops, and finally arrays. Something clicked. I kept going on my own, and for the first time a textbook felt like a toy.",
+            "I landed in Canada six years ago, right in the middle of the Covid pandemic. A few weeks after lockdown lifted, I enrolled in a new high school in New Brunswick, a quiet little town on the east coast. It was fascinating to see how different the system was. Students moved between classrooms for each subject, while back home country, students stay in one fixed class all year and it is the teachers who move between rooms.",
+            "The most striking difference was the fully digital learning environment. Everything ran through Microsoft Teams and OneNote with no physical textbooks in sight, which felt genuinely futuristic. On the flip side, the academic content was considerably lighter than what I had covered back home. I arrived in Grade 11 already having studied topics the North American curriculum reaches in first/second-year university. Adjusting to the new pace took some time.",
         ],
     },
     {
         kind: "prose",
         kicker: "2021 · Ottawa",
-        heading: "Python, in earnest",
+        heading: "Ottawa, Here We Go",
         paragraphs: [
-            "The family moved to Ottawa the following year, and I transferred into a more rigorous school. I doubled down on math — calculus, advanced functions, physics — and took my first formal computer-science course. The language was Python, and that was all I knew at that point. I was hooked anyway.",
-            "For the final term project I built something end-to-end, shipped it, and realized two things: I liked the feedback loop of software, and I wanted to do this for much more than a grade.",
+            "The family moved to the capital the following year, and I transferred into a more rigorous school. I doubled down on math including calculus, advanced functions, and physics, and took my first formal computer science course. At that point, Python was the only language I knew.",
+            "For the final project, I had to build a Trivia web app requiring HTML, CSS, JavaScript, and Django, none of which I had ever touched. With some trial and error and a bit of sibling mentorship, I got it working and placed in the top three of my class. A year later, I was invited back to mentor younger students on web development with Django.",
         ],
     },
     {
         kind: "photo",
         src: "/images/about%20me/infront_of_classroom.jpg",
-        alt: "Standing in front of a classroom",
-        caption: "High school in Ottawa — somewhere between a math problem and a Python script.",
+        alt: "Standing in front of a classroom at Carleton University, leading a tour",
+        caption: "Carleton University — Leading a tour.",
+        aspectRatio: "5/4",
     },
     {
         kind: "prose",
         kicker: "2022 · Carleton",
-        heading: "From hooked to hired",
+        heading: "University, Finally!",
         paragraphs: [
-            "I went off to Carleton for Computer Science, AI/ML stream, with a minor in Maths & Stats. Freshman year turned into a chain reaction: Dean's List, Golden Key, a growing github, and the rush of finally having peers who also got excited about obscure algorithms.",
-            "The internships followed — Ford, Caterpillar, Elections Canada, TD — each one teaching me a different shape of real-world engineering: automation, DevOps, embedded systems, and production ML on real customer data.",
+            "I was undecided between Aerospace Engineering and Artificial Intelligence going into university. I ultimately chose Carleton for Computer Science, AI/ML stream, with a minor in Mathematics and Statistics. Freshman year was a steep learning curve. University moves at a completely different pace from high school: you have the freedom to skip classes, skip assignments, and study on your own schedule, with no one watching over you. But with a lot of freedom comes a lot of responsibility.",
+            "Second year went deeper into core computer science concepts: systems programming, pointers, memory allocation, data structures and algorithms, skip lists, red-black trees, and combinatorics, each year getting harder than the last. The one thing university taught me, especially in third year, was time management. If you do not learn to manage your time, university will force you to.",
         ],
     },
     {
@@ -79,13 +77,14 @@ export const NARRATIVE: readonly NarrativeBlock[] = [
         src: "/images/about%20me/comp%202804.jpg",
         alt: "Working on a discrete math problem on a whiteboard",
         caption:
-            "COMP 2804 · discrete math office hours — working through problem sets with friends on a whiteboard.",
+            "COMP 2804 · Second year — in discrete math office hours working through problem sets with friends on a whiteboard.",
+        aspectRatio: "5/4",
     },
     {
         kind: "prose",
         heading: "Today",
         paragraphs: [
-            "I live in Montréal, code in a few languages, think in French, English, and just-enough-Spanish, and spend the off-hours at a piano, on a bike, or on a tennis court I'm slowly losing to. On-keyboard I'm deep in LLM fine-tuning, RAG, and agentic systems — and always open to a good conversation.",
+            "I have been blessed to make the Dean's List and Golden Key Honor Society every year since my first semester. My co-ops took me through Ford, where I learned the critical importance of testing in embedded systems, then Caterpillar for DevOps pipelines, the Government of Canada where I got my first real foothold into the field of Data, and by God's grace, Toronto Dominion Bank for a last co-op. Whether it is satellite software, production ML, or cloud infrastructure, I am always eager for opportunities to push what I can build.",
         ],
     },
 ] as const
