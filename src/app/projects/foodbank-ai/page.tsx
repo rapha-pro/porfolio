@@ -1,6 +1,5 @@
 import Link from "next/link"
 import { ArrowLeft, Globe } from "lucide-react"
-import { AnimatedYoutube } from "@/components/ui/icons/animated-youtube"
 import { PROJECTS } from "@/lib/data/projects"
 import { TechBadge } from "@/components/projects/tech-badge"
 import { notFound } from "next/navigation"
@@ -61,11 +60,6 @@ export default function FoodbankAIPage() {
                         href="https://devpost.com/software/foodbank-ai"
                         icon={<Globe size={16} />}
                         label="Devpost"
-                    />
-                    <ExtLink
-                        href="https://www.youtube.com/watch?v=wBvP8Fz40FQ"
-                        icon={<AnimatedYoutube size={16} />}
-                        label="Watch demo"
                     />
                 </div>
 
