@@ -5,9 +5,9 @@
  * sub-selector that reveals a grid of Course cards. Grades are revealed on
  * hover (or tap on touch).
  *
- * Editing tips:
+ * Editing:
  *   - To add a course, append to the YEARS[...].courses array.
- *   - If you have a banner/logo for a course, drop it in
+ *   - If a banner/logo for a course is presents, it drops in
  *     /public/images/courses/ and reference the filename in `banner`.
  *   - Tint `accent` for each course to color-code the card header.
  *   - Grades default to "In progress" when `grade` is omitted.
@@ -21,8 +21,7 @@ export type School = {
     result?: string
     description: string
     logo: string | null
-    /** True when the logo renders on a light card background. */
-    lightLogoBg?: boolean
+    lightLogoBg?: boolean // True when the logo renders on a light card background.
 }
 
 export const SCHOOLS: readonly School[] = [
@@ -71,7 +70,7 @@ export type YearBlock = {
 
 /**
  * Four-year arc. Junior-year course descriptions are intentionally left
- * blank so Raphaël can paste them in once - code + structure are ready.
+ * for future edits.
  */
 export const YEARS: readonly YearBlock[] = [
     {
