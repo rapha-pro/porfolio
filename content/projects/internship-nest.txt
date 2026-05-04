@@ -1,5 +1,5 @@
 Internship Nest is a personal productivity tool built to solve a problem I faced directly: tracking dozens of internship applications across different portals, deadlines, and interview stages with nothing but a spreadsheet.
 
-The app provides a Kanban-style board where each application card moves through stages — Saved, Applied, Phone Screen, Technical, Offer, Rejected. Deadline reminders and colour-coded urgency indicators keep the most time-sensitive applications visible at all times.
+The app provides a Kanban-style board where each application card moves through stages, Saved, Applied, Phone Screen, Technical, Offer, Rejected. Deadline reminders and colour-coded urgency indicators keep the most time-sensitive applications visible at all times.
 
 The stack is a React frontend backed by a Node.js/Express API and MongoDB. Authentication uses JWT tokens stored in HTTP-only cookies for security.

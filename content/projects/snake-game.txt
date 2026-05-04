@@ -1,0 +1,5 @@
+Snake Game was a project I built during the summer of 2022 while learning Python GUI programming tools for the first time. The goal was to get comfortable with Pygame and Tkinter by building something I actually enjoyed playing.
+
+I designed and programmed the game entirely on my own with no AI assistance. It includes a working scoring system that tracks the player's performance across sessions. The snake grows as expected, the boundaries are enforced, and the game over screen shows your final score.
+
+It was a simple project but an important one. Building something you have played since childhood from the ground up, handling every pixel of movement, collision detection, and score tracking yourself, teaches you a lot about how games actually work under the hood.

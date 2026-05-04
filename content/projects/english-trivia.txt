@@ -1,5 +1,7 @@
-English Trivia is an interactive quiz application designed for classroom use, covering English grammar rules, literary analysis, and vocabulary. Teachers can select a category and difficulty level, then display questions on a projector for students to answer together.
+English Trivia is the project I talk about in my story. It was my final high school project and my very first website, built completely from scratch on Replit with no AI assistance and no tutorials guiding me line by line.
 
-The app tracks scores per round, animates correct and incorrect answers, and shows an explanation for each answer after the question resolves. Everything runs client-side with no backend — the question bank is a JSON file bundled with the app.
+The goal was to gamify my Grade 12 English lessons for my professor, turning topics from the curriculum into interactive quizzes that made learning more engaging for students. Teachers could select a category and difficulty level and display questions for the class to answer together.
 
-Built with vanilla JavaScript, HTML, and CSS to keep dependencies at zero and make it easy to run on any school computer without installation.
+I built the entire thing from scratch using Django on the backend with JavaScript, Bootstrap, HTML, and CSS on the frontend. Every single line of code was written by hand. It was a full-stack application, login, session handling, quiz logic, score tracking, and all, built by someone who had only ever written Python before and had never touched web development.
+
+It placed in the top three of my class and a year later I was invited back to the school to mentor younger students on web development using the same stack.

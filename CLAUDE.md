@@ -8,17 +8,17 @@ Stunning, animation-heavy personal portfolio. The goal is world-class visual pol
 
 ## Stack
 
-| Layer | Library / Version |
-|---|---|
-| Framework | Next.js 16 (App Router) |
-| Language | TypeScript 5 |
-| Styling | Tailwind CSS 4 (utility-first, CSS variables for theming) |
-| Animation | Framer Motion 12 + GSAP 3 + `@gsap/react` |
-| 3D | Three.js r184 |
-| UI components | HeroUI 3 + Aceternity UI patterns |
-| Icons | Lucide React |
-| Theme | `next-themes` (dark/light), AccentProvider (violet/cyan/amber) |
-| Package manager | pnpm |
+| Layer           | Library / Version                                              |
+| --------------- | -------------------------------------------------------------- |
+| Framework       | Next.js 16 (App Router)                                        |
+| Language        | TypeScript 5                                                   |
+| Styling         | Tailwind CSS 4 (utility-first, CSS variables for theming)      |
+| Animation       | Framer Motion 12 + GSAP 3 + `@gsap/react`                      |
+| 3D              | Three.js r184                                                  |
+| UI components   | HeroUI 3 + Aceternity UI patterns                              |
+| Icons           | Lucide React                                                   |
+| Theme           | `next-themes` (dark/light), AccentProvider (violet/cyan/amber) |
+| Package manager | pnpm                                                           |
 
 ---
 
@@ -28,13 +28,14 @@ Stunning, animation-heavy personal portfolio. The goal is world-class visual pol
 
 All colors are CSS variables scoped to `:root` (light) and `.dark` (dark mode). Three accent themes are applied via a class on `<html>`:
 
-| Class | Accent color |
-|---|---|
-| `.accent-violet` (default) | `#8b5cf6` |
-| `.accent-cyan` | `#06b6d4` |
-| `.accent-amber` | `#f59e0b` |
+| Class                      | Accent color |
+| -------------------------- | ------------ |
+| `.accent-violet` (default) | `#8b5cf6`    |
+| `.accent-cyan`             | `#06b6d4`    |
+| `.accent-amber`            | `#f59e0b`    |
 
 Key semantic tokens:
+
 - `--bg` / `--bg-raised` — page background surfaces
 - `--fg` / `--fg-muted` / `--fg-subtle` — text hierarchy
 - `--accent` / `--accent-glow` / `--accent-soft` — current accent
@@ -118,16 +119,16 @@ public/
 
 ## Data files (`src/lib/data/`)
 
-| File | What it contains |
-|---|---|
-| `narrative.ts` | Story blocks: `NarrativeProseBlock \| NarrativePhotoBlock`. Blocks pair sequentially in the timeline. |
-| `experience.ts` | `ExperienceEntry[]` — jobs most-recent first. Fields: company, role, kind, location, period, bullets, logo, accent, lightLogoBg, bgOverride. |
-| `education.ts` | `SCHOOLS[]` + `YEARS[]` (4-year course catalog). |
-| `hobbies.ts` | `Hobby[]` — imageSrc/videoSrc are optional. |
-| `achievements.ts` | `AWARDS[]` + `ACTIVITIES[]`. |
-| `skills.ts` | Canonical skill list (cube faces + full marquee). |
-| `hero-copy.ts` | Name, bio paragraphs, typewriter roles, photo caption. |
-| `socials.ts` | Email, GitHub, LinkedIn links. |
+| File              | What it contains                                                                                                                             |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| `narrative.ts`    | Story blocks: `NarrativeProseBlock \| NarrativePhotoBlock`. Blocks pair sequentially in the timeline.                                        |
+| `experience.ts`   | `ExperienceEntry[]` — jobs most-recent first. Fields: company, role, kind, location, period, bullets, logo, accent, lightLogoBg, bgOverride. |
+| `education.ts`    | `SCHOOLS[]` + `YEARS[]` (4-year course catalog).                                                                                             |
+| `hobbies.ts`      | `Hobby[]` — imageSrc/videoSrc are optional.                                                                                                  |
+| `achievements.ts` | `AWARDS[]` + `ACTIVITIES[]`.                                                                                                                 |
+| `skills.ts`       | Canonical skill list (cube faces + full marquee).                                                                                            |
+| `hero-copy.ts`    | Name, bio paragraphs, typewriter roles, photo caption.                                                                                       |
+| `socials.ts`      | Email, GitHub, LinkedIn links.                                                                                                               |
 
 ---
 
@@ -140,5 +141,10 @@ public/
 - Prefer Framer Motion for all scroll/entry/hover animations; use GSAP for complex timeline choreography.
 - CSS variables (not Tailwind hardcoded colors) for anything that must respect the theme or accent.
 - Every section directory has a `README.md` describing its file structure.
+
+## Guide
+
+- Do not fake any information you do not know. Stick to what was given to you, if you do not know, then ask
+- No dashes or em-dashes anywhere in user-facing content: project descriptions, narratives, hobby stories, copy files, or any `.txt` content file. Use commas, colons, semicolons, or restructure the sentence instead.
 
 ---
