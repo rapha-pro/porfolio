@@ -203,7 +203,7 @@ export default function PytorchDomainClassifierPage() {
                         <div className="overflow-hidden rounded-2xl border border-app">
                             {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img
-                                src="/images/projects/assignment_5_ML_in_domain_vs_out_domain_accuracy.png"
+                                src="/images/projects/assignment_4_ML_in_domain_vs_out_domain_accuracy.png"
                                 alt="In-domain vs out-of-domain accuracy across threshold values"
                                 className="w-full object-contain"
                             />
