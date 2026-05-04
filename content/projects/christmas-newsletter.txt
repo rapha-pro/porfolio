@@ -1,5 +1,5 @@
-A festive personal newsletter designed and coded as a seasonal creative exercise. The layout mimics a printed holiday card — a bold red header, an editorial-style body with a Christmas scene image, and a warm closing note.
+Christmas Wishes is a responsive festive website I built to send holiday greetings to close friends. The goal was simple: a warm, visually appealing page that felt personal and fun to receive.
 
-The challenge was making a richly formatted email that renders consistently across Gmail, Outlook, and Apple Mail, which all interpret CSS differently. Inline styles, table-based layouts, and thorough testing in multiple clients were required to get a pixel-perfect result everywhere.
+I started from a template I found online, then modified the code to match my own style, adjusting the layout, colors, and copy until it felt like mine. The final result is a clean, mobile-friendly holiday page hosted on Vercel.
 
-Sent to a small list of friends and family in December 2023. A fun reminder that email HTML is its own discipline.
+This was a small personal project but a good reminder that polishing something simple to feel genuinely nice takes more care than it looks.

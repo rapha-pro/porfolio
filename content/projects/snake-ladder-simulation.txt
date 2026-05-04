@@ -1,0 +1,5 @@
+Snake and Ladder Simulation is a two-player board game simulation I built as a course project in my first year at Carleton. The program recreates the classic snake and ladder rules: players take turns rolling, move along the board, climb ladders, and slide down snakes.
+
+The simulation is built entirely with Python and Pygame. Both players are simulated, and the game plays out on screen with the board rendered visually so you can follow each move in real time.
+
+It was an early exercise in thinking through game state, turn logic, and event-driven programming with Pygame.

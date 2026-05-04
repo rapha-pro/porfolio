@@ -1,5 +1,5 @@
-A weather dashboard that fetches real-time conditions and a five-day forecast from the OpenWeatherMap API. Users can search any city worldwide, and the UI updates instantly with temperature, humidity, wind speed, and a condition icon.
+Weather App was built during the summer of 2022 with one clear goal: learn what an API is and actually use one in a real project.
 
-The design adapts its colour palette to the time of day and weather condition — a warm amber for sunny afternoons, deep blue for night, grey tones for overcast skies. CSS custom properties make the theme swap smooth and cheap.
+The application is a Python desktop GUI built with Tkinter. It connects to the OpenWeatherMap API and displays current weather information for any city you search, including temperature, conditions, and local time, all inside a small, clean window.
 
-Built during my first semester of programming. It was my first time working with a public REST API, handling asynchronous JavaScript with fetch, and thinking about error states when the network or the API returns unexpected results.
+This was my first time ever working with an external API, handling HTTP requests in code, parsing JSON responses, and presenting the data to a user through a graphical interface. A small project, but an important step.
