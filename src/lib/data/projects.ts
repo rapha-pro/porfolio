@@ -112,7 +112,7 @@ export const PROJECTS: readonly Project[] = [
     },
     {
         slug: "foodbank-ai",
-        title: "Foodbank AI",
+        title: "FoodQuest",
         description:
             "Gamified food donation app where users earn points based on the nutritional value of donated items, built at a 48-hour hackathon at uOttawa.",
         image: "/images/projects/foodbank_ai.png",
