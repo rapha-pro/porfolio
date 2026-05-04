@@ -19,7 +19,7 @@ export const PROFILE = {
     handle: "@rapha",
     degree: "B.Sc. Computer Science. AI & ML",
     institution: "Carleton University",
-    gradYear: 2026,
+    gradYear: 2027,
     location: "Province QC, Canada",
     title: "Software Engineer · Incoming Graduate",
 } as const
