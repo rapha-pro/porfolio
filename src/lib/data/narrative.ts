@@ -43,7 +43,7 @@ export const NARRATIVE: readonly NarrativeBlock[] = [
         kicker: "Start · New Brunswick",
         heading: "Crossing the Ocean",
         paragraphs: [
-            "I landed in Canada six years ago, right in the middle of the Covid pandemic. A few weeks after lockdown lifted, I enrolled in a new high school in New Brunswick, a quiet little town on the east coast. It was fascinating to see how different the system was. Students moved between classrooms for each subject, while back home country, students stay in one fixed class all year and it is the teachers who move between rooms.",
+            "I landed in Canada about six years ago, right in the middle of the Covid pandemic. A few weeks after lockdown lifted, I enrolled in a new high school in New Brunswick, a quiet little town on the east coast. It was fascinating to see how different the system was. Students moved between classrooms for each subject, while back home country, students stay in one fixed class all year and it is the teachers who move between rooms.",
             "The most striking difference was the fully digital learning environment. Everything ran through Microsoft Teams and OneNote with no physical textbooks in sight, which felt genuinely futuristic. On the flip side, the academic content was considerably lighter than what I had covered back home. I arrived in Grade 11 already having studied topics the North American curriculum reaches in first/second-year university. Adjusting to the new pace took some time.",
         ],
     },
@@ -53,7 +53,7 @@ export const NARRATIVE: readonly NarrativeBlock[] = [
         heading: "Ottawa, Here We Go",
         paragraphs: [
             "The family moved to the capital the following year, and I transferred into a more rigorous school. I doubled down on math including calculus, advanced functions, and physics, and took my first formal computer science course. At that point, Python was the only language I knew.",
-            "For the final project, I had to build a Trivia web app requiring HTML, CSS, JavaScript, and Django, none of which I had ever touched. With some trial and error and a bit of sibling mentorship, I got it working and placed in the top three of my class. A year later, I was invited back to mentor younger students on web development with Django.",
+            "For my final project, I had to build a Trivia web app requiring HTML, CSS, JavaScript, and Django, none of which I had ever touched. With some trial and error and a bit of sibling mentorship, I got it working and placed in the top three of my class. A year later, I was invited back to mentor younger students on web development with Django.",
         ],
     },
     {
